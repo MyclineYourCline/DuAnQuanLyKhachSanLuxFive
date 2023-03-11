@@ -60,10 +60,10 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
     }
 
     public final class hoaDonViewHolder extends RecyclerView.ViewHolder{
-        //todo...
+
         public hoaDonViewHolder(@NonNull View itemView) {
             super(itemView);
-            //todo...
+
         }
     }
     @Override
