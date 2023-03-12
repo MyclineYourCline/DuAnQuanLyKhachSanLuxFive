@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,7 +48,14 @@ public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.kha
         if (items == null){
             return;
         }
-        //todo...
+       holder.item_khach_hang_tv_ten.setText(items.getTenKh());
+        holder.item_khach_hang_tv_sdt.setText(items.getSoDienThoai());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
 
     }
 
@@ -59,10 +67,11 @@ public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.kha
         return 0;
     }
     public final class khachHangViewHolder extends RecyclerView.ViewHolder {
-        // todo..
+        TextView item_khach_hang_tv_ten , item_khach_hang_tv_sdt;
         public khachHangViewHolder(@NonNull View itemView) {
             super(itemView);
-            //todo...
+            item_khach_hang_tv_ten = itemView.findViewById(R.id.item_khach_hang_tv_ten);
+            item_khach_hang_tv_sdt = itemView.findViewById(R.id.item_khach_hang_tv_sdt);
         }
     }
     @Override
