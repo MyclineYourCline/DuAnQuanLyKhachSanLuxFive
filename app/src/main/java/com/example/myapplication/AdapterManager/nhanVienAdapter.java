@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,7 +51,16 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
         if (items == null){
             return;
         }
-        //todo...
+        holder.item_nhan_vien_avata.setImageResource(R.drawable.user);
+       holder.item_nhan_vien_tv_ten.setText(items.getTenNhanVien());
+        holder.item_nhan_vien_tv_sdt.setText(items.getSoDienThoai());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 
     }
 
@@ -61,10 +72,17 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
         return 0;
     }
     public final class nhanVienViewHolder extends RecyclerView.ViewHolder{
-        // todo...
+            ImageView item_nhan_vien_avata;
+            TextView item_nhan_vien_tv_ten , item_nhan_vien_tv_sdt;
         public nhanVienViewHolder(@NonNull View itemView) {
             super(itemView);
-            //todo...
+
+            item_nhan_vien_avata = itemView.findViewById(R.id.item_nhan_vien_avata);
+            item_nhan_vien_tv_ten = itemView.findViewById(R.id.item_nhan_vien_tv_ten);
+            item_nhan_vien_tv_sdt = itemView.findViewById(R.id.item_nhan_vien_tv_sdt);
+
+
+
         }
     }
     @Override
