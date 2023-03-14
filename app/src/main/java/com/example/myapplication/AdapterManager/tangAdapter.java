@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,6 +50,14 @@ public class tangAdapter extends RecyclerView.Adapter<tangAdapter.tangViewHolder
             return;
         }
         //todo...........
+        holder.mImageView.setImageResource(R.drawable.tang_smal);
+        holder.mTextView.setText(items.getTenTang());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.sendTang(items);
+            }
+        });
 
     }
 
@@ -60,9 +70,13 @@ public class tangAdapter extends RecyclerView.Adapter<tangAdapter.tangViewHolder
     }
     public final class tangViewHolder extends RecyclerView.ViewHolder {
         //todo............
+        ImageView mImageView;
+        TextView mTextView;
         public tangViewHolder(@NonNull View itemView) {
             super(itemView);
             //todo..........
+            mImageView = itemView.findViewById(R.id.item_tang_img);
+            mTextView = itemView.findViewById(R.id.item_tang_tenTang);
         }
     }
     @Override

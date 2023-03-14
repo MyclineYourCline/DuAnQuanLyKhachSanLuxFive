@@ -7,7 +7,7 @@ import com.example.myapplication.ObjectManager.hoaDon;
 import com.example.myapplication.ObjectManager.khachHang;
 import com.example.myapplication.ObjectManager.loaiPhong;
 import com.example.myapplication.ObjectManager.nhanVien;
-import com.example.myapplication.ObjectManager.phong;
+import com.example.myapplication.ObjectManager.phongObj;
 import com.example.myapplication.ObjectManager.tang;
 
 public interface sendData {
@@ -18,7 +18,7 @@ public interface sendData {
     void sendKhachHang(khachHang items);
     void sendLoaiPhong (loaiPhong items);
     void sendNhanVien (nhanVien items);
-    void sendPhong (phong items);
+    void sendPhong (phongObj items);
     void sendTang   (tang items);
 }
 

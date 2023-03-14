@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-        <item android:id="@+id/nav_home"
-            android:icon="@drawable/home"
-            android:title="Home"/>
+        <item android:id="@+id/menu_nav_taiKhoanCuaBan"
+            android:icon="@drawable/quan_ly_nhanvien_icon"
+            android:title="Thông tin tài khoản"/>
+        <item android:id="@+id/menu_nav_doiMatKhau"
+            android:icon="@drawable/baseline_password_24"
+            android:title="Đổi mật khẩu"/>
+        <item android:id="@+id/menu_nav_ThongTinKhacSan"
+            android:icon="@drawable/baseline_info_24"
+            android:title="Thông tin khách sạn"/>
 </menu>

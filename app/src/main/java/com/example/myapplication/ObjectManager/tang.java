@@ -1,6 +1,8 @@
 package com.example.myapplication.ObjectManager;
 
-public class tang {
+import java.io.Serializable;
+
+public class tang implements Serializable {
     //maTang
     //tenTang
     //soPhong

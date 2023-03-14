@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,11 +11,50 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
+        <activity android:name=".quanLyPhong"
+            android:exported="false"
+            android:parentActivityName=".Home"/>
         <activity
-            android:name=".Home"
-            android:exported="false" />
+            android:name=".feedBack"
+            android:exported="false"
+            android:parentActivityName=".Home" />
+        <activity
+            android:name=".doanhThu"
+            android:exported="false"
+            android:parentActivityName=".Home" />
+        <activity
+            android:name=".nhanVien"
+            android:exported="false"
+            android:parentActivityName=".Home" />
+        <activity
+            android:name=".hoaDon"
+            android:exported="false"
+            android:parentActivityName=".Home" />
+        <activity
+            android:name=".dichVu"
+            android:exported="false"
+            android:parentActivityName=".Home" />
+        <activity
+            android:name=".khachHang"
+            android:exported="false"
+            android:parentActivityName=".Home" />
+        <activity
+            android:name=".loaiPhong"
+            android:exported="false"
+            android:parentActivityName=".Home" />
+        <activity
+            android:name=".quanLyTang"
+            android:exported="false"
+            android:parentActivityName=".Home" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".quanLyTang_phong"
+            android:exported="false"
+            android:parentActivityName=".loaiPhong" />
+        <activity
+            android:name=".Home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

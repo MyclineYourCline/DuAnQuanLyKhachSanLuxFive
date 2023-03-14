@@ -25,6 +25,21 @@ public class datPhong {
         this.gioVao = gioVao;
         this.ghiChu = ghiChu;
     }
+    public String setGioRa(){
+
+        //todo....
+        return gioVao;
+    }
+    public String tongGioThue(){
+        String result = "";
+        //todo
+        return result;
+    }
+    public String checkOut( ){
+        String result = "";
+        //todo
+        return result;
+    }
 
     public datPhong() {
     }

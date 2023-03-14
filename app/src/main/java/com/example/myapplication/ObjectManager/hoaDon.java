@@ -6,15 +6,24 @@ public class hoaDon {
     //trangThai
     //tongTien
     //ngayThang
-    private String maHoaDon, maDatPhong, trangThai, tongTien, ngayThang;
+    private String maHoaDon, maDatPhong, trangThai, tongTien, ngayThang,maChiTietDV;
 
     public hoaDon(String maHoaDon, String maDatPhong
-            , String trangThai, String tongTien, String ngayThang) {
+            , String trangThai, String tongTien, String ngayThang,String maChiTietDV) {
         this.maHoaDon = maHoaDon;
         this.maDatPhong = maDatPhong;
         this.trangThai = trangThai;
         this.tongTien = tongTien;
         this.ngayThang = ngayThang;
+        this.maChiTietDV = maChiTietDV;
+    }
+
+    public String getMaChiTietDV() {
+        return maChiTietDV;
+    }
+
+    public void setMaChiTietDV(String maChiTietDV) {
+        this.maChiTietDV = maChiTietDV;
     }
 
     public hoaDon() {

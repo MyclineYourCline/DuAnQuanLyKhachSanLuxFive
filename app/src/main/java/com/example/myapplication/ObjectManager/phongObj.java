@@ -1,6 +1,6 @@
 package com.example.myapplication.ObjectManager;
 
-public class phong {
+public class phongObj {
     //maPhong
     //maTang
     //tenPhong
@@ -9,7 +9,7 @@ public class phong {
     //soPhong
     private String maPhong,maTang,maLoai,tenPhong,trangThai;
 
-    public phong(String maPhong, String maTang, String maLoai
+    public phongObj(String maPhong, String maTang, String maLoai
             , String tenPhong, String trangThai) {
         this.maPhong = maPhong;
         this.maTang = maTang;
@@ -18,7 +18,7 @@ public class phong {
         this.trangThai = trangThai;
     }
 
-    public phong() {
+    public phongObj() {
     }
 
     public String getMaPhong() {
