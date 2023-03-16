@@ -1,6 +1,6 @@
 package com.example.myapplication.ObjectManager;
 
-public class dichVu {
+public class dichVuObj {
     //maDichVu
     //tenDichVu
     //giaDichVu
@@ -8,14 +8,14 @@ public class dichVu {
     //soLuong
     private String maDichVu, tenDichVu, giaDichVu , soLuong;
 
-    public dichVu(String maDichVu, String tenDichVu, String giaDichVu, String soLuong) {
+    public dichVuObj(String maDichVu, String tenDichVu, String giaDichVu, String soLuong) {
         this.maDichVu = maDichVu;
         this.tenDichVu = tenDichVu;
         this.giaDichVu = giaDichVu;
         this.soLuong = soLuong;
     }
 
-    public dichVu() {
+    public dichVuObj() {
     }
 
     public String getMaDichVu() {

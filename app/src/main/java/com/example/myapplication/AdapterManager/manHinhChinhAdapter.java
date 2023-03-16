@@ -10,28 +10,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.ObjectManager.manHinhChinh;
+import com.example.myapplication.ObjectManager.manHinhChinhObj;
 import com.example.myapplication.R;
 
 import java.util.List;
 
 public class manHinhChinhAdapter extends RecyclerView.Adapter<manHinhChinhAdapter.manHinhChinhViewHolder>{
     private Context mContext;
-    private List<manHinhChinh> mList;
-    private List<manHinhChinh> mListOld;
+    private List<manHinhChinhObj> mList;
+    private List<manHinhChinhObj> mListOld;
     private senData mListener;
 
     public manHinhChinhAdapter(Context mContext, senData mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
     }
-    public void setmList(List<manHinhChinh> mList){
+    public void setmList(List<manHinhChinhObj> mList){
         this.mList = mList;
         this.mListOld = this.mList;
         notifyDataSetChanged();
     }
     public interface senData{
-        void sendDada(manHinhChinh items);
+        void sendDada(manHinhChinhObj items);
     }
 
     @NonNull
@@ -44,7 +44,7 @@ public class manHinhChinhAdapter extends RecyclerView.Adapter<manHinhChinhAdapte
 
     @Override
     public void onBindViewHolder(@NonNull manHinhChinhViewHolder holder, int position) {
-            manHinhChinh items = mList.get(position);
+            manHinhChinhObj items = mList.get(position);
             if (items == null){
                 return;
             }

@@ -6,7 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.myapplication.ObjectManager.dichVu;
+import com.example.myapplication.ObjectManager.dichVuObj;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,24 +24,24 @@ public class dichVuDao {
     //
     //soLuong
     @SuppressLint("Range")
-    public List<dichVu> get (String sql, String...agrs){
-        List<dichVu> mList = new ArrayList<>();
+    public List<dichVuObj> get (String sql, String...agrs){
+        List<dichVuObj> mList = new ArrayList<>();
         Cursor cursor = db.rawQuery(sql, agrs);
         while (cursor.moveToNext()){
-            dichVu dichVu = new dichVu();
-            dichVu.setMaDichVu(cursor.getString(cursor.getColumnIndex("maDichVu")));
-            dichVu.setTenDichVu(cursor.getString(cursor.getColumnIndex("tenDichVu")));
-            dichVu.setGiaDichVu(cursor.getString(cursor.getColumnIndex("giaDichVu")));
-            dichVu.setSoLuong(cursor.getString(cursor.getColumnIndex("soLuong")));
-            mList.add(dichVu);
+            dichVuObj dichVuObj = new dichVuObj();
+            dichVuObj.setMaDichVu(cursor.getString(cursor.getColumnIndex("maDichVu")));
+            dichVuObj.setTenDichVu(cursor.getString(cursor.getColumnIndex("tenDichVu")));
+            dichVuObj.setGiaDichVu(cursor.getString(cursor.getColumnIndex("giaDichVu")));
+            dichVuObj.setSoLuong(cursor.getString(cursor.getColumnIndex("soLuong")));
+            mList.add(dichVuObj);
         }
         return mList;
     }
-    public List<dichVu> getAll(){
+    public List<dichVuObj> getAll(){
         String sql = "SELECT * FROM dichVuThem";
         return get(sql);
     }
-    public Long inserDichVuThem(dichVu items){
+    public Long inserDichVuThem(dichVuObj items){
         ContentValues values = new ContentValues();
         values.put("maDichVu",items.getMaDichVu());
         values.put("tenDichVu",items.getTenDichVu());
@@ -49,7 +49,7 @@ public class dichVuDao {
         values.put("soLuong",items.getSoLuong());
         return db.insert("dichVuThem",null,values);
     }
-    public int updateDichVuThem (dichVu items){
+    public int updateDichVuThem (dichVuObj items){
         ContentValues values = new ContentValues();
         values.put("maDichVu",items.getMaDichVu());
         values.put("tenDichVu",items.getTenDichVu());

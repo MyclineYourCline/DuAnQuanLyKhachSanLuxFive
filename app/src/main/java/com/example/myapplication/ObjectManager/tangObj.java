@@ -2,19 +2,19 @@ package com.example.myapplication.ObjectManager;
 
 import java.io.Serializable;
 
-public class tang implements Serializable {
+public class tangObj implements Serializable {
     //maTang
     //tenTang
     //soPhong
     private String maTang, tenTang, soPhong;
 
-    public tang(String maTang, String tenTang, String soPhong) {
+    public tangObj(String maTang, String tenTang, String soPhong) {
         this.maTang = maTang;
         this.tenTang = tenTang;
         this.soPhong = soPhong;
     }
 
-    public tang() {
+    public tangObj() {
     }
 
     public String getMaTang() {

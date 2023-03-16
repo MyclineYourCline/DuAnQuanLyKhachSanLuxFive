@@ -1,14 +1,14 @@
 package com.example.myapplication.ObjectManager;
 
-public class loaiPhong {
+public class loaiPhongObj {
     //maLoai
     //tenLoaiPhong
     //giaThue
     private String maLoai, tenLoaiPhong, giaThue;
 
-    public loaiPhong() {
+    public loaiPhongObj() {
     }
-    public loaiPhong(String maLoai, String tenLoaiPhong, String giaThue) {
+    public loaiPhongObj(String maLoai, String tenLoaiPhong, String giaThue) {
         this.maLoai = maLoai;
         this.tenLoaiPhong = tenLoaiPhong;
         this.giaThue = giaThue;

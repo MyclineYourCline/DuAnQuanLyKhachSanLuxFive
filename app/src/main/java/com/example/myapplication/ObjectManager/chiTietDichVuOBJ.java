@@ -1,20 +1,20 @@
 package com.example.myapplication.ObjectManager;
 
-public class chiTietDichVu {
+public class chiTietDichVuOBJ {
     //maChiTietDV
     //maDichVu
     //maDatPhong
     //giaTien
     private String maChiTietDV, maDichVu, maDatPhong, giaTien;
 
-    public chiTietDichVu(String maChiTietDV, String maDichVu, String maDatPhong, String giaTien) {
+    public chiTietDichVuOBJ(String maChiTietDV, String maDichVu, String maDatPhong, String giaTien) {
         this.maChiTietDV = maChiTietDV;
         this.maDichVu = maDichVu;
         this.maDatPhong = maDatPhong;
         this.giaTien = giaTien;
     }
 
-    public chiTietDichVu() {
+    public chiTietDichVuOBJ() {
     }
 
     public String getMaChiTietDV() {

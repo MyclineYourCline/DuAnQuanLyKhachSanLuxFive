@@ -1,20 +1,20 @@
 package com.example.myapplication.ObjectManager;
 
-public class khachHang {
+public class khachHangObj {
     //soCMT
     //tenKh
     //ngaySinh
     //soDienThoai
     private String soCMT, tenKh, ngaySinh, soDienThoai;
 
-    public khachHang(String soCMT, String tenKh, String ngaySinh, String soDienThoai) {
+    public khachHangObj(String soCMT, String tenKh, String ngaySinh, String soDienThoai) {
         this.soCMT = soCMT;
         this.tenKh = tenKh;
         this.ngaySinh = ngaySinh;
         this.soDienThoai = soDienThoai;
     }
 
-    public khachHang() {
+    public khachHangObj() {
     }
 
     public String getSoCMT() {

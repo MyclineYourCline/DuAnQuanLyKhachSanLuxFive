@@ -1,10 +1,10 @@
 package com.example.myapplication.ObjectManager;
 
-public class manHinhChinh {
+public class manHinhChinhObj {
     private int image;
     private String name;
 
-    public manHinhChinh() {
+    public manHinhChinhObj() {
     }
 
     public int getImage() {
@@ -23,7 +23,7 @@ public class manHinhChinh {
         this.name = name;
     }
 
-    public manHinhChinh(int image, String name) {
+    public manHinhChinhObj(int image, String name) {
         this.image = image;
         this.name = name;
     }

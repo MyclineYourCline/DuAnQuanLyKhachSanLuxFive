@@ -1,6 +1,6 @@
 package com.example.myapplication.ObjectManager;
 
-public class nhanVien {
+public class nhanVienObj {
     //maNhanVien
     //tenNhanVien
     //anhNhanVien
@@ -8,8 +8,8 @@ public class nhanVien {
     //matKhau
     private String maNhanVien,tenNhanVien,anhNhanVien,soDienThoai,matKhau;
 
-    public nhanVien(String maNhanVien,
-                    String tenNhanVien, String anhNhanVien, String soDienThoai, String matKhau) {
+    public nhanVienObj(String maNhanVien,
+                       String tenNhanVien, String anhNhanVien, String soDienThoai, String matKhau) {
         this.maNhanVien = maNhanVien;
         this.tenNhanVien = tenNhanVien;
         this.anhNhanVien = anhNhanVien;
@@ -17,7 +17,7 @@ public class nhanVien {
         this.matKhau = matKhau;
     }
 
-    public nhanVien() {
+    public nhanVienObj() {
     }
 
     public String getMaNhanVien() {

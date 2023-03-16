@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.myapplication.ObjectManager.tang;
+import com.example.myapplication.ObjectManager.tangObj;
 
 public class quanLyTang_phong extends AppCompatActivity {
     private Intent mIntent;
@@ -18,7 +18,7 @@ public class quanLyTang_phong extends AppCompatActivity {
         setContentView(R.layout.quan_ly_phong_tang);
         mIntent = getIntent();
         mBundle = mIntent.getBundleExtra("bundle_senTang");
-        tang items_nhan = (tang) mBundle.getSerializable("items");
+        tangObj items_nhan = (tangObj) mBundle.getSerializable("items");
         getSupportActionBar().setTitle("Quản lý phòng "+items_nhan.getTenTang());
     }
 }

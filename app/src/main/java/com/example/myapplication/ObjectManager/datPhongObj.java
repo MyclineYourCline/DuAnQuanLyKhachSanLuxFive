@@ -1,6 +1,6 @@
 package com.example.myapplication.ObjectManager;
 
-public class datPhong {
+public class datPhongObj {
     //maDatPhong
     //maKh
     //maNhanVien
@@ -15,7 +15,7 @@ public class datPhong {
     private String maDatPhong, maKh,maNhanVien, maPhong,checkIn,
             gioVao,ghiChu;
 
-    public datPhong(String maDatPhong, String maKh, String maNhanVien
+    public datPhongObj(String maDatPhong, String maKh, String maNhanVien
             , String maPhong, String checkIn, String gioVao, String ghiChu) {
         this.maDatPhong = maDatPhong;
         this.maKh = maKh;
@@ -41,7 +41,7 @@ public class datPhong {
         return result;
     }
 
-    public datPhong() {
+    public datPhongObj() {
     }
 
     public String getMaDatPhong() {

@@ -13,7 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.myapplication.AdapterManager.manHinhChinhAdapter;
-import com.example.myapplication.ObjectManager.manHinhChinh;
+import com.example.myapplication.ObjectManager.manHinhChinhObj;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -37,11 +37,11 @@ public class Home extends AppCompatActivity {
         //
         adapter = new manHinhChinhAdapter(Home.this, new manHinhChinhAdapter.senData() {
             @Override
-            public void sendDada(manHinhChinh items) {
+            public void sendDada(manHinhChinhObj items) {
                 chuyenManHinh(items);
             }
 
-            private void chuyenManHinh(manHinhChinh items) {
+            private void chuyenManHinh(manHinhChinhObj items) {
                 switch (items.getName().trim()){
                     case "Quản lý Tầng":
                         mIntent = new Intent(Home.this, quanLyTang.class);
@@ -91,18 +91,18 @@ public class Home extends AppCompatActivity {
         mRecyclerView.setAdapter(adapter);
     }
     // chung set giá trị cho list
-    private List<manHinhChinh> getmList() {
-        List<manHinhChinh> list = new ArrayList<>();
-        list.add(new manHinhChinh(R.drawable.tang_icon,"Quản lý Tầng"));
-        list.add(new manHinhChinh(R.drawable.phong_icon,"Quản lý phòng"));
-        list.add(new manHinhChinh(R.drawable.loai_phong_icon,"Loại phòng"));
-        list.add(new manHinhChinh(R.drawable.user,"Khách hàng"));
-        list.add(new manHinhChinh(R.drawable.dich_vu_icon,"Dịch vụ"));
-        list.add(new manHinhChinh(R.drawable.hoa_don_icon,"Hóa đơn"));
-        list.add(new manHinhChinh(R.drawable.quan_ly_nhanvien_icon,"Nhân viên"));
-        list.add(new manHinhChinh(R.drawable.thongke,"Doanh thu"));
-        list.add(new manHinhChinh(R.drawable.home,"Trang chủ"));
-        list.add(new manHinhChinh(R.drawable.baseline_feedback_24,"FeedBack"));
+    private List<manHinhChinhObj> getmList() {
+        List<manHinhChinhObj> list = new ArrayList<>();
+        list.add(new manHinhChinhObj(R.drawable.tang_icon,"Quản lý Tầng"));
+        list.add(new manHinhChinhObj(R.drawable.phong_icon,"Quản lý phòng"));
+        list.add(new manHinhChinhObj(R.drawable.loai_phong_icon,"Loại phòng"));
+        list.add(new manHinhChinhObj(R.drawable.user,"Khách hàng"));
+        list.add(new manHinhChinhObj(R.drawable.dich_vu_icon,"Dịch vụ"));
+        list.add(new manHinhChinhObj(R.drawable.hoa_don_icon,"Hóa đơn"));
+        list.add(new manHinhChinhObj(R.drawable.quan_ly_nhanvien_icon,"Nhân viên"));
+        list.add(new manHinhChinhObj(R.drawable.thongke,"Doanh thu"));
+        list.add(new manHinhChinhObj(R.drawable.home,"Trang chủ"));
+        list.add(new manHinhChinhObj(R.drawable.baseline_feedback_24,"FeedBack"));
 
         return list;
     }

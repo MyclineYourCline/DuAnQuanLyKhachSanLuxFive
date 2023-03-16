@@ -47,7 +47,6 @@
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dialog_update_nhan_vien_textInput_sdt"
         android:layout_below="@id/dialog_update_nhan_vien_textInput_manv"

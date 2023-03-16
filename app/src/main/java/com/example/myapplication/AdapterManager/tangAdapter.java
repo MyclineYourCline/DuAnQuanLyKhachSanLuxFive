@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.InterfaceManager.sendData;
-import com.example.myapplication.ObjectManager.tang;
+import com.example.myapplication.ObjectManager.tangObj;
 import com.example.myapplication.R;
 
 import java.util.List;
@@ -21,15 +21,15 @@ import java.util.List;
 public class tangAdapter extends RecyclerView.Adapter<tangAdapter.tangViewHolder>
         implements Filterable {
     private Context mContext;
-    private List<tang> mList;
-    private List<tang> mListOld;
+    private List<tangObj> mList;
+    private List<tangObj> mListOld;
     private sendData mListener;
 
     public tangAdapter(Context mContext, sendData mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
     }
-    public void setmList(List<tang> mList){
+    public void setmList(List<tangObj> mList){
         this.mList = mList;
         this.mListOld = this.mList;
         notifyDataSetChanged();
@@ -45,7 +45,7 @@ public class tangAdapter extends RecyclerView.Adapter<tangAdapter.tangViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull tangViewHolder holder, int position) {
-        tang items = mList.get(position);
+        tangObj items = mList.get(position);
         if (items == null){
             return;
         }

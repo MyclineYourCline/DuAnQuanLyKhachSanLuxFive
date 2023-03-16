@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.InterfaceManager.sendData;
-import com.example.myapplication.ObjectManager.khachHang;
+import com.example.myapplication.ObjectManager.khachHangObj;
 import com.example.myapplication.R;
 
 import java.util.List;
@@ -20,15 +20,15 @@ import java.util.List;
 public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.khachHangViewHolder>
                                 implements Filterable {
     private Context mContext;
-    private List<khachHang> mList;
-    private List<khachHang> mListOld;
+    private List<khachHangObj> mList;
+    private List<khachHangObj> mListOld;
     private sendData mListener;
 
     public khachHangAdapter(Context mContext, sendData mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
     }
-    public void setmList(List<khachHang> mList){
+    public void setmList(List<khachHangObj> mList){
         this.mList = mList;
         this.mListOld = this.mList;
         notifyDataSetChanged();
@@ -44,7 +44,7 @@ public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.kha
 
     @Override
     public void onBindViewHolder(@NonNull khachHangViewHolder holder, int position) {
-        khachHang items = mList.get(position);
+        khachHangObj items = mList.get(position);
         if (items == null){
             return;
         }

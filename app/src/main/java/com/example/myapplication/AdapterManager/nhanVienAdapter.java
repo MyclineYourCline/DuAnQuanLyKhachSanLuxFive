@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.InterfaceManager.sendData;
-import com.example.myapplication.ObjectManager.nhanVien;
+import com.example.myapplication.ObjectManager.nhanVienObj;
 import com.example.myapplication.R;
 
 import java.util.List;
@@ -21,15 +21,15 @@ import java.util.List;
 public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVienViewHolder>
                             implements Filterable {
     private Context mContext;
-    private List<nhanVien> mList;
-    private List<nhanVien> mListOld;
+    private List<nhanVienObj> mList;
+    private List<nhanVienObj> mListOld;
     private sendData mListener;
 
     public nhanVienAdapter(Context mContext, sendData mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
     }
-    public void setmList(List<nhanVien> mList){
+    public void setmList(List<nhanVienObj> mList){
         this.mList = mList;
         this.mListOld = this.mList;
         notifyDataSetChanged();
@@ -47,7 +47,7 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
 
     @Override
     public void onBindViewHolder(@NonNull nhanVienViewHolder holder, int position) {
-        nhanVien items = mList.get(position);
+        nhanVienObj items = mList.get(position);
         if (items == null){
             return;
         }

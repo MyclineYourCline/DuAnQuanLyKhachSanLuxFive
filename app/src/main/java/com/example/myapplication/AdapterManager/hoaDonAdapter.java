@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.InterfaceManager.sendData;
-import com.example.myapplication.ObjectManager.hoaDon;
+import com.example.myapplication.ObjectManager.hoaDonObj;
 import com.example.myapplication.R;
 
 import java.util.List;
@@ -19,15 +19,15 @@ import java.util.List;
 public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonViewHolder>
                             implements Filterable {
     private Context mContext;
-    private List<hoaDon> mList;
-    private List<hoaDon> mListOld;
+    private List<hoaDonObj> mList;
+    private List<hoaDonObj> mListOld;
     private sendData mListenr;
 
     public hoaDonAdapter(Context mContext, sendData mListenr) {
         this.mContext = mContext;
         this.mListenr = mListenr;
     }
-    public void setmList( List<hoaDon> mList){
+    public void setmList( List<hoaDonObj> mList){
         this.mList = mList;
         this.mListOld = this.mList;
         notifyDataSetChanged();
@@ -43,7 +43,7 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
 
     @Override
     public void onBindViewHolder(@NonNull hoaDonViewHolder holder, int position) {
-        hoaDon items = mList.get(position);
+        hoaDonObj items = mList.get(position);
         if (items == null){
             return;
         }

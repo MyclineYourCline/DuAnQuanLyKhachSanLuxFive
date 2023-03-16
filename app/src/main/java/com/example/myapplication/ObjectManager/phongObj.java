@@ -7,18 +7,18 @@ public class phongObj {
     //maLoai
     //trangThai
     //soPhong
-    private String maPhong,maTang,maLoai,tenPhong,trangThai;
+    private String maPhong,maTang,maLoai,tenPhong,trangThai,soPhong;
 
-    public phongObj(String maPhong, String maTang, String maLoai
-            , String tenPhong, String trangThai) {
+    public phongObj() {
+    }
+
+    public phongObj(String maPhong, String maTang, String maLoai, String tenPhong, String trangThai, String soPhong) {
         this.maPhong = maPhong;
         this.maTang = maTang;
         this.maLoai = maLoai;
         this.tenPhong = tenPhong;
         this.trangThai = trangThai;
-    }
-
-    public phongObj() {
+        this.soPhong = soPhong;
     }
 
     public String getMaPhong() {
@@ -59,5 +59,13 @@ public class phongObj {
 
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public String getSoPhong() {
+        return soPhong;
+    }
+
+    public void setSoPhong(String soPhong) {
+        this.soPhong = soPhong;
     }
 }

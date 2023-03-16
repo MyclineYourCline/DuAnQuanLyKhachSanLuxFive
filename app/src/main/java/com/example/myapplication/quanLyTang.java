@@ -8,15 +8,15 @@ import android.os.Bundle;
 
 import com.example.myapplication.AdapterManager.tangAdapter;
 import com.example.myapplication.InterfaceManager.sendData;
-import com.example.myapplication.ObjectManager.chiTietDichVu;
-import com.example.myapplication.ObjectManager.datPhong;
-import com.example.myapplication.ObjectManager.dichVu;
-import com.example.myapplication.ObjectManager.hoaDon;
-import com.example.myapplication.ObjectManager.khachHang;
-import com.example.myapplication.ObjectManager.loaiPhong;
-import com.example.myapplication.ObjectManager.nhanVien;
+import com.example.myapplication.ObjectManager.chiTietDichVuOBJ;
+import com.example.myapplication.ObjectManager.datPhongObj;
+import com.example.myapplication.ObjectManager.dichVuObj;
+import com.example.myapplication.ObjectManager.hoaDonObj;
+import com.example.myapplication.ObjectManager.khachHangObj;
+import com.example.myapplication.ObjectManager.loaiPhongObj;
+import com.example.myapplication.ObjectManager.nhanVienObj;
 import com.example.myapplication.ObjectManager.phongObj;
-import com.example.myapplication.ObjectManager.tang;
+import com.example.myapplication.ObjectManager.tangObj;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,37 +34,37 @@ public class quanLyTang extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.activity_quan_ly_tang_recycleView);
         mAdapter = new tangAdapter(quanLyTang.this, new sendData() {
             @Override
-            public void sendChiTietDichVu(chiTietDichVu items) {
+            public void sendChiTietDichVu(chiTietDichVuOBJ items) {
 
             }
 
             @Override
-            public void sendDatPhong(datPhong items) {
+            public void sendDatPhong(datPhongObj items) {
 
             }
 
             @Override
-            public void sendDichVu(dichVu items) {
+            public void sendDichVu(dichVuObj items) {
 
             }
 
             @Override
-            public void sendHoaDon(hoaDon items) {
+            public void sendHoaDon(hoaDonObj items) {
 
             }
 
             @Override
-            public void sendKhachHang(khachHang items) {
+            public void sendKhachHang(khachHangObj items) {
 
             }
 
             @Override
-            public void sendLoaiPhong(loaiPhong items) {
+            public void sendLoaiPhong(loaiPhongObj items) {
 
             }
 
             @Override
-            public void sendNhanVien(nhanVien items) {
+            public void sendNhanVien(nhanVienObj items) {
 
             }
 
@@ -74,7 +74,7 @@ public class quanLyTang extends AppCompatActivity {
             }
 
             @Override
-            public void sendTang(tang items) {
+            public void sendTang(tangObj items) {
                 mIntent = new Intent(quanLyTang.this, quanLyTang_phong.class);
                 mBundle = new Bundle();
                 mBundle.putSerializable("items", items);
@@ -88,12 +88,12 @@ public class quanLyTang extends AppCompatActivity {
 
     }
 
-    private List<tang> getListTang() {
-        List<tang> list = new ArrayList<>();
-        list.add(new tang("01","Tầng 1", "20"));
-        list.add(new tang("02","Tầng 2", "20"));
-        list.add(new tang("03","Tầng 3", "20"));
-        list.add(new tang("04","Tầng 4", "20"));
+    private List<tangObj> getListTang() {
+        List<tangObj> list = new ArrayList<>();
+        list.add(new tangObj("01","Tầng 1", "20"));
+        list.add(new tangObj("02","Tầng 2", "20"));
+        list.add(new tangObj("03","Tầng 3", "20"));
+        list.add(new tangObj("04","Tầng 4", "20"));
 
 
         return list;

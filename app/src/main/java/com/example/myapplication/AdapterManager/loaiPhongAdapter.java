@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.InterfaceManager.sendData;
-import com.example.myapplication.ObjectManager.loaiPhong;
+import com.example.myapplication.ObjectManager.loaiPhongObj;
 import com.example.myapplication.R;
 
 import java.util.List;
@@ -19,15 +19,15 @@ import java.util.List;
 public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loaiPhongViewHolder>
                                 implements Filterable {
     private Context mContext;
-    private List<loaiPhong> mList;
-    private List<loaiPhong> mListOld;
+    private List<loaiPhongObj> mList;
+    private List<loaiPhongObj> mListOld;
     private sendData mListener;
 
     public loaiPhongAdapter(Context mContext, sendData mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
     }
-    public void setmList(List<loaiPhong> mList){
+    public void setmList(List<loaiPhongObj> mList){
         this.mList = mList;
         this.mListOld = this.mList;
         notifyDataSetChanged();
@@ -43,7 +43,7 @@ public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loai
 
     @Override
     public void onBindViewHolder(@NonNull loaiPhongViewHolder holder, int position) {
-        loaiPhong items = mList.get(position);
+        loaiPhongObj items = mList.get(position);
         if (items == null){
             return;
         }

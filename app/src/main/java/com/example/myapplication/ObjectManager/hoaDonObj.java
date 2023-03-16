@@ -1,6 +1,6 @@
 package com.example.myapplication.ObjectManager;
 
-public class hoaDon {
+public class hoaDonObj {
     //maHoaDon
     //maDatPhong
     //trangThai
@@ -8,8 +8,8 @@ public class hoaDon {
     //ngayThang
     private String maHoaDon, maDatPhong, trangThai, tongTien, ngayThang,maChiTietDV;
 
-    public hoaDon(String maHoaDon, String maDatPhong
-            , String trangThai, String tongTien, String ngayThang,String maChiTietDV) {
+    public hoaDonObj(String maHoaDon, String maDatPhong
+            , String trangThai, String tongTien, String ngayThang, String maChiTietDV) {
         this.maHoaDon = maHoaDon;
         this.maDatPhong = maDatPhong;
         this.trangThai = trangThai;
@@ -26,7 +26,7 @@ public class hoaDon {
         this.maChiTietDV = maChiTietDV;
     }
 
-    public hoaDon() {
+    public hoaDonObj() {
     }
 
     public String getMaHoaDon() {

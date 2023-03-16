@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.InterfaceManager.sendData;
-import com.example.myapplication.ObjectManager.chiTietDichVu;
+import com.example.myapplication.ObjectManager.chiTietDichVuOBJ;
 import com.example.myapplication.R;
 
 import java.util.List;
@@ -20,15 +20,15 @@ public class chiTietDichVuAdapter extends
                             RecyclerView.Adapter<chiTietDichVuAdapter.chiTietDichVuViewHolder>
                             implements Filterable {
     private Context mContext;
-    private List<chiTietDichVu> mList;
-    private List<chiTietDichVu> mListOld;
+    private List<chiTietDichVuOBJ> mList;
+    private List<chiTietDichVuOBJ> mListOld;
     private sendData listener;
 
     public chiTietDichVuAdapter(Context mContext, sendData listener) {
         this.mContext = mContext;
         this.listener = listener;
     }
-    public void setmList(List<chiTietDichVu> mList){
+    public void setmList(List<chiTietDichVuOBJ> mList){
         this.mList = mList;
         this.mListOld = this.mList;
         notifyDataSetChanged();
@@ -44,7 +44,7 @@ public class chiTietDichVuAdapter extends
 
     @Override
     public void onBindViewHolder(@NonNull chiTietDichVuViewHolder holder, int position) {
-        chiTietDichVu items = mList.get(position);
+        chiTietDichVuOBJ items = mList.get(position);
         if (items== null){
             return;
         }
