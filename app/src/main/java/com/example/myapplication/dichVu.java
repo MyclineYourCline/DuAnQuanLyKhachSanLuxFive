@@ -12,5 +12,6 @@ public class dichVu extends AppCompatActivity {
         setContentView(R.layout.activity_dich_vu);
         getSupportActionBar().setTitle("Quản lý Dịch vụ");
         // chung tuổi lol
+        //dsfdsfs
     }
 }
