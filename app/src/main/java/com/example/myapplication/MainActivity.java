@@ -14,19 +14,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//        createDataBase mCreateDataBase = new createDataBase(MainActivity.this);
-//        db = mCreateDataBase.getWritableDatabase();
-//        db.close();
-
-
+        setContentView(R.layout.activity_main);
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this , Home.class);
+                Intent intent = new Intent(MainActivity.this , manHinhDangNhap.class);
                 startActivity(intent);
+                finish();
             }
-        }, 20000);
+        }, 2000);
     }
 }

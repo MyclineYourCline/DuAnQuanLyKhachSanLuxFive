@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.myapplication.AdapterManager.manHinhChinhAdapter;
 import com.example.myapplication.ObjectManager.manHinhChinhObj;
@@ -71,13 +72,6 @@ public class Home extends AppCompatActivity {
                         mIntent = new Intent(Home.this, doanhThu.class);
                         startActivity(mIntent);
                         break;
-                    case "Trang chủ":
-                        //
-                        break;
-                    case "FeedBack":
-                        mIntent = new Intent(Home.this, feedBack.class);
-                        startActivity(mIntent);
-                        break;
                     case "Quản lý phòng":
                         mIntent = new Intent(Home.this, quanLyPhong.class);
                         startActivity(mIntent);
@@ -89,6 +83,22 @@ public class Home extends AppCompatActivity {
 
         adapter.setmList(getmList());
         mRecyclerView.setAdapter(adapter);
+        // click vào item trong navigation
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            private Intent intent;
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.menu_nav_dangXuat:
+                        intent = new Intent(Home.this, manHinhDangNhap.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                }
+                    return true;
+            }
+        });
+
     }
     // chung set giá trị cho list
     private List<manHinhChinhObj> getmList() {
@@ -101,9 +111,6 @@ public class Home extends AppCompatActivity {
         list.add(new manHinhChinhObj(R.drawable.hoa_don_icon,"Hóa đơn"));
         list.add(new manHinhChinhObj(R.drawable.quan_ly_nhanvien_icon,"Nhân viên"));
         list.add(new manHinhChinhObj(R.drawable.thongke,"Doanh thu"));
-        list.add(new manHinhChinhObj(R.drawable.home,"Trang chủ"));
-        list.add(new manHinhChinhObj(R.drawable.baseline_feedback_24,"FeedBack"));
-
         return list;
     }
 
