@@ -15,10 +15,10 @@
         android:background="@color/backGroundTiTle">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtSoPhong"
+            android:id="@+id/edtLoaiPhong"
             android:layout_width="250dp"
             android:layout_height="48dp"
-            android:layout_below="@+id/edtTenTang"
+            android:layout_below="@+id/edtSoPhong"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="25dp"
@@ -37,7 +37,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtTenTang"
+            android:id="@+id/edtSoPhong"
             android:layout_width="250dp"
             android:layout_height="48dp"
             android:layout_below="@+id/edtTenPhong"
@@ -50,7 +50,7 @@
             android:id="@+id/btnThanhToan"
             android:layout_width="130dp"
             android:layout_height="48dp"
-            android:layout_below="@id/edtSoPhong"
+            android:layout_below="@id/edtLoaiPhong"
             android:layout_alignParentStart="true"
             android:layout_marginStart="90dp"
             android:layout_marginTop="20dp"

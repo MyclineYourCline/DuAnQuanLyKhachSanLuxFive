@@ -55,16 +55,20 @@
             android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_margin="10dp">
+
             <Button
-                android:text="Thanh toán"
-                android:layout_margin="20dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:padding="10dp"
+                android:text="Thanh toán" />
+
             <Button
-                android:layout_margin="20dp"
-                android:text="Chi tiết"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:padding="10dp"
+                android:text="Chi tiết" />
 
         </LinearLayout>
     </LinearLayout>

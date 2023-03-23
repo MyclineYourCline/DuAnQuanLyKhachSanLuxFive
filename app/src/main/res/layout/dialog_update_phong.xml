@@ -2,79 +2,78 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
-    android:layout_width="300dp"
-    android:layout_height="300dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginLeft="20dp"
+    android:layout_marginLeft="10dp"
     android:layout_marginTop="30dp"
     android:layout_marginRight="10dp"
     app:cardCornerRadius="10dp">
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/backGroundTiTle">
+        android:background="@color/purple_200">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtSoPhong"
-            android:layout_width="250dp"
-            android:layout_height="48dp"
-            android:layout_below="@+id/edtTenTang"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="#FFFFFF" />
-
+            android:layout_width="match_parent"
+            android:layout_margin="20dp"
+            android:hint="Tên phòng"
+            app:startIconDrawable="@drawable/baseline_menu_24"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtTenPhong"
-            android:layout_width="250dp"
-            android:layout_height="48dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="#FFFFFF">
-
+            android:layout_width="match_parent"
+            android:layout_margin="20dp"
+            android:hint="Trạng thái"
+            app:startIconDrawable="@drawable/baseline_info_24"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/edtTenTang"
-            android:layout_width="250dp"
-            android:layout_height="48dp"
-            android:layout_below="@+id/edtTenPhong"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="#FFFFFF" />
+            android:layout_width="match_parent"
+            android:layout_margin="20dp"
+            android:hint="Số phòng"
+            app:startIconDrawable="@drawable/baseline_confirmation_number_24"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/btnThanhToan"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
-            android:layout_below="@id/edtSoPhong"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/button_background"
-            android:text="Tạo Phiếu" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
 
-        <Button
-            android:id="@+id/btnChiTiet"
-            android:layout_width="130dp"
-            android:layout_height="48dp"
-            android:layout_below="@+id/edtSoPhong"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_toEndOf="@+id/btnThanhToan"
-            android:background="@drawable/button_background"
-            android:text="Sửa" />
-    </RelativeLayout>
+            <Button
+                android:id="@+id/btnTaoPhieu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:padding="10dp"
+                android:text="Tạo phiếu" />
+
+            <Button
+                android:id="@+id/btnSua"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:padding="10dp"
+                android:text="Sửa" />
+
+        </LinearLayout>
+    </LinearLayout>
 
 
 </androidx.cardview.widget.CardView>
