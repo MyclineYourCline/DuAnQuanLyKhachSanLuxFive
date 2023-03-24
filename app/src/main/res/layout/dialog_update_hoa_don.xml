@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+
 
 
     <LinearLayout
@@ -12,7 +15,14 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:background="@color/teal_700">
+        android:background="@color/teal_700"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/dialog_update_hoaDon_OutDialog"
+            android:layout_gravity="end"
+            android:src="@drawable/out_dialog"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -20,7 +30,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="50dp"
             android:fontFamily="@font/kieuchu"
-            android:text="Thanh tóa hóa đơn"
+            android:text="Thanh Toán Hóa Đơn"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="30dp" />
@@ -56,26 +66,25 @@
                 android:padding="15dp">
 
                 <ImageView
-                    android:layout_weight="1"
+                    android:layout_width="30dp"
+                    android:layout_height="70dp"
                     android:src="@drawable/avata_khach_hang"
-                    android:layout_width="35dp"
-                    android:layout_height="100dp"
 
                     />
 
+
                 <TextView android:text=":"
-                    android:textSize="25dp"
-                    android:textColor="@color/black"
-                    android:layout_gravity="center_vertical"/>
+                    android:textColor="@color/white"/>
 
 
                 <TextView
                     android:id="@+id/update_hoadon_tv_tenKhachHang"
                     android:layout_marginStart="15dp"
                     android:layout_weight="2"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="25dp"
-                    android:text="Nam" />
+                  android:layout_marginTop="10dp"
+                   android:gravity="start"
+                    android:textSize="23dp"
+                    android:text="nguyễn trần khả dsadd" />
             </TableRow>
 
             <TableRow
@@ -103,7 +112,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_weight="2"
                     android:textSize="20dp"
-                    android:text="Nam" />
+                    android:text="dsadsahfdshfdsdsadsad" />
             </TableRow>
 
 
@@ -120,11 +129,12 @@
                     android:textColor="@color/black"
                     android:textSize="20dp"
 
-                    />
+                    tools:ignore="SpUsage" />
 
                 <TextView android:text=":"
                     android:textSize="20dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    tools:ignore="HardcodedText,SpUsage" />
 
 
                 <TextView
@@ -132,6 +142,7 @@
                     android:layout_marginStart="15dp"
                     android:layout_weight="2"
                     android:textSize="20dp"
+                    tools:ignore="HardcodedText,SpUsage"
                     android:text="Nam" />
             </TableRow>
 
@@ -197,18 +208,11 @@
              android:layout_height="wrap_content"
              android:layout_marginTop="50dp"
              >
-             <Button
-                 android:id="@+id/btn_hoa_don_cuThe"
-                 android:layout_alignParentStart="true"
-                 android:text="cụ thể"
-                 android:layout_marginStart="20dp"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"/>
 
 
              <Button
                  android:id="@+id/btn_hoa_don_thanhToan"
-                 android:layout_alignParentEnd="true"
+                 android:layout_centerInParent="true"
                  android:layout_width="wrap_content"
                  android:text="Thanh Toán"
                  android:layout_marginEnd="20dp"

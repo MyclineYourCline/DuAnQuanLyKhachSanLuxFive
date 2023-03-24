@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -19,7 +20,11 @@ public class hoaDon extends AppCompatActivity {
         setContentView(R.layout.activity_hoa_don);
         getSupportActionBar().setTitle("Quản lý Hóa đơn");
         recycleView_hoadon_activity = findViewById(R.id.recycleView_hoadon_activity);
-
+        ArrayList<hoaDonObj> list = data_test();
+        hoadon_adapter = new hoaDonAdapter(this , list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recycleView_hoadon_activity.setLayoutManager(layoutManager);
+        recycleView_hoadon_activity.setAdapter(hoadon_adapter);
 
 
     }
