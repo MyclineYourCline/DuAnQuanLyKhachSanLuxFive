@@ -15,6 +15,12 @@ public class dichVuObj {
         this.soLuong = soLuong;
     }
 
+    public dichVuObj(String tenDichVu, String giaDichVu, String soLuong) {
+        this.tenDichVu = tenDichVu;
+        this.giaDichVu = giaDichVu;
+        this.soLuong = soLuong;
+    }
+
     public dichVuObj() {
     }
 

@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    android:layout_gravity="center"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginRight="10dp"
+    app:cardCornerRadius="10dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backGroundTiTle">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edtLoaiPhong"
+            android:layout_width="250dp"
+            android:layout_height="48dp"
+            android:layout_below="@+id/edtSoPhong"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:background="#FFFFFF" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edtTenPhong"
+            android:layout_width="250dp"
+            android:layout_height="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:background="#FFFFFF">
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edtSoPhong"
+            android:layout_width="250dp"
+            android:layout_height="48dp"
+            android:layout_below="@+id/edtTenPhong"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="25dp"
+            android:background="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btnThanhToan"
+            android:layout_width="130dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/edtLoaiPhong"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="90dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_background"
+            android:text="Thêm" />
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
