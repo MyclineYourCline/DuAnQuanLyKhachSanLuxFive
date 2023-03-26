@@ -108,27 +108,27 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
         });
 
         /// ấn vào nút thanh toán hiện ra dialog thanh toán
-        holder.item_hoaDon_btn_thanhToan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dialog dialog = new Dialog(v.getContext());
-                dialog.setContentView(R.layout.dialog_update_hoa_don);
-                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                // ánh xạ view dialog thanh toán
-                ImageView dialog_update_hoaDon_OutDialog = dialog.findViewById(R.id.dialog_update_hoaDon_OutDialog);
-                Button btn_hoa_don_thanhToan = dialog.findViewById(R.id.btn_hoa_don_thanhToan);
-
-                // nút X trong dialog thanh toán , ấn vào dialog mất
-                dialog_update_hoaDon_OutDialog.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.show();
-            }
-        });
+//        holder.item_hoaDon_btn_thanhToan.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Dialog dialog = new Dialog(v.getContext());
+//                dialog.setContentView(R.layout.dialog_update_hoa_don);
+//                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+//                // ánh xạ view dialog thanh toán
+//                ImageView dialog_update_hoaDon_OutDialog = dialog.findViewById(R.id.dialog_update_hoaDon_OutDialog);
+//                Button btn_hoa_don_thanhToan = dialog.findViewById(R.id.btn_hoa_don_thanhToan);
+//
+//                // nút X trong dialog thanh toán , ấn vào dialog mất
+//                dialog_update_hoaDon_OutDialog.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//
+//                dialog.show();
+//            }
+//        });
 
 
     }
@@ -166,7 +166,7 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
             item_hoaDon_tvNamePhong = itemView.findViewById(R.id.item_hoaDon_tvNamePhong);
             item_hoaDon_tvNgayThang = itemView.findViewById(R.id.item_hoaDon_tvNgayThang);
             item_hoaDon_tvTongTien = itemView.findViewById(R.id.item_hoaDon_tvTongTien);
-            item_hoaDon_btn_thanhToan = itemView.findViewById(R.id.item_hoaDon_btn_thanhToan);
+
             item_hoaDon_btn_chitiet = itemView.findViewById(R.id.item_hoaDon_btn_chitiet);
         }
 
