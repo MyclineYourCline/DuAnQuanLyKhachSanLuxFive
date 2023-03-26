@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_margin="20dp"
             android:hint="Số phòng"
-            app:startIconDrawable="@drawable/baseline_menu_24"
+            app:startIconDrawable="@drawable/baseline_edit_note_24"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText

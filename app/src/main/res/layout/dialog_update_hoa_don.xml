@@ -125,7 +125,7 @@
 
                 <TextView
                     android:layout_weight="1"
-                    android:text="@string/ti_n_ph_ng"
+                    android:text="tiền phòng"
                     android:textColor="@color/black"
                     android:textSize="20dp"
 
