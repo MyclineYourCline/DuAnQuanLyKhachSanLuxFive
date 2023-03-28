@@ -10,8 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.myapplication.InterfaceManager.sendData;
+import com.example.myapplication.InterfaceManager.sendKhachHang;
 import com.example.myapplication.ObjectManager.khachHangObj;
 import com.example.myapplication.R;
 
@@ -22,9 +21,9 @@ public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.kha
     private Context mContext;
     private List<khachHangObj> mList;
     private List<khachHangObj> mListOld;
-    private sendData mListener;
+    private sendKhachHang mListener;
 
-    public khachHangAdapter(Context mContext, sendData mListener) {
+    public khachHangAdapter(Context mContext, sendKhachHang mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
     }

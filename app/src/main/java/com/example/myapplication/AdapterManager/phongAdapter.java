@@ -10,7 +10,7 @@ import android.widget.Filterable;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.InterfaceManager.sendData;
+import com.example.myapplication.InterfaceManager.sendPhong;
 import com.example.myapplication.ObjectManager.phongObj;
 import com.example.myapplication.R;
 
@@ -21,9 +21,9 @@ public class phongAdapter extends RecyclerView.Adapter<phongAdapter.phongViewHol
     private Context mContext;
     private List<phongObj> mList;
     private List<phongObj> mListOld;
-    private sendData mListener;
+    private sendPhong mListener;
 
-    public phongAdapter(Context mContext, sendData mListener) {
+    public phongAdapter(Context mContext, sendPhong mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
     }

@@ -19,7 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.InterfaceManager.sendData;
+import com.example.myapplication.InterfaceManager.sendHoaDon;
 import com.example.myapplication.ObjectManager.dichVuObj;
 import com.example.myapplication.ObjectManager.hoaDonObj;
 import com.example.myapplication.R;
@@ -33,14 +33,14 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
     private List<hoaDonObj> mList;
     private List<hoaDonObj> mListOld;
     recycle_chitietHoadon_Adapter adapter;
-    private sendData mListenr;
+    private sendHoaDon mListenr;
 
     public hoaDonAdapter(Context mContext, List<hoaDonObj> mList) {
         this.mContext = mContext;
         this.mList = mList;
     }
 
-    public hoaDonAdapter(Context mContext, sendData mListenr) {
+    public hoaDonAdapter(Context mContext, sendHoaDon mListenr) {
         this.mContext = mContext;
         this.mListenr = mListenr;
     }

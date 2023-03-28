@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.InterfaceManager.sendData;
+import com.example.myapplication.InterfaceManager.sendTang;
 import com.example.myapplication.ObjectManager.tangObj;
 import com.example.myapplication.R;
 
@@ -23,9 +23,9 @@ public class tangAdapter extends RecyclerView.Adapter<tangAdapter.tangViewHolder
     private Context mContext;
     private List<tangObj> mList;
     private List<tangObj> mListOld;
-    private sendData mListener;
+    private sendTang mListener;
 
-    public tangAdapter(Context mContext, sendData mListener) {
+    public tangAdapter(Context mContext, sendTang mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
     }

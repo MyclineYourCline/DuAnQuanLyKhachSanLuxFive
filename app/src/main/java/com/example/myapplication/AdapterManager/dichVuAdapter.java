@@ -10,7 +10,7 @@ import android.widget.Filterable;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.InterfaceManager.sendData;
+import com.example.myapplication.InterfaceManager.sendDichVu;
 import com.example.myapplication.ObjectManager.dichVuObj;
 import com.example.myapplication.R;
 
@@ -21,9 +21,9 @@ public class dichVuAdapter extends RecyclerView.Adapter<dichVuAdapter.dichVuView
     private Context mContext;
     private List<dichVuObj> mList;
     private List<dichVuObj> mListOld;
-    private sendData mListener;
+    private sendDichVu mListener;
 
-    public dichVuAdapter(Context mContext, sendData mListener) {
+    public dichVuAdapter(Context mContext, sendDichVu mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
     }

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.InterfaceManager.sendData;
+import com.example.myapplication.InterfaceManager.sendNhanVien;
 import com.example.myapplication.ObjectManager.nhanVienObj;
 import com.example.myapplication.R;
 
@@ -23,9 +23,9 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
     private Context mContext;
     private List<nhanVienObj> mList;
     private List<nhanVienObj> mListOld;
-    private sendData mListener;
+    private sendNhanVien mListener;
 
-    public nhanVienAdapter(Context mContext, sendData mListener) {
+    public nhanVienAdapter(Context mContext, sendNhanVien mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
     }

@@ -10,7 +10,7 @@ import android.widget.Filterable;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.InterfaceManager.sendData;
+import com.example.myapplication.InterfaceManager.sendLoaiPhong;
 import com.example.myapplication.ObjectManager.loaiPhongObj;
 import com.example.myapplication.R;
 
@@ -21,9 +21,9 @@ public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loai
     private Context mContext;
     private List<loaiPhongObj> mList;
     private List<loaiPhongObj> mListOld;
-    private sendData mListener;
+    private sendLoaiPhong mListener;
 
-    public loaiPhongAdapter(Context mContext, sendData mListener) {
+    public loaiPhongAdapter(Context mContext, sendLoaiPhong mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
     }

@@ -10,7 +10,7 @@ import android.widget.Filterable;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.InterfaceManager.sendData;
+import com.example.myapplication.InterfaceManager.sendChiTietDichVu;
 import com.example.myapplication.ObjectManager.chiTietDichVuOBJ;
 import com.example.myapplication.R;
 
@@ -22,9 +22,9 @@ public class chiTietDichVuAdapter extends
     private Context mContext;
     private List<chiTietDichVuOBJ> mList;
     private List<chiTietDichVuOBJ> mListOld;
-    private sendData listener;
+    private sendChiTietDichVu listener;
 
-    public chiTietDichVuAdapter(Context mContext, sendData listener) {
+    public chiTietDichVuAdapter(Context mContext, sendChiTietDichVu listener) {
         this.mContext = mContext;
         this.listener = listener;
     }

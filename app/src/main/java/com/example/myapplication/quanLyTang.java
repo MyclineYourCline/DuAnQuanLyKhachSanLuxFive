@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.myapplication.AdapterManager.tangAdapter;
-import com.example.myapplication.InterfaceManager.sendData;
+import com.example.myapplication.InterfaceManager.sendTang;
 import com.example.myapplication.ObjectManager.chiTietDichVuOBJ;
 import com.example.myapplication.ObjectManager.datPhongObj;
 import com.example.myapplication.ObjectManager.dichVuObj;
@@ -32,46 +32,7 @@ public class quanLyTang extends AppCompatActivity {
         setContentView(R.layout.activity_quan_ly_tang);
         getSupportActionBar().setTitle("Quản lý tầng");
         mRecyclerView = findViewById(R.id.activity_quan_ly_tang_recycleView);
-        mAdapter = new tangAdapter(quanLyTang.this, new sendData() {
-            @Override
-            public void sendChiTietDichVu(chiTietDichVuOBJ items) {
-
-            }
-
-            @Override
-            public void sendDatPhong(datPhongObj items) {
-
-            }
-
-            @Override
-            public void sendDichVu(dichVuObj items) {
-
-            }
-
-            @Override
-            public void sendHoaDon(hoaDonObj items) {
-
-            }
-
-            @Override
-            public void sendKhachHang(khachHangObj items) {
-
-            }
-
-            @Override
-            public void sendLoaiPhong(loaiPhongObj items) {
-
-            }
-
-            @Override
-            public void sendNhanVien(nhanVienObj items) {
-
-            }
-
-            @Override
-            public void sendPhong(phongObj items) {
-
-            }
+        mAdapter = new tangAdapter(quanLyTang.this, new sendTang() {
 
             @Override
             public void sendTang(tangObj items) {

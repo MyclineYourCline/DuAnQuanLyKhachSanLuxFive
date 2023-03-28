@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.myapplication.AdapterManager.phongAdapter;
-import com.example.myapplication.InterfaceManager.sendData;
+import com.example.myapplication.InterfaceManager.sendPhong;
 import com.example.myapplication.ObjectManager.chiTietDichVuOBJ;
 import com.example.myapplication.ObjectManager.datPhongObj;
 import com.example.myapplication.ObjectManager.dichVuObj;
@@ -36,41 +36,7 @@ public class quanLyPhong extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.activity_quan_ly_phong_recycleView);
 
-        mAdapter = new phongAdapter(quanLyPhong.this, new sendData() {
-            @Override
-            public void sendChiTietDichVu(chiTietDichVuOBJ items) {
-
-            }
-
-            @Override
-            public void sendDatPhong(datPhongObj items) {
-
-            }
-
-            @Override
-            public void sendDichVu(dichVuObj items) {
-
-            }
-
-            @Override
-            public void sendHoaDon(hoaDonObj items) {
-
-            }
-
-            @Override
-            public void sendKhachHang(khachHangObj items) {
-
-            }
-
-            @Override
-            public void sendLoaiPhong(loaiPhongObj items) {
-
-            }
-
-            @Override
-            public void sendNhanVien(nhanVienObj items) {
-
-            }
+        mAdapter = new phongAdapter(quanLyPhong.this, new sendPhong() {
 
             @Override
             public void sendPhong(phongObj items) {
@@ -79,11 +45,6 @@ public class quanLyPhong extends AppCompatActivity {
                 mBundle.putSerializable("items", (Serializable) items);
                 mIntent.putExtra("bundle_senTang", mBundle);
                 startActivity(mIntent);
-            }
-
-            @Override
-            public void sendTang(tangObj items) {
-
             }
         });
         mAdapter.setmList(getListPhong());

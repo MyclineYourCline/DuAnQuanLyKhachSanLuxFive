@@ -10,7 +10,7 @@ import android.os.Bundle;
 
 import com.example.myapplication.AdapterManager.loaiPhongAdapter;
 import com.example.myapplication.AdapterManager.phongAdapter;
-import com.example.myapplication.InterfaceManager.sendData;
+import com.example.myapplication.InterfaceManager.sendLoaiPhong;
 import com.example.myapplication.ObjectManager.chiTietDichVuOBJ;
 import com.example.myapplication.ObjectManager.datPhongObj;
 import com.example.myapplication.ObjectManager.dichVuObj;
@@ -38,54 +38,15 @@ public class loaiPhong extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.activity_quan_ly_loai_phong_recycleView);
 
-        mAdapter = new loaiPhongAdapter(loaiPhong.this, new sendData() {
-            @Override
-            public void sendChiTietDichVu(chiTietDichVuOBJ items) {
-
-            }
-
-            @Override
-            public void sendDatPhong(datPhongObj items) {
-
-            }
-
-            @Override
-            public void sendDichVu(dichVuObj items) {
-
-            }
-
-            @Override
-            public void sendHoaDon(hoaDonObj items) {
-
-            }
-
-            @Override
-            public void sendKhachHang(khachHangObj items) {
-
-            }
+        mAdapter = new loaiPhongAdapter(loaiPhong.this, new sendLoaiPhong() {
 
             @Override
             public void sendLoaiPhong(loaiPhongObj items) {
-
-            }
-
-            @Override
-            public void sendNhanVien(nhanVienObj items) {
-
-            }
-
-            @Override
-            public void sendPhong(phongObj items) {
                 mIntent = new Intent(loaiPhong.this, quanLyTang_phong.class);
                 mBundle = new Bundle();
                 mBundle.putSerializable("items", (Serializable) items);
                 mIntent.putExtra("bundle_senTang", mBundle);
                 startActivity(mIntent);
-            }
-
-            @Override
-            public void sendTang(tangObj items) {
-
             }
         });
         mAdapter.setmList(getListLoaiPhong());

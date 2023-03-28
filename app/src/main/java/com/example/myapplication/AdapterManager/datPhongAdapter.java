@@ -10,7 +10,7 @@ import android.widget.Filterable;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.InterfaceManager.sendData;
+import com.example.myapplication.InterfaceManager.sendDatPhong;
 import com.example.myapplication.ObjectManager.datPhongObj;
 import com.example.myapplication.R;
 
@@ -21,8 +21,8 @@ public class datPhongAdapter extends RecyclerView.Adapter<datPhongAdapter.datPho
     private Context mContext;
     private List<datPhongObj> mList;
     private List<datPhongObj> mListOld;
-    private sendData mListener;
-    public datPhongAdapter(Context mContext, sendData mListener) {
+    private sendDatPhong mListener;
+    public datPhongAdapter(Context mContext, sendDatPhong mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
 
