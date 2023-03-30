@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class createDataBase extends SQLiteOpenHelper {
     public final static String DB_NAME = "LUX_FIVE_HOTEL";
-    public final static int DB_VERSION = 1;
+    public final static int DB_VERSION = 2;
 
     public createDataBase(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -53,7 +53,7 @@ public class createDataBase extends SQLiteOpenHelper {
     //ngaySinh
     //soDienThoai
     private final static String CREATE_TABLE_KHACHHANG
-            = "CREATE TABLE khacHang  (" +
+            = "CREATE TABLE khachHang  (" +
             "soCMT TEXT PRIMARY KEY" +
             ", tenKh TEXT" +
             ", ngaySinh TEXT" +

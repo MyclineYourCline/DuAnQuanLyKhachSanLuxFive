@@ -1,6 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_margin="15sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:startIconDrawable="@drawable/baseline_person_outline_24"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dialogEdtMaKhachHang"
+                android:hint="Mã khách hàng"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/dialogBtnTaoKhachHang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Tạo khách hàng"
+            android:layout_marginRight="10dp"
+            />
+    </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15sp"
+            app:startIconDrawable="@drawable/baseline_person_24"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dialogEdtMaNhanVien"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mã nhân viên"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15sp"
+            app:startIconDrawable="@drawable/baseline_room_24"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dialogEdtTenPhong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tên Phòng"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_margin="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/baseline_date_range_24"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dialogEdtNgayDat"
+                android:hint="Ngày đặt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_margin="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/baseline_hourglass_empty_24"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dialogEdtSoGioDat"
+                android:hint="Số giờ đặt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_margin="15sp"
+            app:startIconDrawable="@drawable/baseline_edit_note_24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dialogEdtGhiChu"
+                android:hint="Ghi chú"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/dialogBtnDichVu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dịch vụ"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+
+        <Button
+            android:id="@+id/dialogBtnHuy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hủy"
+            android:layout_marginRight="30dp"
+            />
+
+        <Button
+            android:id="@+id/dialogBtnTaoPhieu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tạo phiếu"
+            android:layout_marginLeft="30dp"
+            />
+    </LinearLayout>
+
+</LinearLayout>

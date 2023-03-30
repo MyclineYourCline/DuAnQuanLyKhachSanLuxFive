@@ -6,12 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.InterfaceManager.sendData;
-import com.example.myapplication.ObjectManager.tang;
+import com.example.myapplication.InterfaceManager.sendTang;
+import com.example.myapplication.ObjectManager.tangObj;
 import com.example.myapplication.R;
 
 import java.util.List;
@@ -19,15 +21,15 @@ import java.util.List;
 public class tangAdapter extends RecyclerView.Adapter<tangAdapter.tangViewHolder>
         implements Filterable {
     private Context mContext;
-    private List<tang> mList;
-    private List<tang> mListOld;
-    private sendData mListener;
+    private List<tangObj> mList;
+    private List<tangObj> mListOld;
+    private sendTang mListener;
 
-    public tangAdapter(Context mContext, sendData mListener) {
+    public tangAdapter(Context mContext, sendTang mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
     }
-    public void setmList(List<tang> mList){
+    public void setmList(List<tangObj> mList){
         this.mList = mList;
         this.mListOld = this.mList;
         notifyDataSetChanged();
@@ -43,11 +45,19 @@ public class tangAdapter extends RecyclerView.Adapter<tangAdapter.tangViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull tangViewHolder holder, int position) {
-        tang items = mList.get(position);
+        tangObj items = mList.get(position);
         if (items == null){
             return;
         }
         //todo...........
+        holder.mImageView.setImageResource(R.drawable.tang_smal);
+        holder.mTextView.setText(items.getTenTang());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.sendTang(items);
+            }
+        });
 
     }
 
@@ -60,9 +70,13 @@ public class tangAdapter extends RecyclerView.Adapter<tangAdapter.tangViewHolder
     }
     public final class tangViewHolder extends RecyclerView.ViewHolder {
         //todo............
+        ImageView mImageView;
+        TextView mTextView;
         public tangViewHolder(@NonNull View itemView) {
             super(itemView);
             //todo..........
+            mImageView = itemView.findViewById(R.id.item_tang_img);
+            mTextView = itemView.findViewById(R.id.item_tang_tenTang);
         }
     }
     @Override

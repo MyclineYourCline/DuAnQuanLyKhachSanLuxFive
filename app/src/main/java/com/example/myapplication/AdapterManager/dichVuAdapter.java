@@ -10,8 +10,8 @@ import android.widget.Filterable;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.InterfaceManager.sendData;
-import com.example.myapplication.ObjectManager.dichVu;
+import com.example.myapplication.InterfaceManager.sendDichVu;
+import com.example.myapplication.ObjectManager.dichVuObj;
 import com.example.myapplication.R;
 
 import java.util.List;
@@ -19,15 +19,15 @@ import java.util.List;
 public class dichVuAdapter extends RecyclerView.Adapter<dichVuAdapter.dichVuViewHolder>
                             implements Filterable {
     private Context mContext;
-    private List<dichVu> mList;
-    private List<dichVu> mListOld;
-    private sendData mListener;
+    private List<dichVuObj> mList;
+    private List<dichVuObj> mListOld;
+    private sendDichVu mListener;
 
-    public dichVuAdapter(Context mContext, sendData mListener) {
+    public dichVuAdapter(Context mContext, sendDichVu mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
     }
-    public void setmList(List<dichVu> mList){
+    public void setmList(List<dichVuObj> mList){
         this.mList = mList;
         this.mListOld = this.mList;
         notifyDataSetChanged();
@@ -42,7 +42,7 @@ public class dichVuAdapter extends RecyclerView.Adapter<dichVuAdapter.dichVuView
 
     @Override
     public void onBindViewHolder(@NonNull dichVuViewHolder holder, int position) {
-        dichVu items = mList.get(position);
+        dichVuObj items = mList.get(position);
         if (items == null){
             return;
         }

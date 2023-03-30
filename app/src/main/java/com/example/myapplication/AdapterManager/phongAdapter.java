@@ -10,8 +10,8 @@ import android.widget.Filterable;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.InterfaceManager.sendData;
-import com.example.myapplication.ObjectManager.phong;
+import com.example.myapplication.InterfaceManager.sendPhong;
+import com.example.myapplication.ObjectManager.phongObj;
 import com.example.myapplication.R;
 
 import java.util.List;
@@ -19,15 +19,15 @@ import java.util.List;
 public class phongAdapter extends RecyclerView.Adapter<phongAdapter.phongViewHolder>
                 implements Filterable {
     private Context mContext;
-    private List<phong> mList;
-    private List<phong> mListOld;
-    private sendData mListener;
+    private List<phongObj> mList;
+    private List<phongObj> mListOld;
+    private sendPhong mListener;
 
-    public phongAdapter(Context mContext, sendData mListener) {
+    public phongAdapter(Context mContext, sendPhong mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
     }
-    public void setmList(List<phong> mList){
+    public void setmList(List<phongObj> mList){
         this.mList = mList;
         this.mListOld = this.mList;
         notifyDataSetChanged();
@@ -44,7 +44,7 @@ public class phongAdapter extends RecyclerView.Adapter<phongAdapter.phongViewHol
 
     @Override
     public void onBindViewHolder(@NonNull phongViewHolder holder, int position) {
-        phong items = mList.get(position);
+        phongObj items = mList.get(position);
         if (items == null){
             return;
         }

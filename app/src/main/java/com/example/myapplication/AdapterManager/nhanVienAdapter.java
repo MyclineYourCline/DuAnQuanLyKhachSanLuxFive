@@ -6,12 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.InterfaceManager.sendData;
-import com.example.myapplication.ObjectManager.nhanVien;
+import com.example.myapplication.InterfaceManager.sendNhanVien;
+import com.example.myapplication.ObjectManager.nhanVienObj;
 import com.example.myapplication.R;
 
 import java.util.List;
@@ -19,15 +21,15 @@ import java.util.List;
 public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVienViewHolder>
                             implements Filterable {
     private Context mContext;
-    private List<nhanVien> mList;
-    private List<nhanVien> mListOld;
-    private sendData mListener;
+    private List<nhanVienObj> mList;
+    private List<nhanVienObj> mListOld;
+    private sendNhanVien mListener;
 
-    public nhanVienAdapter(Context mContext, sendData mListener) {
+    public nhanVienAdapter(Context mContext, sendNhanVien mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
     }
-    public void setmList(List<nhanVien> mList){
+    public void setmList(List<nhanVienObj> mList){
         this.mList = mList;
         this.mListOld = this.mList;
         notifyDataSetChanged();
@@ -45,11 +47,20 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
 
     @Override
     public void onBindViewHolder(@NonNull nhanVienViewHolder holder, int position) {
-        nhanVien items = mList.get(position);
+        nhanVienObj items = mList.get(position);
         if (items == null){
             return;
         }
-        //todo...
+        holder.item_nhan_vien_avata.setImageResource(R.drawable.user);
+       holder.item_nhan_vien_tv_ten.setText(items.getTenNhanVien());
+        holder.item_nhan_vien_tv_sdt.setText(items.getSoDienThoai());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 
     }
 
@@ -61,10 +72,17 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
         return 0;
     }
     public final class nhanVienViewHolder extends RecyclerView.ViewHolder{
-        // todo...
+            ImageView item_nhan_vien_avata;
+            TextView item_nhan_vien_tv_ten , item_nhan_vien_tv_sdt;
         public nhanVienViewHolder(@NonNull View itemView) {
             super(itemView);
-            //todo...
+
+            item_nhan_vien_avata = itemView.findViewById(R.id.item_nhan_vien_avata);
+            item_nhan_vien_tv_ten = itemView.findViewById(R.id.item_nhan_vien_tv_ten);
+            item_nhan_vien_tv_sdt = itemView.findViewById(R.id.item_nhan_vien_tv_sdt);
+
+
+
         }
     }
     @Override

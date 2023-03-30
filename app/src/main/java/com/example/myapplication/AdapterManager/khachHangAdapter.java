@@ -6,12 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.myapplication.InterfaceManager.sendData;
-import com.example.myapplication.ObjectManager.khachHang;
+import com.example.myapplication.InterfaceManager.sendKhachHang;
+import com.example.myapplication.ObjectManager.khachHangObj;
 import com.example.myapplication.R;
 
 import java.util.List;
@@ -19,15 +19,15 @@ import java.util.List;
 public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.khachHangViewHolder>
                                 implements Filterable {
     private Context mContext;
-    private List<khachHang> mList;
-    private List<khachHang> mListOld;
-    private sendData mListener;
+    private List<khachHangObj> mList;
+    private List<khachHangObj> mListOld;
+    private sendKhachHang mListener;
 
-    public khachHangAdapter(Context mContext, sendData mListener) {
+    public khachHangAdapter(Context mContext, sendKhachHang mListener) {
         this.mContext = mContext;
         this.mListener = mListener;
     }
-    public void setmList(List<khachHang> mList){
+    public void setmList(List<khachHangObj> mList){
         this.mList = mList;
         this.mListOld = this.mList;
         notifyDataSetChanged();
@@ -43,11 +43,18 @@ public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.kha
 
     @Override
     public void onBindViewHolder(@NonNull khachHangViewHolder holder, int position) {
-        khachHang items = mList.get(position);
+        khachHangObj items = mList.get(position);
         if (items == null){
             return;
         }
-        //todo...
+       holder.item_khach_hang_tv_ten.setText(items.getTenKh());
+        holder.item_khach_hang_tv_sdt.setText(items.getSoDienThoai());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
 
     }
 
@@ -59,10 +66,11 @@ public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.kha
         return 0;
     }
     public final class khachHangViewHolder extends RecyclerView.ViewHolder {
-        // todo..
+        TextView item_khach_hang_tv_ten , item_khach_hang_tv_sdt;
         public khachHangViewHolder(@NonNull View itemView) {
             super(itemView);
-            //todo...
+            item_khach_hang_tv_ten = itemView.findViewById(R.id.item_khach_hang_tv_ten);
+            item_khach_hang_tv_sdt = itemView.findViewById(R.id.item_khach_hang_tv_sdt);
         }
     }
     @Override
