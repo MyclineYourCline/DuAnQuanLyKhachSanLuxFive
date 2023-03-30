@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -21,26 +22,43 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:src="@drawable/out_dialog" />
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/layoutAvata"
+   android:layout_alignParentTop="true"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentStart="true"
+   android:layout_marginTop="120dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/dialog_add_nhan_vien_avata"
+        android:layout_width="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="100dp"
         android:src="@drawable/user"
-        android:layout_below="@id/dialog_add_nhan_vien_img"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="30sp"
-        android:layout_marginTop="-70dp"
-        android:layout_width="130dp"
-        android:layout_height="130dp"/>
+        tools:layout_editor_absoluteX="140dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
 
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dialog_add_nhan_vien_textInput_manv"
-        android:layout_below="@id/dialog_add_nhan_vien_avata"
-        android:layout_margin="20sp"
+        android:layout_below="@id/layoutAvata"
+        android:layout_margin="10dp"
         app:startIconDrawable="@drawable/baseline_person_outline_24"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
@@ -50,12 +68,28 @@
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dialog_add_nhan_vien_textInput_tenNv"
+        android:layout_below="@id/dialog_add_nhan_vien_textInput_manv"
+        android:layout_margin="10dp"
+        app:startIconDrawable="@drawable/baseline_person_outline_24"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dialog_add_nhan_vien_Edt_tenNv"
+            android:hint="Tên Nhân viên"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dialog_add_nhan_vien_textInput_sdt"
-        android:layout_below="@id/dialog_add_nhan_vien_textInput_manv"
-        android:layout_margin="20sp"
+        android:layout_below="@id/dialog_add_nhan_vien_textInput_tenNv"
+        android:layout_margin="15sp"
         app:startIconDrawable="@drawable/baseline_local_phone"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
@@ -69,8 +103,9 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dialog_add_nhan_vien_textInput_matkhau"
         android:layout_below="@id/dialog_add_nhan_vien_textInput_sdt"
-        android:layout_margin="20sp"
+        android:layout_margin="10dp"
         app:startIconDrawable="@drawable/baseline_password"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
@@ -84,8 +119,9 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dialog_add_nhan_vien_textInput_matkhauNhaplai"
         android:layout_below="@id/dialog_add_nhan_vien_textInput_matkhau"
-        android:layout_margin="20sp"
+        android:layout_margin="10dp"
         app:startIconDrawable="@drawable/baseline_password"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
@@ -100,6 +136,7 @@
     <Button
         android:id="@+id/dialog_add_nhan_vien_btnThem"
         android:text="Thêm"
+        android:layout_marginBottom="10dp"
        android:layout_centerHorizontal="true"
         android:layout_marginLeft="30dp"
         android:backgroundTint="@color/teal_700"

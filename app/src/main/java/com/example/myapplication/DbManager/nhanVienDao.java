@@ -66,4 +66,17 @@ public class nhanVienDao {
         List<nhanVienObj> mList = get(sql,maNhanVien);
         return mList.get(0);
     }
+    // check nhân viên tả về boolen
+    public Boolean CheckByMaNhanVien(String maNhanVien , String mattkhau) {
+        String sql = "SELECT * FROM nhanVien WHERE maNhanVien = ? AND matKhau = ? ";
+        Cursor c = db.rawQuery(sql , new String[]{maNhanVien , mattkhau});
+        if (c.getCount() > 0 ){
+            return true;
+        }
+        return false;
+    }
+
+
+
+
 }

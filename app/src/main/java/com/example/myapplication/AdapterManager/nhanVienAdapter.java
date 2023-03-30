@@ -29,6 +29,13 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
         this.mContext = mContext;
         this.mListener = mListener;
     }
+
+    public nhanVienAdapter(Context mContext, List<nhanVienObj> mList) {
+        this.mContext = mContext;
+        this.mList = mList;
+        notifyDataSetChanged();
+    }
+
     public void setmList(List<nhanVienObj> mList){
         this.mList = mList;
         this.mListOld = this.mList;
