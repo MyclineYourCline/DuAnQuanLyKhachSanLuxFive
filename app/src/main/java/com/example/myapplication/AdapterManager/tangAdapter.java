@@ -58,7 +58,6 @@ public class tangAdapter extends RecyclerView.Adapter<tangAdapter.tangViewHolder
                 mListener.sendTang(items);
             }
         });
-
     }
 
     @Override
