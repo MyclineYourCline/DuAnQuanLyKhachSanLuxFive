@@ -23,26 +23,28 @@
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:hint="Tên Loại Phòng"
+            android:hint="Mã Loại Phòng"
             app:startIconDrawable="@drawable/baseline_menu_24">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtTenLoaiPhong"
+                android:id="@+id/edtMaLoaiPhong"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:editable="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:hint="Giá Thuê"
-            app:startIconDrawable="@drawable/baseline_attach_money_24">
+            android:hint="Tên Phòng"
+            app:startIconDrawable="@drawable/baseline_edit_note_24">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtGiaThue"
+                android:id="@+id/edtTenLoaiPhong"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:editable="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
