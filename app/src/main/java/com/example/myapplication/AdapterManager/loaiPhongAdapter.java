@@ -17,9 +17,11 @@ import android.widget.Filterable;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.DbManager.loaiPhongDao;
 import com.example.myapplication.InterfaceManager.sendLoaiPhong;
 import com.example.myapplication.ObjectManager.loaiPhongObj;
 import com.example.myapplication.R;
+import com.example.myapplication.loaiPhong;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
@@ -51,13 +53,13 @@ public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loai
 
     @Override
     public void onBindViewHolder(@NonNull loaiPhongViewHolder holder, int position) {
-        loaiPhongObj items = mList.get(position);
-        if (items == null){
+        loaiPhongObj loaiPhong = mList.get(position);
+        if (loaiPhong == null){
             return;
         }
         //gán view cho từng phần tử
-        holder.edtMaLoaiPhong.setText(items.getMaLoai());
-        holder.edtTenLoaiPhong.setText(items.getTenLoaiPhong());
+        holder.edtMaLoaiPhong.setText(loaiPhong.getMaLoai());
+        holder.edtTenLoaiPhong.setText(loaiPhong.getTenLoaiPhong());
 
         //onclick Sửa hiện dialog
         holder.btnSua.setOnClickListener(new View.OnClickListener() {
@@ -114,17 +116,23 @@ public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loai
         Button btnSua =dialog.findViewById(R.id.btnSua);
 
         //Xử lý nút trong Dialog
-        btnHuy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        btnSua.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loaiPhongObj loaiPhong = new loaiPhongObj();
-            }
+            btnHuy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            btnSua.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+  //                  loaiPhongObj loaiPhongObj= new loaiPhongDao();
+                    TextInputEditText edtMaLoaiPhong = v.findViewById(R.id.edtMaLoaiPhong);
+                    TextInputEditText edtTenLoaiPhong = v.findViewById(R.id.edtTenLoaiPhong);
+
+  //                  loaiPhongObj.setMaLoai(edtMaLoaiPhong.getText().toString());
+  //                  loaiPhongObj.setTenLoaiPhong(edtTenLoaiPhong.getText().toString());
+
+                }
         });
 
         dialog.show();

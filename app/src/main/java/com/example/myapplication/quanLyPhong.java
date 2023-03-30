@@ -3,10 +3,15 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.myapplication.AdapterManager.phongAdapter;
+import com.example.myapplication.DbManager.loaiPhongDao;
 import com.example.myapplication.InterfaceManager.sendPhong;
 import com.example.myapplication.ObjectManager.chiTietDichVuOBJ;
 import com.example.myapplication.ObjectManager.datPhongObj;
@@ -27,6 +32,8 @@ public class quanLyPhong extends AppCompatActivity {
     private phongAdapter mAdapter;
     private Intent mIntent;
     private Bundle mBundle;
+
+    private loaiPhongDao mLoaiPhong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,5 +70,7 @@ public class quanLyPhong extends AppCompatActivity {
 
         return list;
     }
+
+
 }
 

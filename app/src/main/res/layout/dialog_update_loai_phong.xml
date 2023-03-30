@@ -18,12 +18,12 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_margin="20dp"
-            android:hint="Tên Loại Phòng"
+            android:hint="Mã Loại Phòng"
             app:startIconDrawable="@drawable/baseline_menu_24"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtTenLoaiPhong"
+                android:id="@+id/edtMaLoaiPhong"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -31,12 +31,12 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_margin="20dp"
-            android:hint="Giá Thuê"
-            app:startIconDrawable="@drawable/baseline_attach_money_24"
+            android:hint="Tên Loại Phòng"
+            app:startIconDrawable="@drawable/baseline_edit_note_24"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtGiaThue"
+                android:id="@+id/edtTenLoaiPhong"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
