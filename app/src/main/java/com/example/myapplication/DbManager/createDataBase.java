@@ -33,9 +33,8 @@ public class createDataBase extends SQLiteOpenHelper {
     //giaThue
     private final static String CREATE_TABLE_LOAIPHONG
            = "CREATE TABLE loaiPhong (" +
-                "maLoai INTEGER PRIMARY KEY AUTOINCREMENT" +
-                ", tenLoaiPhong TEXT" +
-                ", giaThue DOUBLE)";
+                "maLoai TEXT PRIMARY KEY " +
+                ", tenLoaiPhong TEXT)";
     //maNhanVien
     //tenNhanVien
     //anhNhanVien

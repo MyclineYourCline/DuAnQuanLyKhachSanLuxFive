@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,7 +47,8 @@ public class dichVuAdapter extends RecyclerView.Adapter<dichVuAdapter.dichVuView
         if (items == null){
             return;
         }
-        //todo...
+        holder.giaTien.setText(items.getGiaDichVu());
+        holder.tenDichVu.setText(items.getTenDichVu());
 
     }
 
@@ -59,10 +61,11 @@ public class dichVuAdapter extends RecyclerView.Adapter<dichVuAdapter.dichVuView
     }
 
     public final class dichVuViewHolder extends RecyclerView.ViewHolder{
-        //todo...
+        TextView tenDichVu, giaTien;
         public dichVuViewHolder(@NonNull View itemView) {
             super(itemView);
-            //todo....
+            tenDichVu = itemView.findViewById(R.id.item_dichVu_ten);
+            giaTien = itemView.findViewById(R.id.item_dichVu_giaTien);
         }
     }
     @Override

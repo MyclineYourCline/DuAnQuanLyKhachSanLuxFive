@@ -8,6 +8,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_height="wrap_content"
         android:id="@+id/activity_dich_vu_Rcv"/>
 
@@ -19,7 +20,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="20dp"
         android:src="@android:drawable/ic_input_add"
-        />
+        android:contentDescription="TODO" />
 
 
 </RelativeLayout>

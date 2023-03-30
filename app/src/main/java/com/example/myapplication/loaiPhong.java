@@ -15,9 +15,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.myapplication.AdapterManager.loaiPhongAdapter;
 import com.example.myapplication.AdapterManager.phongAdapter;
+import com.example.myapplication.DbManager.loaiPhongDao;
 import com.example.myapplication.InterfaceManager.sendLoaiPhong;
 import com.example.myapplication.ObjectManager.chiTietDichVuOBJ;
 import com.example.myapplication.ObjectManager.datPhongObj;
@@ -39,6 +42,7 @@ public class loaiPhong extends AppCompatActivity {
     private loaiPhongAdapter mAdapter;
     private Intent mIntent;
     private Bundle mBundle;
+    private loaiPhongDao mLoaiPhongDao;
     private FloatingActionButton flb_AddLoaiPhong;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,7 @@ public class loaiPhong extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.activity_quan_ly_loai_phong_recycleView);
         flb_AddLoaiPhong = findViewById(R.id.btnAddLoaiPhong);
+        mLoaiPhongDao = new loaiPhongDao(loaiPhong.this);
 
         mAdapter = new loaiPhongAdapter(loaiPhong.this, new sendLoaiPhong() {
 
@@ -60,15 +65,13 @@ public class loaiPhong extends AppCompatActivity {
                 startActivity(mIntent);
             }
         });
-        mAdapter.setmList(getListLoaiPhong());
-        mRecyclerView.setAdapter(mAdapter);
+       capNhapRec();
 
         //Xử lý nút thêm loại phòng
         flb_AddLoaiPhong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openThemLoaiPhongDialog(Gravity.CENTER);
-
             }
         });
     }
@@ -94,8 +97,11 @@ public class loaiPhong extends AppCompatActivity {
         } else {
             dialog.setCancelable(false);
         }
-        Button btnHuy =dialog.findViewById(R.id.btnHuy);
-        Button btnThem =dialog.findViewById(R.id.btnThem);
+        Button btnHuy =dialog.findViewById(R.id.dialog_add_loaiPhong_tenLoai_btnHuy);
+        Button btnThem =dialog.findViewById(R.id.dialog_add_loaiPhong_btnThem);
+        EditText maLoai, tenLoai;
+        maLoai = dialog.findViewById(R.id.dialog_add_loaiPhong_maLoai);
+        tenLoai = dialog.findViewById(R.id.dialog_add_loaiPhong_tenLoai);
 
         //Xử lý nút trong Dialog
         btnHuy.setOnClickListener(new View.OnClickListener() {
@@ -107,19 +113,65 @@ public class loaiPhong extends AppCompatActivity {
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            //Todo.....
+            if (tenLoai.getText().toString().isEmpty()
+            || maLoai.getText().toString().isEmpty()){
+                if (tenLoai.getText().toString().isEmpty()){
+                    tenLoai.setError("Không được để trống");
+                    return;
+                }
+                if (maLoai.getText().toString().isEmpty()){
+                    maLoai.setError("Không được để trống");
+                    return;
+                }
+            }
+            else{
+                boolean checkTonTaiML = checkMaLoai(maLoai.getText().toString());
+                if (checkTonTaiML){
+                    loaiPhongObj itemInsert = new loaiPhongObj();
+                    itemInsert.setMaLoai(maLoai.getText().toString().trim());
+                    itemInsert.setTenLoaiPhong(tenLoai.getText().toString().trim());
+                    mLoaiPhongDao.insertLoaiPhong(itemInsert);
+                    capNhapRec();
+                    dialog.cancel();
+                    Toast.makeText(loaiPhong.this, "Thanh Cong", Toast.LENGTH_SHORT).show();
+
+                }
+                else{
+                    Toast.makeText(loaiPhong.this, "Mã loại đã tồn tại", Toast.LENGTH_SHORT).show();
+                }
+            }
             }
         });
 
         dialog.show();
     }
+    private void capNhapRec(){
+        mAdapter.setmList(getListLoaiPhong());
+        mRecyclerView.setAdapter(mAdapter);
+    }
 
     private List<loaiPhongObj> getListLoaiPhong() {
-        List<loaiPhongObj> list = new ArrayList<>();
-        list.add(new loaiPhongObj("1", "phòng đơn", "300000"));
-        list.add(new loaiPhongObj("2", "phòng đôi", "400000"));
-        list.add(new loaiPhongObj("3", "phòng vip", "500000"));
-        list.add(new loaiPhongObj("4", "phòng vip 2", "600000"));
+        List<loaiPhongObj> list = mLoaiPhongDao.getAll();
         return list;
+    }
+    private boolean checkMaLoai(String maLoai){
+        boolean check = true;
+        List<loaiPhongObj> loaiPhongs = mLoaiPhongDao.getAll();
+        if (loaiPhongs == null){
+            check = true;
+        }
+        else{
+            for (loaiPhongObj items : loaiPhongs){
+                if (items.getMaLoai().toLowerCase().equals(maLoai)){
+                    check = false;
+                    break;
+                }
+                else{
+                    check = true;
+                }
+            }
+
+        }
+       return check;
     }
 }

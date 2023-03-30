@@ -29,7 +29,6 @@ public class loaiPhongDao {
             loaiPhongObj mLoaiPhongObj = new loaiPhongObj();
             mLoaiPhongObj.setMaLoai(cursor.getString(cursor.getColumnIndex("maLoai")));
             mLoaiPhongObj.setTenLoaiPhong(cursor.getString(cursor.getColumnIndex("tenLoaiPhong")));
-            mLoaiPhongObj.setGiaThue(cursor.getString(cursor.getColumnIndex("giaThue")));
             //loaiPhong
             mList.add(mLoaiPhongObj);
         }
@@ -43,7 +42,6 @@ public class loaiPhongDao {
         ContentValues values = new ContentValues();
         values.put("maLoai",items.getMaLoai());
         values.put("tenLoaiPhong",items.getTenLoaiPhong());
-        values.put("giaThue",items.getGiaThue());
         return db.insert("loaiPhong", null,values);
 
     }
@@ -51,7 +49,6 @@ public class loaiPhongDao {
         ContentValues values = new ContentValues();
         values.put("maLoai",items.getMaLoai());
         values.put("tenLoaiPhong",items.getTenLoaiPhong());
-        values.put("giaThue",items.getGiaThue());
         return db.update("loaiPhong", values,"maLoai = ?", new String[]{items.getMaLoai()});
 
     }

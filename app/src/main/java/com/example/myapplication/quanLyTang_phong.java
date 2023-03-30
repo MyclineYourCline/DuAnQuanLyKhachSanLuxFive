@@ -56,18 +56,7 @@ public class quanLyTang_phong extends AppCompatActivity {
         btn_add = findViewById(R.id.quan_ly_phong_tang_add);
         mLoaiPhongDao = new loaiPhongDao(quanLyTang_phong.this);
         mPhongDao = new phongDao(quanLyTang_phong.this);
-        //
-        for (int i = 0; i<4; i++){
-            loaiPhongObj items = new loaiPhongObj();
-            items.setMaLoai(""+i);
-           items.setTenLoaiPhong("loai"+i);
-            mLoaiPhongDao.insertLoaiPhong(items);
-        }
 
-
-
-
-        //
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

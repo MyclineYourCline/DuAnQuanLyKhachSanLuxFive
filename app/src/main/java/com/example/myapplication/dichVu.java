@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,6 +48,7 @@ public class dichVu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 themDichVu();
+                Log.d("cachung", "onClick: "+layTatCaDichVu().size());
             }
         });
 
@@ -61,7 +63,7 @@ public class dichVu extends AppCompatActivity {
         return list;
     }
     private void themDichVu(){
-        Dialog dialog = new Dialog(dichVu.this, androidx.appcompat.R.style.Theme_AppCompat_Light_Dialog_Alert);
+        Dialog dialog = new Dialog(dichVu.this);
         dialog.setContentView(R.layout.dialog_add_dich_vu);
         EditText mEditText_tenDichVu = dialog.findViewById(R.id.dialog_add_dichVu_tenDV);
         EditText mEditText_giaDichVu = dialog.findViewById(R.id.dialog_add_dichVu_GiaTien);

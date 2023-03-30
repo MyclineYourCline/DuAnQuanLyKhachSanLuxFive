@@ -23,7 +23,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtMaLoaiPhong"
+                android:id="@+id/dialog_add_loaiPhong_maLoai"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -31,12 +31,12 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_margin="20dp"
-            android:hint="Mã Loại Phòng"
+            android:hint="Ten Loại Phòng"
             app:startIconDrawable="@drawable/baseline_attach_money_24"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtTenLoaiPhong"
+                android:id="@+id/dialog_add_loaiPhong_tenLoai"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -50,7 +50,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnHuy"
+                android:id="@+id/dialog_add_loaiPhong_tenLoai_btnHuy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -59,8 +59,8 @@
                 android:padding="10dp"
                 android:text="Hủy" />
 
-            <Button
-                android:id="@+id/btnThem"
+            6<Button
+                android:id="@+id/dialog_add_loaiPhong_btnThem"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
