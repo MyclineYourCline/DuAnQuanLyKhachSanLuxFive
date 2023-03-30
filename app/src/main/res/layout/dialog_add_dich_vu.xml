@@ -12,7 +12,7 @@
 
         >
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/dialogEdtTenDV"
+            android:id="@+id/dialog_add_dichVu_tenDV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tên dịch vụ"
@@ -28,7 +28,7 @@
         app:startIconDrawable="@drawable/baseline_attach_money_24"
         >
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/dialogEdtGiatTien"
+            android:id="@+id/dialog_add_dichVu_GiaTien"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Giá tiền"
@@ -48,14 +48,14 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/dialogBtnThoat"
+            android:id="@+id/dialog_add_dichVu_huy"
             android:text="Hủy"
             android:layout_marginRight="30dp"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/dialogBtnThemDV"
+            android:id="@+id/dialog_add_dichVu_them"
             android:text="Thêm"
             android:layout_marginLeft="30dp"
             />
