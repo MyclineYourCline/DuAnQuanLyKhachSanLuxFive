@@ -4,56 +4,52 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="30dp"
-    android:layout_marginRight="10dp"
-    app:cardCornerRadius="10dp">
+    android:layout_gravity="center">
 
     <LinearLayout
         android:orientation="vertical"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/purple_200">
+        android:background="@color/teal_700">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_margin="20dp"
-            android:hint="Số Phòng"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:hint="Tên phòng"
             app:startIconDrawable="@drawable/baseline_menu_24"
             android:layout_height="wrap_content">
-
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtSoPhong"
+                android:id="@+id/dialog_add_phong_tenPhong"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
+        <Spinner
+            android:id="@+id/dialog_add_phong_spiner_loaiPhong"
+            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
-            android:layout_margin="20dp"
-            android:hint="Loại phòng"
-            app:startIconDrawable="@drawable/phong_icon"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtLoaiPhong"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"/>
 
         <LinearLayout
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnSua"
+                android:id="@+id/dialog_add_phong_btnAdd"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
+                android:textColor="@color/black"
                 android:padding="10dp"
                 android:text="Thêm" />
 
