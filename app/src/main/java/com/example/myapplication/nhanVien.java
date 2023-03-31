@@ -8,23 +8,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
-import android.content.Intent;
-
-import android.graphics.Bitmap;
 
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 import com.example.myapplication.AdapterManager.nhanVienAdapter;
 import com.example.myapplication.DbManager.nhanVienDao;
 import com.example.myapplication.ObjectManager.nhanVienObj;
@@ -115,7 +107,7 @@ public class nhanVien extends AppCompatActivity {
 
 
   // setImg
-        dialog_add_nhan_vien_img_back.setOnClickListener(new View.OnClickListener() {
+        dialog_add_nhan_vien_avata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkPermission();
