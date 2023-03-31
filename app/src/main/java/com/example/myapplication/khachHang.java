@@ -106,12 +106,14 @@ public class khachHang extends AppCompatActivity {
                     khachHang.setTenKh(Ten.trim());
                     khachHang.setNgaySinh(ngaySinh.trim());
                     khachHang.setSoDienThoai(SDT.trim());
-                    if (dao.insertKhachHangObj(khachHang)>0){
+                    if (dao.checkKhachHang(CMT.trim())){
+                        dao.insertKhachHangObj(khachHang);
+                        Toast.makeText(khachHang.this, "Cập nhập thành công", Toast.LENGTH_SHORT).show();
+                        dialog.cancel();
                         getData();
-                        Toast.makeText(khachHang.this, "Them thanh cong", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Toast.makeText(khachHang.this, "Them khong thanh cong", Toast.LENGTH_SHORT).show();
+                        edtCMT.setError("Khách hàng đã tồn tại");
                     }
 
                 }

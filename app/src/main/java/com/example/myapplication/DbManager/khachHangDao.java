@@ -48,6 +48,16 @@ public class khachHangDao {
         values.put("soDienThoai",items.getSoDienThoai());
         return db.insert("khachHang", null,values);
     }
+    public boolean checkKhachHang(String CMT){
+        String sql = "SELECT * FROM khachHang WHERE soCMT = ?";
+        List<khachHangObj> list = get(sql,CMT);
+        if (list.size()>0){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
     public int updateKhachHangObj(khachHangObj items ){
         ContentValues values = new ContentValues();
         values.put("soCMT",items.getSoCMT());
@@ -59,5 +69,6 @@ public class khachHangDao {
     public int deleteKhachHangObj (String soCMT){
         return db.delete("khachHang","soCMT", new String[]{soCMT});
     }
+
 
 }

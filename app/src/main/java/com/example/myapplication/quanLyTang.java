@@ -69,6 +69,7 @@ public class quanLyTang extends AppCompatActivity {
         return list;
     }
     private void addTang(){
+
         Dialog dialog = new Dialog(quanLyTang.this,
                 androidx.appcompat.R.style.Base_Theme_AppCompat_Dialog_Alert );
         dialog.setContentView(R.layout.dialog_add_tang);
