@@ -34,13 +34,13 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import gun0912.tedbottompicker.TedBottomPicker;
-import gun0912.tedbottompicker.TedBottomSheetDialogFragment;
+
 
 public class nhanVien extends AppCompatActivity {
 
@@ -118,7 +118,7 @@ public class nhanVien extends AppCompatActivity {
         dialog_add_nhan_vien_img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkPermission(dialog_add_nhan_vien_avata);
+                checkPermission();
 
             }
         });
@@ -180,24 +180,24 @@ public class nhanVien extends AppCompatActivity {
 
 
     }
-    private void checkPermission (ImageView imageView){
+    private void checkPermission ( ){
         PermissionListener permissionlistener = new PermissionListener() {
             @Override
             public void onPermissionGranted() {
                 Toast.makeText(nhanVien.this, "Permission Granted"
                         , Toast.LENGTH_SHORT).show();
-                TedBottomSheetDialogFragment.OnImageSelectedListener listener
-                        = new TedBottomSheetDialogFragment.OnImageSelectedListener() {
-                    @Override
-                    public void onImageSelected(Uri uri) {
-                        try {
-                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                            imageView.setImageBitmap(bitmap);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                };
+//                TedBottomSheetDialogFragment.OnImageSelectedListener listener
+//                        = new TedBottomSheetDialogFragment.OnImageSelectedListener() {
+//                    @Override
+//                    public void onImageSelected(Uri uri) {
+//                        try {
+//                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+//                            imageView.setImageBitmap(bitmap);
+//                        } catch (IOException e) {
+//                            throw new RuntimeException(e);
+//                        }
+//                    }
+//                };
 
             }
 
