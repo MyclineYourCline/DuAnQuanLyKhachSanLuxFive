@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 
@@ -30,12 +31,16 @@ import com.example.myapplication.ObjectManager.nhanVienObj;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.normal.TedPermission;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import gun0912.tedbottompicker.TedBottomPicker;
+import gun0912.tedbottompicker.TedBottomSheetDialogFragment;
 
 public class nhanVien extends AppCompatActivity {
 
@@ -109,19 +114,28 @@ public class nhanVien extends AppCompatActivity {
 
 
 
-//        dialog_add_nhan_vien_avata.setImageURI(Url_anh);
+  // setImg
+        dialog_add_nhan_vien_img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkPermission(dialog_add_nhan_vien_avata);
+
+            }
+        });
+
         dao = new nhanVienDao(dialog.getContext());
 // ấn vào nút thêm
         dialog_add_nhan_vien_btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//check trống
+                //check trống
                 dialog_add_nhan_vien_textInput_manv.setError(dialog_add_nhan_vien_Edt_manv.getText().toString().isEmpty() ? "mã nhân viên trống !" : "");
                 dialog_add_nhan_vien_textInput_tenNv.setError(dialog_add_nhan_vien_Edt_tenNv.getText().toString().isEmpty() ? "tên nhân viên trống !" : "");
                 dialog_add_nhan_vien_textInput_sdt.setError(dialog_add_nhan_vien_Edt_sdt.getText().toString().isEmpty() ? "sdt nhân viên trống !" :
                         (dialog_add_nhan_vien_Edt_sdt.getText().toString().matches("\\\\d{10}"  ) ? "" : "Không phải số điện thoại"));
                 dialog_add_nhan_vien_textInput_matkhau.setError(dialog_add_nhan_vien_Edt_matkhau.getText().toString().isEmpty() ? "mật khẩu không đc để trống":"");
                 dialog_add_nhan_vien_textInput_matkhauNhaplai.setError(dialog_add_nhan_vien_Edt_matkhauNhaplai.getText().toString().isEmpty() ? "không đc để trống" : "");
+
 
                 // thêm vào dataase
                     if (dialog_add_nhan_vien_Edt_matkhauNhaplai.getText().toString().equals(dialog_add_nhan_vien_Edt_matkhau.getText().toString())) {
@@ -166,7 +180,40 @@ public class nhanVien extends AppCompatActivity {
 
 
     }
+    private void checkPermission (ImageView imageView){
+        PermissionListener permissionlistener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                Toast.makeText(nhanVien.this, "Permission Granted"
+                        , Toast.LENGTH_SHORT).show();
+                TedBottomSheetDialogFragment.OnImageSelectedListener listener
+                        = new TedBottomSheetDialogFragment.OnImageSelectedListener() {
+                    @Override
+                    public void onImageSelected(Uri uri) {
+                        try {
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                            imageView.setImageBitmap(bitmap);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                };
 
+            }
 
+            @Override
+            public void onPermissionDenied(List<String> deniedPermissions) {
+                Toast.makeText(nhanVien.this, "Permission Denied\n"
+                        + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+            }
 
+            };
+        TedPermission.create()
+                .setPermissionListener(permissionlistener)
+                .setDeniedMessage("If you reject permission,you can not use this service\n" +
+                        "\nPlease turn on permissions at [Setting] > [Permission]")
+                .setPermissions(android.Manifest.permission.CAMERA
+                        , android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                .check();
+    }
 }
