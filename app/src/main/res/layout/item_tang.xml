@@ -20,15 +20,15 @@
 
         <ImageView
             android:id="@+id/item_tang_img"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="25dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="25dp"
-            android:background="@drawable/ic_floor" />
+            android:background="@drawable/tang_icon" />
 
         <TextView
             android:id="@+id/item_tang_tenTang"

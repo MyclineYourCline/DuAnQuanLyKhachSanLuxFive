@@ -4,48 +4,53 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="30dp"
-    android:layout_marginRight="10dp"
-    app:cardCornerRadius="10dp">
+    android:layout_gravity="center">
 
     <LinearLayout
         android:orientation="vertical"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/purple_200">
+        android:background="@color/teal_700">
 
       <com.google.android.material.textfield.TextInputLayout
           android:layout_width="match_parent"
           android:layout_margin="20dp"
+          android:textColorHint="@color/black"
           android:hint="Tên phòng"
           app:startIconDrawable="@drawable/baseline_menu_24"
           android:layout_height="wrap_content">
           <com.google.android.material.textfield.TextInputEditText
+              android:id="@+id/dialog_update_phong_dang_su_dung_tenPhong"
               android:layout_width="match_parent"
+              android:textColor="@color/black"
               android:layout_height="wrap_content"/>
       </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_margin="20dp"
             android:hint="Trạng thái"
+            android:textColorHint="@color/black"
             app:startIconDrawable="@drawable/baseline_info_24"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dialog_update_phong_dang_su_dung_trangThai"
                 android:layout_width="match_parent"
+                android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_margin="20dp"
-            android:hint="Số phòng"
-            app:startIconDrawable="@drawable/baseline_edit_note_24"
+            android:hint="Người thuê"
+            android:textColorHint="@color/black"
+            app:startIconDrawable="@drawable/baseline_person_24"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dialog_update_phong_dang_su_dung_nguoiThue"
                 android:layout_width="match_parent"
+                android:textColor="@color/black"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,6 +62,7 @@
             android:layout_margin="10dp">
 
             <Button
+                android:id="@+id/dialog_update_phong_dang_su_dung_thanhToan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -64,6 +70,7 @@
                 android:text="Thanh toán" />
 
             <Button
+                android:id="@+id/dialog_update_phong_dang_su_dung_chiTiet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"

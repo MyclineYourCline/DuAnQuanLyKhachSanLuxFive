@@ -133,7 +133,7 @@ public class loaiPhong extends AppCompatActivity {
                     mLoaiPhongDao.insertLoaiPhong(itemInsert);
                     capNhapRec();
                     dialog.cancel();
-                    Toast.makeText(loaiPhong.this, "Thanh Cong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(loaiPhong.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
 
                 }
                 else{

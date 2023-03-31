@@ -50,7 +50,6 @@ public class tangAdapter extends RecyclerView.Adapter<tangAdapter.tangViewHolder
             return;
         }
         //todo...........
-        holder.mImageView.setImageResource(R.drawable.tang_smal);
         holder.mTextView.setText(items.getTenTang());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

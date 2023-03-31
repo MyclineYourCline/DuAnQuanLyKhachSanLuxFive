@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Dialog;
 
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.view.View;
@@ -178,19 +179,6 @@ public class nhanVien extends AppCompatActivity {
             public void onPermissionGranted() {
                 Toast.makeText(nhanVien.this, "Permission Granted"
                         , Toast.LENGTH_SHORT).show();
-//                TedBottomSheetDialogFragment.OnImageSelectedListener listener
-//                        = new TedBottomSheetDialogFragment.OnImageSelectedListener() {
-//                    @Override
-//                    public void onImageSelected(Uri uri) {
-//                        try {
-//                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-//                            imageView.setImageBitmap(bitmap);
-//                        } catch (IOException e) {
-//                            throw new RuntimeException(e);
-//                        }
-//                    }
-//                };
-
             }
 
             @Override

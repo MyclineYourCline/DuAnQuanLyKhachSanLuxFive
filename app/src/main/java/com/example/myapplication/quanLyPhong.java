@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 import com.example.myapplication.AdapterManager.phongAdapter;
 import com.example.myapplication.DbManager.loaiPhongDao;
+import com.example.myapplication.DbManager.phongDao;
 import com.example.myapplication.InterfaceManager.sendPhong;
 import com.example.myapplication.ObjectManager.chiTietDichVuOBJ;
 import com.example.myapplication.ObjectManager.datPhongObj;
@@ -32,6 +33,7 @@ public class quanLyPhong extends AppCompatActivity {
     private phongAdapter mAdapter;
     private Intent mIntent;
     private Bundle mBundle;
+    private phongDao mPhongDao;
 
     private loaiPhongDao mLoaiPhong;
 
@@ -42,6 +44,7 @@ public class quanLyPhong extends AppCompatActivity {
         getSupportActionBar().setTitle("Quản lý phòng");
 
         mRecyclerView = findViewById(R.id.activity_quan_ly_phong_recycleView);
+        mPhongDao = new phongDao(quanLyPhong.this);
 
         mAdapter = new phongAdapter(quanLyPhong.this, new sendPhong() {
 
@@ -60,14 +63,7 @@ public class quanLyPhong extends AppCompatActivity {
     }
 
     private List<phongObj> getListPhong() {
-        List<phongObj> list = new ArrayList<>();
-        list.add(new phongObj("1", "1", "1", "Phòng đơn", "Trống", "101"));
-        list.add(new phongObj("2", "1", "2", "Phòng đôi", "Trống", "102"));
-        list.add(new phongObj("3", "2", "2", "Phòng đôi", "Trống", "201"));
-        list.add(new phongObj("4", "2", "1", "Phòng đơn", "Trống", "202"));
-        list.add(new phongObj("5", "3", "2", "Phòng đôi vip", "Trống", "301"));
-
-
+        List<phongObj> list = mPhongDao.getAll();
         return list;
     }
 
