@@ -35,7 +35,6 @@ public class phongDao {
             mPhongObj.setTenPhong(cursor.getString(cursor.getColumnIndex("tenPhong")));
             mPhongObj.setMaLoai(cursor.getString(cursor.getColumnIndex("maLoai")));
             mPhongObj.setTrangThai(cursor.getString(cursor.getColumnIndex("trangThai")));
-            mPhongObj.setTrangThai(cursor.getString(cursor.getColumnIndex("soPhong")));
             mList.add(mPhongObj);
         }
         return mList;
@@ -51,7 +50,6 @@ public class phongDao {
         values.put("tenPhong",items.getTenPhong());
         values.put("maLoai",items.getMaLoai());
         values.put("trangThai",items.getTrangThai());
-        values.put("soPhong",items.getSoPhong());
         return db.insert("phong", null,values);
     }
     public int updatePhong(phongObj items){
@@ -73,10 +71,10 @@ public class phongDao {
         List<phongObj> mList = get(sql,maPhong);
         return mList.get(0);
     }
-    public phongObj getByMaTang(String maTang){
+    public List<phongObj> getByMaTang(String maTang){
         String sql = "SELECT * FROM phong WHERE maTang  = ?";
         List<phongObj> mList = get(sql,maTang);
-        return mList.get(0);
+        return mList;
     }
     public phongObj getByMaLoai(String maLoai){
         String sql = "SELECT * FROM phong WHERE maLoai  = ?";

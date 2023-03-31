@@ -12,7 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/teal_700">
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dialog_themPhong_title"
+            android:text="Thêm Phòng"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_marginTop="50dp"
@@ -26,14 +35,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="50dp"
+            android:textStyle="bold"
+            android:layout_marginRight="20dp"
+            android:text="Loại Phòng"/>
         <Spinner
             android:id="@+id/dialog_add_phong_spiner_loaiPhong"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="5dp"
+            android:popupBackground="@drawable/custom_boder_edt"
             android:layout_width="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_height="wrap_content"
+            android:layout_height="65dp"
             android:background="@android:color/transparent"/>
 
         <LinearLayout

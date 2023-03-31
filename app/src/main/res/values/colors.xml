@@ -11,5 +11,8 @@
     <color name="backGroundTiTle">#82E6FF</color>
     <color name="backGroundDangSuDung">#32FA32</color>
     <color name="backGroundQuaHan">#FA3232</color>
+    <color name="phongTrong">#DFDBDB</color>
+    <color name="phongDangDung">#1048B6</color>
+    <color name="phongQuaHan">#FA3232</color>
 
 </resources>

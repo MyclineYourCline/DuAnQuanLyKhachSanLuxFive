@@ -91,7 +91,6 @@ public class quanLyTang extends AppCompatActivity {
                         }
                     }
                     else{
-
                         if (checkMaTang(maTang)){
                             tangObj items = new tangObj();
                             items.setMaTang(editText_maTang.getText().toString().trim());
