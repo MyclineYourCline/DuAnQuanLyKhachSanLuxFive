@@ -77,7 +77,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/dialog_add_khackhang_btnThem"
+        android:id="@+id/dialog_add_khach_hang_btnThemKhachHang"
         android:text="Thêm"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="30dp"

@@ -49,12 +49,6 @@ public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.kha
         }
        holder.item_khach_hang_tv_ten.setText(items.getTenKh());
         holder.item_khach_hang_tv_sdt.setText(items.getSoDienThoai());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                
-            }
-        });
 
     }
 
