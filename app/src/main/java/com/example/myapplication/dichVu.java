@@ -63,10 +63,10 @@ public class dichVu extends AppCompatActivity {
         return list;
     }
     private void themDichVu(){
-        Dialog dialog = new Dialog(dichVu.this);
+        Dialog dialog = new Dialog(dichVu.this,
+                androidx.appcompat.R.style.Base_Theme_AppCompat_Dialog_Alert);
         dialog.setContentView(R.layout.dialog_add_dich_vu);
         EditText mEditText_tenDichVu = dialog.findViewById(R.id.dialog_add_dichVu_tenDV);
-        EditText mEditText_giaDichVu = dialog.findViewById(R.id.dialog_add_dichVu_GiaTien);
         Button button_them =  dialog.findViewById(R.id.dialog_add_dichVu_them);
         Button button_huy =  dialog.findViewById(R.id.dialog_add_dichVu_huy);
         button_huy.setOnClickListener(new View.OnClickListener() {
@@ -78,24 +78,17 @@ public class dichVu extends AppCompatActivity {
         button_them.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mEditText_tenDichVu.getText().toString().isEmpty()
-                || mEditText_giaDichVu.getText().toString().isEmpty()){
                     if (mEditText_tenDichVu.getText().toString().isEmpty()){
                         mEditText_tenDichVu.setError("Không được để trông");
 
                     }
-                    else{
-                        mEditText_giaDichVu.setError("Không được để trông");
-                    }
-                }
-                else{
-                    dichVuObj dichVuObjInsert = new dichVuObj();
-                    dichVuObjInsert.setTenDichVu(mEditText_tenDichVu.getText().toString().trim());
-                    dichVuObjInsert.setGiaDichVu(mEditText_giaDichVu.getText().toString().trim());
-                    mDichVuDao.inserDichVuThem(dichVuObjInsert);
-                    capNhapRecyclerView();
-                    dialog.cancel();
-                    Toast.makeText(dichVu.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                     else{
+                        dichVuObj dichVuObjInsert = new dichVuObj();
+                        dichVuObjInsert.setTenDichVu(mEditText_tenDichVu.getText().toString().trim());
+                        mDichVuDao.inserDichVuThem(dichVuObjInsert);
+                        capNhapRecyclerView();
+                        dialog.cancel();
+                        Toast.makeText(dichVu.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                 }
             }
         });

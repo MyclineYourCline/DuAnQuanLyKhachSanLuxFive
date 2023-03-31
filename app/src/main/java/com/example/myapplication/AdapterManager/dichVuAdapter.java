@@ -47,7 +47,6 @@ public class dichVuAdapter extends RecyclerView.Adapter<dichVuAdapter.dichVuView
         if (items == null){
             return;
         }
-        holder.giaTien.setText(items.getGiaDichVu());
         holder.tenDichVu.setText(items.getTenDichVu());
 
     }
@@ -61,11 +60,10 @@ public class dichVuAdapter extends RecyclerView.Adapter<dichVuAdapter.dichVuView
     }
 
     public final class dichVuViewHolder extends RecyclerView.ViewHolder{
-        TextView tenDichVu, giaTien;
+        TextView tenDichVu;
         public dichVuViewHolder(@NonNull View itemView) {
             super(itemView);
             tenDichVu = itemView.findViewById(R.id.item_dichVu_ten);
-            giaTien = itemView.findViewById(R.id.item_dichVu_giaTien);
         }
     }
     @Override

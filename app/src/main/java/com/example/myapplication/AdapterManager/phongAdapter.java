@@ -60,10 +60,10 @@ public class phongAdapter extends RecyclerView.Adapter<phongAdapter.phongViewHol
         if (items == null){
             return;
         }
-        if (items.getTrangThai().equals("1")){
+        if (items.getTrangThai().toLowerCase().equals("phòng trống")){
             holder.trangThai.setImageResource(R.drawable.phong_trong);
         }
-        else if(items.getTrangThai().equals("2")){
+        else if(items.getTrangThai().toLowerCase().equals("đang dùng")){
             holder.trangThai.setImageResource(R.drawable.phong_dang_dung);
         }
         else{
@@ -82,6 +82,12 @@ public class phongAdapter extends RecyclerView.Adapter<phongAdapter.phongViewHol
             holder.anhPhong.setImageResource(R.drawable.phong_icon);
         }
         holder.tenPhong.setText(items.getTenPhong());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.sendPhong(items);
+            }
+        });
 
     }
 

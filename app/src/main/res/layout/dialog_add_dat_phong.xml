@@ -17,20 +17,19 @@
             app:startIconDrawable="@drawable/baseline_person_outline_24"
             >
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/dialogEdtMaKhachHang"
+                android:id="@+id/dialog_add_dat_phong_maKhachHang"
                 android:hint="Mã khách hàng"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/black"
                 android:textSize="20dp"/>
         </com.google.android.material.textfield.TextInputLayout>
-
         <Button
-            android:id="@+id/dialogBtnTaoKhachHang"
+            android:id="@+id/dialog_add_dat_phong_btnTaoKH"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Tạo khách hàng"
+            android:text="Tạo"
             android:layout_marginRight="10dp"
             />
     </LinearLayout>
@@ -42,7 +41,7 @@
             app:startIconDrawable="@drawable/baseline_person_24"
             >
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/dialogEdtMaNhanVien"
+                android:id="@+id/dialog_add_dat_phong_nhanVien"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Mã nhân viên"
@@ -58,7 +57,7 @@
             app:startIconDrawable="@drawable/baseline_room_24"
             >
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/dialogEdtTenPhong"
+                android:id="@+id/dialog_add_dat_phong_tenPhong"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tên Phòng"
@@ -73,7 +72,7 @@
             app:startIconDrawable="@drawable/baseline_date_range_24"
             >
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/dialogEdtNgayDat"
+                android:id="@+id/dialog_add_dat_phong_ngayDat"
                 android:hint="Ngày đặt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -89,7 +88,7 @@
             app:startIconDrawable="@drawable/baseline_hourglass_empty_24"
             >
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/dialogEdtSoGioDat"
+                android:id="@+id/dialog_add_dat_phong_soGioDat"
                 android:hint="Số giờ đặt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -105,7 +104,7 @@
             android:layout_height="wrap_content"
             >
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/dialogEdtGhiChu"
+                android:id="@+id/dialog_add_dat_phong_ghiChu"
                 android:hint="Ghi chú"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -114,7 +113,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/dialogBtnDichVu"
+        android:id="@+id/dialog_add_dat_phong_btnDichVu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Dịch vụ"
@@ -126,10 +125,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="20dp"
         >
 
         <Button
-            android:id="@+id/dialogBtnHuy"
+            android:id="@+id/dialog_add_dat_phong_btnHuy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hủy"
@@ -137,7 +137,7 @@
             />
 
         <Button
-            android:id="@+id/dialogBtnTaoPhieu"
+            android:id="@+id/dialog_add_dat_phong_btnTaoPhieu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tạo phiếu"
