@@ -34,6 +34,7 @@
                     android:id="@+id/item_nhan_vien_tv_ten"
                     android:paddingStart="25dp"
                     android:layout_marginTop="15dp"
+                    android:textStyle="bold"
                     android:text="Ten nhan vien"
                     android:layout_marginLeft="5dp"
                     android:textSize="20sp"
@@ -56,7 +57,12 @@
 
 
             </LinearLayout>
-
+            <ImageView
+                android:id="@+id/img_xoa_nhanvien"
+                android:src="@android:drawable/ic_menu_delete"
+                android:layout_gravity="center"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
         </LinearLayout>
     </LinearLayout>
 
