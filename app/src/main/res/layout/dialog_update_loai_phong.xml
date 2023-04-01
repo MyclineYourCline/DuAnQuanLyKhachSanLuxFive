@@ -23,7 +23,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtMaLoaiPhong"
+                android:id="@+id/dialog_update_loai_phong_edtMaLoaiPhong"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtTenLoaiPhong"
+                android:id="@+id/dialog_update_loai_phong_edtTenLoaiPhong"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -48,21 +48,21 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnHuy"
+                android:id="@+id/dialog_update_loai_phong_btnHuy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_red_conner_15dp"
+                android:background="@color/backGroundQuaHan"
                 android:padding="10dp"
                 android:text="Hủy" />
 
             <Button
-                android:id="@+id/btnSua"
+                android:id="@+id/dialog_update_loai_phong_btnSua"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@drawable/bg_green_conner_15dp"
+                android:background="@color/backGroundDangSuDung"
                 android:padding="10dp"
                 android:layout_weight="1"
                 android:text="Sửa" />

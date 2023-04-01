@@ -11,6 +11,7 @@
     app:cardCornerRadius="10dp">
 
     <LinearLayout
+        android:id="@+id/loaiPhongItem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/purple_200"
@@ -20,8 +21,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:hint="Mã Loại Phòng"
             app:startIconDrawable="@drawable/baseline_menu_24">
@@ -47,13 +48,6 @@
                 android:editable="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/btnSua"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:text="Sửa"
-            />
     </LinearLayout>
 
 

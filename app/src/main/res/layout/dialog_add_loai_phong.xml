@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_margin="20dp"
             android:hint="Ten Loại Phòng"
-            app:startIconDrawable="@drawable/baseline_attach_money_24"
+            app:startIconDrawable="@drawable/baseline_edit_note_24"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -59,7 +59,7 @@
                 android:padding="10dp"
                 android:text="Hủy" />
 
-            6<Button
+            <Button
                 android:id="@+id/dialog_add_loaiPhong_btnThem"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

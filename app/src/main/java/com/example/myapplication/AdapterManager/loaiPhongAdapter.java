@@ -1,7 +1,9 @@
 package com.example.myapplication.AdapterManager;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
@@ -11,10 +13,14 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.DbManager.loaiPhongDao;
@@ -30,8 +36,10 @@ public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loai
                                 implements Filterable {
     private Context mContext;
     private List<loaiPhongObj> mList;
-    private List<loaiPhongObj> mListOld;
+    private List<loaiPhongObj> mListNew;
+
     private sendLoaiPhong mListener;
+    private loaiPhongDao mloaiPhongDao;
 
     public loaiPhongAdapter(Context mContext, sendLoaiPhong mListener) {
         this.mContext = mContext;
@@ -39,7 +47,6 @@ public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loai
     }
     public void setmList(List<loaiPhongObj> mList){
         this.mList = mList;
-        this.mListOld = this.mList;
         notifyDataSetChanged();
     }
 
@@ -52,20 +59,20 @@ public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loai
     }
 
     @Override
-    public void onBindViewHolder(@NonNull loaiPhongViewHolder holder, int position) {
-        loaiPhongObj loaiPhong = mList.get(position);
-        if (loaiPhong == null){
+    public void onBindViewHolder(@NonNull loaiPhongViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        loaiPhongObj loaiPhongObj = mList.get(position);
+        if (loaiPhongObj == null){
             return;
         }
-        //gán view cho từng phần tử
-        holder.edtMaLoaiPhong.setText(loaiPhong.getMaLoai());
-        holder.edtTenLoaiPhong.setText(loaiPhong.getTenLoaiPhong());
+
+        holder.edtMaLoaiPhong.setText(loaiPhongObj.getMaLoai());
+        holder.edtTenLoaiPhong.setText(loaiPhongObj.getTenLoaiPhong());
 
         //onclick Sửa hiện dialog
-        holder.btnSua.setOnClickListener(new View.OnClickListener() {
+        holder.loaiPhongItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openSuaLoaiPhongDialog(Gravity.CENTER);
+                openSuaLoaiPhongDialog(Gravity.CENTER, position);
             }
         });
     }
@@ -78,22 +85,24 @@ public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loai
         return 0;
     }
     public final class loaiPhongViewHolder extends RecyclerView.ViewHolder {
-        //khai báo các phần tử
+        //khai báo các phần tử trong View
         TextInputEditText edtMaLoaiPhong,edtTenLoaiPhong;
-        Button btnSua;
+        LinearLayout loaiPhongItem;
         public loaiPhongViewHolder(@NonNull View itemView) {
             super(itemView);
             //gán view cho từng phần tử
             edtMaLoaiPhong = itemView.findViewById(R.id.edtMaLoaiPhong);
             edtTenLoaiPhong = itemView.findViewById(R.id.edtTenLoaiPhong);
-            btnSua = itemView.findViewById(R.id.btnSua);
+            loaiPhongItem = itemView.findViewById(R.id.loaiPhongItem);
         }
     }
 
-    private void openSuaLoaiPhongDialog(int gravity){
+    private void openSuaLoaiPhongDialog(int gravity, int pos){
+        //Tạo Dialog
         final Dialog dialog = new Dialog(mContext);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_update_loai_phong);
+        mloaiPhongDao = new loaiPhongDao(mContext);
 
         Window window = dialog.getWindow();
         if(window == null){
@@ -112,25 +121,52 @@ public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loai
         } else {
             dialog.setCancelable(false);
         }
-        Button btnHuy =dialog.findViewById(R.id.btnHuy);
-        Button btnSua =dialog.findViewById(R.id.btnSua);
+        //Khai báo các phần tử dialog
+        Button btnHuy =dialog.findViewById(R.id.dialog_update_loai_phong_btnHuy);
+        Button btnSua =dialog.findViewById(R.id.dialog_update_loai_phong_btnSua);
+        EditText maLoai, tenLoai;
+        maLoai = dialog.findViewById(R.id.dialog_update_loai_phong_edtMaLoaiPhong);
+        tenLoai = dialog.findViewById(R.id.dialog_update_loai_phong_edtTenLoaiPhong);
 
         //Xử lý nút trong Dialog
+            //Nút hủy thoát Dialog
             btnHuy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
                 }
             });
+            //Nút Sửa thông tin
             btnSua.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-  //                  loaiPhongObj loaiPhongObj= new loaiPhongDao();
-                    TextInputEditText edtMaLoaiPhong = v.findViewById(R.id.edtMaLoaiPhong);
-                    TextInputEditText edtTenLoaiPhong = v.findViewById(R.id.edtTenLoaiPhong);
-
-  //                  loaiPhongObj.setMaLoai(edtMaLoaiPhong.getText().toString());
-  //                  loaiPhongObj.setTenLoaiPhong(edtTenLoaiPhong.getText().toString());
+                    if (tenLoai.getText().toString().isEmpty()
+                            || maLoai.getText().toString().isEmpty()){
+                        if (tenLoai.getText().toString().isEmpty()){
+                            tenLoai.setError("Không được để trống");
+                            return;
+                        }
+                        if (maLoai.getText().toString().isEmpty()){
+                            maLoai.setError("Không được để trống");
+                            return;
+                        }
+                    }
+                    else{
+                        boolean checkTonTaiML = checkMaLoai(maLoai.getText().toString().trim());
+                        if (checkTonTaiML){
+                            loaiPhongObj itemUpdate = new loaiPhongObj();
+                            loaiPhongDao loaiPhongDao = new loaiPhongDao(mContext);
+                            itemUpdate.setMaLoai(maLoai.getText().toString().trim());
+                            itemUpdate.setTenLoaiPhong(tenLoai.getText().toString().trim());
+                            mloaiPhongDao.updateLoaiPhong(itemUpdate);
+                            dialog.cancel();
+                            updateData(pos , itemUpdate);
+                            Toast.makeText(mContext, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(mContext, "Mã loại đã tồn tại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
                 }
         });
@@ -150,5 +186,36 @@ public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loai
 
             }
         };
+    }
+
+
+    public boolean checkMaLoai(String maLoai){
+        boolean check = true;
+        List<loaiPhongObj> loaiPhongs = mloaiPhongDao.getAll();
+        if (loaiPhongs == null){
+            check = true;
+        }
+        else{
+            for (loaiPhongObj items : loaiPhongs){
+                if (items.getMaLoai().toLowerCase().equals(maLoai)){
+                    check = false;
+                    break;
+                }
+                else{
+                    check = true;
+                }
+            }
+
+        }
+        return check;
+    }
+    private List<loaiPhongObj> getListLoaiPhong() {
+        List<loaiPhongObj> list = mloaiPhongDao.getAll();
+        return list;
+    }
+
+    public void updateData(int position, loaiPhongObj updatedObject){
+        mList.set(position,updatedObject); // updating source
+        notifyDataSetChanged(); // notify adapter to refresh
     }
 }

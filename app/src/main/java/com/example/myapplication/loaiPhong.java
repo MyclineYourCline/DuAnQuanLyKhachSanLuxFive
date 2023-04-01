@@ -65,7 +65,7 @@ public class loaiPhong extends AppCompatActivity {
                 startActivity(mIntent);
             }
         });
-       capNhapRec();
+       capNhatRec();
 
         //Xử lý nút thêm loại phòng
         flb_AddLoaiPhong.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +74,7 @@ public class loaiPhong extends AppCompatActivity {
                 openThemLoaiPhongDialog(Gravity.CENTER);
             }
         });
+
     }
     private void openThemLoaiPhongDialog(int gravity){
         final Dialog dialog = new Dialog(this);
@@ -97,6 +98,7 @@ public class loaiPhong extends AppCompatActivity {
         } else {
             dialog.setCancelable(false);
         }
+
         Button btnHuy =dialog.findViewById(R.id.dialog_add_loaiPhong_tenLoai_btnHuy);
         Button btnThem =dialog.findViewById(R.id.dialog_add_loaiPhong_btnThem);
         EditText maLoai, tenLoai;
@@ -131,7 +133,7 @@ public class loaiPhong extends AppCompatActivity {
                     itemInsert.setMaLoai(maLoai.getText().toString().trim());
                     itemInsert.setTenLoaiPhong(tenLoai.getText().toString().trim());
                     mLoaiPhongDao.insertLoaiPhong(itemInsert);
-                    capNhapRec();
+                    capNhatRec();
                     dialog.cancel();
                     Toast.makeText(loaiPhong.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
 
@@ -145,16 +147,16 @@ public class loaiPhong extends AppCompatActivity {
 
         dialog.show();
     }
-    private void capNhapRec(){
+    public void capNhatRec(){
         mAdapter.setmList(getListLoaiPhong());
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    private List<loaiPhongObj> getListLoaiPhong() {
+    public List<loaiPhongObj> getListLoaiPhong() {
         List<loaiPhongObj> list = mLoaiPhongDao.getAll();
         return list;
     }
-    private boolean checkMaLoai(String maLoai){
+    public boolean checkMaLoai(String maLoai){
         boolean check = true;
         List<loaiPhongObj> loaiPhongs = mLoaiPhongDao.getAll();
         if (loaiPhongs == null){
