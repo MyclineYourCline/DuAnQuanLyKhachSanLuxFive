@@ -21,6 +21,7 @@
 
     <style name="ErrorTextAppearance" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/red</item>
+        <item name="android:height">15dp</item>
         <item name="android:textSize">10dp</item>
     </style>
 

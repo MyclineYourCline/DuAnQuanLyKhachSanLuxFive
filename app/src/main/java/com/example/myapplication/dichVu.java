@@ -95,4 +95,11 @@ public class dichVu extends AppCompatActivity {
 
         dialog.show();
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
 }

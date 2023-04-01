@@ -52,6 +52,11 @@ public class nhanVienDao {
         values.put("matKhau",nhanVienObj.getMatKhau());
         return db.insert("nhanVien",null,values);
     }
+
+    public Long deleteNhanVien(String manv){
+        long res = db.delete("nhanVien" , "maNhanVien = ?" , new String[]{manv});
+        return res;
+    }
     public int updateNhanVien(nhanVienObj nhanVienObj){
         ContentValues values = new ContentValues();
         values.put("maNhanVien",nhanVienObj.getMaNhanVien());
