@@ -77,7 +77,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/dialog_update_nhan_vien_btnThem"
+        android:id="@+id/dialog_update_nhan_vien_btnUpdateKhachHang"
         android:text="Cập nhật"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="30dp"
