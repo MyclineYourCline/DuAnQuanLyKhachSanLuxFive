@@ -70,6 +70,7 @@ public class khachHangDao {
         values.put("ngaySinh",items.getNgaySinh());
         values.put("soDienThoai",items.getSoDienThoai());
         return db.update("khachHang", values,"soCMT = ?", new String[]{items.getSoCMT()});
+
     }
     public int deleteKhachHangObj (String soCMT){
         return db.delete("khachHang","soCMT", new String[]{soCMT});
