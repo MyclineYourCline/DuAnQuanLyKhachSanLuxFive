@@ -6,27 +6,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.DbManager.chiTietDichVuDao;
+import com.example.myapplication.DbManager.dichVuDao;
 import com.example.myapplication.InterfaceManager.sendChiTietDichVu;
 import com.example.myapplication.ObjectManager.chiTietDichVuOBJ;
+import com.example.myapplication.ObjectManager.dichVuObj;
 import com.example.myapplication.R;
 
 import java.util.List;
 
 public class chiTietDichVuAdapter extends
-                            RecyclerView.Adapter<chiTietDichVuAdapter.chiTietDichVuViewHolder>
-                            implements Filterable {
+                            RecyclerView.Adapter<chiTietDichVuAdapter.chiTietDichVuViewHolder> {
     private Context mContext;
     private List<chiTietDichVuOBJ> mList;
     private List<chiTietDichVuOBJ> mListOld;
     private sendChiTietDichVu listener;
+    private dichVuDao mDichVuDao;
 
     public chiTietDichVuAdapter(Context mContext, sendChiTietDichVu listener) {
         this.mContext = mContext;
         this.listener = listener;
+        mDichVuDao = new dichVuDao(mContext);
     }
     public void setmList(List<chiTietDichVuOBJ> mList){
         this.mList = mList;
@@ -48,7 +53,10 @@ public class chiTietDichVuAdapter extends
         if (items== null){
             return;
         }
-        //todo...
+        dichVuObj itemDichVu = mDichVuDao.getByMaDV(items.getMaDichVu());
+        holder.tenDichVu.setText(itemDichVu.getTenDichVu());
+        holder.soLuong.setText(items.getSoLuong());
+        holder.tongTien.setText(items.tongTien(items.getSoLuong(),items.getGiaTien())+"");
     }
 
     @Override
@@ -59,25 +67,13 @@ public class chiTietDichVuAdapter extends
         return 0;
     }
     public final class chiTietDichVuViewHolder extends RecyclerView.ViewHolder{
-        // todo...
+       TextView tenDichVu, soLuong, tongTien;
         public chiTietDichVuViewHolder(@NonNull View itemView) {
             super(itemView);
-            // todo...
+            tenDichVu = itemView.findViewById(R.id.item_chi_tiet_dich_vu_tenDV);
+            soLuong = itemView.findViewById(R.id.item_chi_tiet_dich_vu_soLuong);
+            tongTien = itemView.findViewById(R.id.item_chi_tiet_dich_vu_tongTien);
         }
-    }
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                return null;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-
-            }
-        };
     }
 
 }

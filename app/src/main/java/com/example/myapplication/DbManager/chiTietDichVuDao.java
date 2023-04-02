@@ -31,13 +31,14 @@ public class chiTietDichVuDao {
             itemsResult.setMaChiTietDV(mCursor.getString(mCursor.getColumnIndex("maChiTietDV")));
             itemsResult.setMaDichVu(mCursor.getString(mCursor.getColumnIndex("maDichVu")));
             itemsResult.setMaDatPhong(mCursor.getString(mCursor.getColumnIndex("maDatPhong")));
+            itemsResult.setSoLuong(mCursor.getString(mCursor.getColumnIndex("soLuong")));
             itemsResult.setGiaTien(mCursor.getString(mCursor.getColumnIndex("giaTien")));
             mList.add(itemsResult);
         }
         return mList;
     }
     public List<chiTietDichVuOBJ> getAll(){
-        String sql ="SELECT * FROM chiTietDichVuOBJ";
+        String sql ="SELECT * FROM chiTietDichVu";
         return get(sql);
     }
     public Long inserChiTietDichVu(chiTietDichVuOBJ items){
@@ -46,7 +47,8 @@ public class chiTietDichVuDao {
         values.put("maDichVu",items.getMaDichVu());
         values.put("maDatPhong",items.getMaDatPhong());
         values.put("giaTien",items.getGiaTien());
-        return db.insert("chiTietDichVuOBJ",null,values);
+        values.put("soLuong", items.getSoLuong());
+        return db.insert("chiTietDichVu",null,values);
     }
     public int updateChiTietDichVu(chiTietDichVuOBJ items){
         ContentValues values = new ContentValues();
@@ -54,25 +56,39 @@ public class chiTietDichVuDao {
         values.put("maDichVu",items.getMaDichVu());
         values.put("maDatPhong",items.getMaDatPhong());
         values.put("giaTien",items.getGiaTien());
-        return db.update("chiTietDichVuOBJ",values,"maChiTietDV = ?"
+        values.put("soLuong", items.getSoLuong());
+        return db.update("chiTietDichVu",values,"maChiTietDV = ?"
                 , new String[]{items.getMaChiTietDV()});
     }
     public int deleteChiTietDichVu(String maChiTietDV){
-        return db.delete("chiTietDichVuOBJ","maChiTietDV = ?",new String[]{maChiTietDV});
+        return db.delete("chiTietDichVu","maChiTietDV = ?",new String[]{maChiTietDV});
+    }
+    public int deletechiTietDichVuDaoByMaDatPhong(String maDatPhong){
+        return db.delete("chiTietDichVu","maDatPhong = ?",new String[]{maDatPhong});
     }
     public chiTietDichVuOBJ getByMaDatPhong(String maDatPhong){
-        String sql = "SELECT * FROM chiTietDichVuOBJ WHERE maDatPhong = ?";
+        String sql = "SELECT * FROM chiTietDichVu WHERE maDatPhong = ?";
        List<chiTietDichVuOBJ> mList = get(sql,maDatPhong);
        return mList.get(0);
     }
     public chiTietDichVuOBJ getByMaDichVu(String maDichVu){
-        String sql = "SELECT * FROM chiTietDichVuOBJ WHERE maDichVu = ?";
+        String sql = "SELECT * FROM chiTietDichVu WHERE maDichVu = ?";
         List<chiTietDichVuOBJ> mList = get(sql,maDichVu);
         return mList.get(0);
     }
-    public chiTietDichVuOBJ getByMaChiTietDV(String maChiTietDV){
-        String sql = "SELECT * FROM chiTietDichVuOBJ WHERE maChiTietDV = ?";
-        List<chiTietDichVuOBJ> mList = get(sql,maChiTietDV);
-        return mList.get(0);
+    public List<chiTietDichVuOBJ> getByMaChiTietDV(String maDatPhong){
+        String sql = "SELECT * FROM chiTietDichVu WHERE maDatPhong = ?";
+        List<chiTietDichVuOBJ> mList = get(sql,maDatPhong);
+        return mList;
     }
+    public List<String> getListDV(String maChiTietDV){
+        List<String> listMaDv = new ArrayList<>();
+        String sql = "SELECT * FROM chiTietDichVu WHERE maChiTietDV = ?";
+        List<chiTietDichVuOBJ> mList = get(sql,maChiTietDV);
+        for (chiTietDichVuOBJ x: mList){
+            listMaDv.add(x.getMaDichVu());
+        }
+        return listMaDv;
+    }
+
 }

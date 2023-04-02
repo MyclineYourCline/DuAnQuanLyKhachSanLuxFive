@@ -5,12 +5,17 @@ public class chiTietDichVuOBJ {
     //maDichVu
     //maDatPhong
     //giaTien
-    private String maChiTietDV, maDichVu, maDatPhong, giaTien;
+    private String maChiTietDV;
+    private String maDichVu;
+    private String maDatPhong;
+    private String soLuong;
+    private String giaTien;
 
-    public chiTietDichVuOBJ(String maChiTietDV, String maDichVu, String maDatPhong, String giaTien) {
+    public chiTietDichVuOBJ(String maChiTietDV, String maDichVu, String maDatPhong, String soLuong, String giaTien) {
         this.maChiTietDV = maChiTietDV;
         this.maDichVu = maDichVu;
         this.maDatPhong = maDatPhong;
+        this.soLuong = soLuong;
         this.giaTien = giaTien;
     }
 
@@ -41,11 +46,23 @@ public class chiTietDichVuOBJ {
         this.maDatPhong = maDatPhong;
     }
 
+    public String getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(String soLuong) {
+        this.soLuong = soLuong;
+    }
+
     public String getGiaTien() {
         return giaTien;
     }
 
     public void setGiaTien(String giaTien) {
         this.giaTien = giaTien;
+    }
+    public double tongTien(String soLuong, String giaTien){
+        double tongTien = Double.parseDouble(soLuong)*Double.parseDouble(giaTien);
+        return tongTien;
     }
 }

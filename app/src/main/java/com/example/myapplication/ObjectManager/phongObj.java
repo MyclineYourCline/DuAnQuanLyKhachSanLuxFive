@@ -1,6 +1,8 @@
 package com.example.myapplication.ObjectManager;
 
-public class phongObj {
+import java.io.Serializable;
+
+public class phongObj implements Serializable {
     //maPhong
     //maTang
     //tenPhong

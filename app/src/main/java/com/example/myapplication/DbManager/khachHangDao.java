@@ -40,6 +40,11 @@ public class khachHangDao {
         String sql = "SELECT * FROM khachHang";
         return get(sql);
     }
+    public khachHangObj getByMaKh (String makh){
+        String sql = "SELECT * FROM khachHang WHERE soCMT = ?";
+        List<khachHangObj> list = get(sql,makh);
+        return list.get(0);
+    }
     public Long insertKhachHangObj(khachHangObj items ){
         ContentValues values = new ContentValues();
         values.put("soCMT",items.getSoCMT());

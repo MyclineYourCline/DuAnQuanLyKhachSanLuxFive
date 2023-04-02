@@ -1,5 +1,12 @@
 package com.example.myapplication.ObjectManager;
 
+import static android.util.Log.d;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class datPhongObj {
     //maDatPhong
     //maKh
@@ -13,10 +20,35 @@ public class datPhongObj {
     //gioVao
     //gioRa
     private String maDatPhong, maKh,maNhanVien, maPhong,checkIn,
-            gioVao,ghiChu;
+            gioVao,ghiChu,soGioDat, giaTien,gioRa,ngayRa;
 
-    public datPhongObj(String maDatPhong, String maKh, String maNhanVien
-            , String maPhong, String checkIn, String gioVao, String ghiChu) {
+    public String checkTimeOut(){
+        String timeIn = gioVao;
+        String thoiGianDat = soGioDat;
+        LocalTime t1 = LocalTime.parse(timeIn, DateTimeFormatter.ofPattern("HH:mm:ss"));
+        LocalTime t2 = LocalTime.parse(thoiGianDat, DateTimeFormatter.ofPattern("HH:mm:ss"));
+
+        LocalTime sum = t1.plusHours(t2.getHour())
+                .plusMinutes(t2.getMinute())
+                .plusSeconds(t2.getSecond());
+        String formattedTime = sum.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        return formattedTime;
+
+    }
+    public String checkDayOut (){
+        String dateString =  checkIn +" "+ gioVao ;
+        String thoiGianDat = soGioDat;
+        //
+        LocalDateTime dateTime = LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        LocalTime time = LocalTime.parse(thoiGianDat, DateTimeFormatter.ofPattern("HH:mm:ss"));
+        LocalDateTime newDateTime = dateTime.plusHours(time.getHour()).plusMinutes(time.getMinute()).plusSeconds(time.getSecond());
+        String newDateTimeString = newDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); // Định dạng chuỗi kết quả
+        return newDateTimeString;
+    }
+
+    public datPhongObj(String maDatPhong, String maKh, String maNhanVien, String maPhong, String checkIn,
+                       String gioVao, String ghiChu, String soGioDat, String giaTien,
+                       String gioRa, String ngayRa) {
         this.maDatPhong = maDatPhong;
         this.maKh = maKh;
         this.maNhanVien = maNhanVien;
@@ -24,24 +56,10 @@ public class datPhongObj {
         this.checkIn = checkIn;
         this.gioVao = gioVao;
         this.ghiChu = ghiChu;
-    }
-    public String setGioRa(){
-
-        //todo....
-        return gioVao;
-    }
-    public String tongGioThue(){
-        String result = "";
-        //todo
-        return result;
-    }
-    public String checkOut( ){
-        String result = "";
-        //todo
-        return result;
-    }
-
-    public datPhongObj() {
+        this.soGioDat = soGioDat;
+        this.giaTien = giaTien;
+        this.gioRa = gioRa;
+        this.ngayRa = ngayRa;
     }
 
     public String getMaDatPhong() {
@@ -98,5 +116,40 @@ public class datPhongObj {
 
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
+    }
+
+    public String getSoGioDat() {
+        return soGioDat;
+    }
+
+    public void setSoGioDat(String soGioDat) {
+        this.soGioDat = soGioDat;
+    }
+
+    public String getGiaTien() {
+        return giaTien;
+    }
+
+    public void setGiaTien(String giaTien) {
+        this.giaTien = giaTien;
+    }
+
+    public String getGioRa() {
+        return gioRa;
+    }
+
+    public void setGioRa(String gioRa) {
+        this.gioRa = gioRa;
+    }
+
+    public String getNgayRa() {
+        return ngayRa;
+    }
+
+    public void setNgayRa(String ngayRa) {
+        this.ngayRa = ngayRa;
+    }
+
+    public datPhongObj() {
     }
 }

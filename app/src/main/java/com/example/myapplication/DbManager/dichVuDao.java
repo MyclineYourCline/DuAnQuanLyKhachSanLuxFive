@@ -62,4 +62,9 @@ public class dichVuDao {
         return db.delete("dichVuThem","maDichVu = ?"
                 , new String[]{maDichVuThem});
     }
+    public dichVuObj getByMaDV (String maDV){
+        String sql = "SELECT * FROM dichVuThem WHERE maDichVu = ?";
+        List<dichVuObj> list = get(sql,maDV);
+        return list.get(0);
+    }
 }

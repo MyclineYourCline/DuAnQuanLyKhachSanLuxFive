@@ -69,8 +69,6 @@
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_add_khach_hang_textEdit_soDt"
-            android:inputType="textPassword"
-
             android:hint="Số điện thoại"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

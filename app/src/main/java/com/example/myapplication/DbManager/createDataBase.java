@@ -77,7 +77,7 @@ public class createDataBase extends SQLiteOpenHelper {
     //gioRa
     private final static String CREATE_TABLE_DATPHONG
             = "CREATE TABLE datPhong (" +
-            "maDatPhong INTEGER PRIMARY KEY AUTOINCREMENT" +
+            "maDatPhong TEXT PRIMARY KEY " +
             ", maKh TEXT" +
             ", maNhanVien INTEGER" +
             ", maPhong INTEGER" +
@@ -85,6 +85,8 @@ public class createDataBase extends SQLiteOpenHelper {
             ", checkOut TEXT" +
             ", gioVao TEXT" +
             ", gioRa TEXT" +
+            ",giaThue TEXT"+
+            ",soGioThue TEXT"+
             ", FOREIGN KEY (maKh) REFERENCES khachHang(maKh)" +
             " ,FOREIGN KEY (maNhanVien) REFERENCES nhanVien(maNhanVien)" +
             " ,FOREIGN KEY (maPhong) REFERENCES phong(maPhong))";
@@ -108,29 +110,27 @@ public class createDataBase extends SQLiteOpenHelper {
     private final static String CREATE_TABLE_HOADONTHANHTOAN
             = "CREATE TABLE hoaDonThanhToan(" +
             "maHoaDon INTEGER PRIMARY KEY AUTOINCREMENT" +
-            ", maDatPhong INTEGER" +
+            ", maDatPhong TEXT" +
             ", trangThai TEXT" +
             ", tongTien DOUBLE" +
             ", ngayThang TEXT" +
-            ", maChiTietDV INTEGER" +
+            ", maChiTietDV TEXT" +
             ", FOREIGN KEY (maDatPhong) REFERENCES datPhong(maDatPhong)" +
             ", FOREIGN KEY (maChiTietDV) REFERENCES chiTietDichVu(maChiTietDV))";
     //maChiTietDV
     //maDichVu
     //maDatPhong
     //giaTien
+    // soluong
     private final static String CREATE_TABLE_CHITIETDICHVU
             = "CREATE TABLE chiTietDichVu (" +
             " maChiTietDV INTEGER PRIMARY KEY AUTOINCREMENT" +
             ", maDichVu INTEGER" +
-            ", maDatPhong INTEGER" +
+            ", maDatPhong TEXT" +
+            ", soLuong INT"+
             ", giaTien DOUBLE" +
             ", FOREIGN KEY(maDichVu) REFERENCES dichVuThem(maDichVu)" +
             ", FOREIGN KEY(maDatPhong) REFERENCES datPhong(maDatPhong))";
-
-
-
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {

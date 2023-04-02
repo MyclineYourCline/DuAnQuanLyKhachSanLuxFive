@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -23,11 +24,15 @@ import android.widget.Toast;
 import com.example.myapplication.AdapterManager.phongAdapter;
 import com.example.myapplication.AdapterManager.spinerTenLoaiAdapter;
 import com.example.myapplication.AdapterManager.tangAdapter;
+import com.example.myapplication.DbManager.datPhongDao;
+import com.example.myapplication.DbManager.khachHangDao;
 import com.example.myapplication.DbManager.loaiPhongDao;
 import com.example.myapplication.DbManager.phongDao;
 import com.example.myapplication.DbManager.tangDao;
 import com.example.myapplication.InterfaceManager.sendPhong;
 import com.example.myapplication.InterfaceManager.sendTang;
+import com.example.myapplication.ObjectManager.datPhongObj;
+import com.example.myapplication.ObjectManager.khachHangObj;
 import com.example.myapplication.ObjectManager.loaiPhongObj;
 import com.example.myapplication.ObjectManager.phongObj;
 import com.example.myapplication.ObjectManager.tangObj;
@@ -56,15 +61,10 @@ public class quanLyTang_phong extends AppCompatActivity {
         setContentView(R.layout.quan_ly_phong_tang);
         d("ca" + "chung", "onCreate: chung");
         //
-        if (savedInstanceState != null){
-           items_nhan = (tangObj) savedInstanceState.getSerializable("itemSave");
-        }
-        else{
             mIntent = getIntent();
             mBundle = mIntent.getBundleExtra("bundle_senTang");
             items_nhan = (tangObj) mBundle.getSerializable("items");
             maTang = items_nhan.getMaTang();
-        }
 
         getSupportActionBar().setTitle("Quản lý phòng "+items_nhan.getTenTang());
 
@@ -102,48 +102,63 @@ public class quanLyTang_phong extends AppCompatActivity {
         return list;
     }
     private void themPhong(String maTang){
-        Dialog dialogThemPhong = new Dialog(quanLyTang_phong.this,
-                com.google.android.material.R.style.Theme_AppCompat_DayNight_Dialog_Alert);
-        dialogThemPhong.setContentView(R.layout.dialog_add_phong);
-        EditText editText_tenPhong = dialogThemPhong.findViewById(R.id.dialog_add_phong_tenPhong);
-        Spinner spinner_loaiPhong = dialogThemPhong.findViewById(R.id.dialog_add_phong_spiner_loaiPhong);
-        Button button_them = dialogThemPhong.findViewById(R.id.dialog_add_phong_btnAdd);
-        //
-        spinerLoaiPhongAdapter = new spinerTenLoaiAdapter(quanLyTang_phong.this
-        ,R.layout.item_spinner_select,layLoaiPhong());
-        spinner_loaiPhong.setAdapter(spinerLoaiPhongAdapter);
-        //
-        button_them.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (editText_tenPhong.getText().toString().isEmpty()){
-                    editText_tenPhong.setError("Bạn không được để trống tiên phòng");
-                    return;
+        loaiPhongDao mLoaiPhongDao = new loaiPhongDao(quanLyTang_phong.this);
+        List<loaiPhongObj> listLoaiPhong = mLoaiPhongDao.getAll();
+        if (listLoaiPhong.size() == 0){
+            AlertDialog.Builder builder = new AlertDialog.Builder(quanLyTang_phong.this);
+            builder.setTitle("Bạn cần thêm Loại Phòng đã");
+            builder.setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
                 }
-                if (editText_tenPhong.getText().toString().toLowerCase().equals(maTang.toLowerCase())){
-                    editText_tenPhong.setError("Bạn chưa đặt tên phòng");
-                    return;
-                }
-                if (editText_tenPhong.getText().toString().toLowerCase()
-                        .substring(0,maTang.length()).equals(maTang.toLowerCase())){
-                    loaiPhongObj itemSlect = (loaiPhongObj) spinner_loaiPhong.getSelectedItem();
-                    phongObj phongObjInsert = new phongObj();
-                    phongObjInsert.setTenPhong(editText_tenPhong.getText().toString().trim());
-                    phongObjInsert.setMaLoai(itemSlect.getMaLoai());
-                    phongObjInsert.setMaTang(maTang);
-                    phongObjInsert.setTrangThai("Phòng trống");
-                    mPhongDao.insertPhong(phongObjInsert);
-                    capNhapDuLieu();
-                    dialogThemPhong.cancel();
-                }
-                else{
-                    editText_tenPhong.setError("Tên tầng phải bắt đầu bằng mã tầng");
-                }
+            });
+            builder.show();
+        }
+        else {
 
-            }
-        });
-        editText_tenPhong.setText(maTang);
-        dialogThemPhong.show();
+            Dialog dialogThemPhong = new Dialog(quanLyTang_phong.this,
+                    com.google.android.material.R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+            dialogThemPhong.setContentView(R.layout.dialog_add_phong);
+            EditText editText_tenPhong = dialogThemPhong.findViewById(R.id.dialog_add_phong_tenPhong);
+            Spinner spinner_loaiPhong = dialogThemPhong.findViewById(R.id.dialog_add_phong_spiner_loaiPhong);
+            Button button_them = dialogThemPhong.findViewById(R.id.dialog_add_phong_btnAdd);
+            //
+            spinerLoaiPhongAdapter = new spinerTenLoaiAdapter(quanLyTang_phong.this
+                    , R.layout.item_spinner_select, layLoaiPhong());
+            spinner_loaiPhong.setAdapter(spinerLoaiPhongAdapter);
+            //
+            button_them.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (editText_tenPhong.getText().toString().isEmpty()) {
+                        editText_tenPhong.setError("Bạn không được để trống tiên phòng");
+                        return;
+                    }
+                    if (editText_tenPhong.getText().toString().toLowerCase().equals(maTang.toLowerCase())) {
+                        editText_tenPhong.setError("Bạn chưa đặt tên phòng");
+                        return;
+                    }
+                    if (editText_tenPhong.getText().toString().toLowerCase()
+                            .substring(0, maTang.length()).equals(maTang.toLowerCase())) {
+                        loaiPhongObj itemSlect = (loaiPhongObj) spinner_loaiPhong.getSelectedItem();
+                        phongObj phongObjInsert = new phongObj();
+                        phongObjInsert.setTenPhong(editText_tenPhong.getText().toString().trim());
+                        phongObjInsert.setMaLoai(itemSlect.getMaLoai());
+                        phongObjInsert.setMaTang(maTang);
+                        phongObjInsert.setTrangThai("Phòng trống");
+                        mPhongDao.insertPhong(phongObjInsert);
+                        capNhapDuLieu();
+                        dialogThemPhong.cancel();
+                    } else {
+                        editText_tenPhong.setError("Tên tầng phải bắt đầu bằng mã tầng");
+                    }
+
+                }
+            });
+            editText_tenPhong.setText(maTang);
+            dialogThemPhong.show();
+        }
     }
     private List<loaiPhongObj> layLoaiPhong(){
         List<loaiPhongObj> list = mLoaiPhongDao.getAll();
@@ -165,14 +180,18 @@ public class quanLyTang_phong extends AppCompatActivity {
             btn_TaoPhieu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    taoPhieuThuePhong();
+                    taoPhieuThuePhong(phongObj);
                     dialog.cancel();
                 }
             });
             btn_sua.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    phongObj phongObj1 = phongObj;
+                    phongObj1.setTenPhong(tenPhong.getText().toString().trim());
+                    mPhongDao.updatePhong(phongObj1);
+                    capNhapDuLieu();
+                    dialog.cancel();
                 }
             });
             dialog.show();
@@ -188,18 +207,50 @@ public class quanLyTang_phong extends AppCompatActivity {
             Button thanhToan = dialog.findViewById(R.id.dialog_update_phong_dang_su_dung_thanhToan);
             Button chiTiet = dialog.findViewById(R.id.dialog_update_phong_dang_su_dung_chiTiet);
             //
+            datPhongDao mDatPhongDao = new datPhongDao(quanLyTang_phong.this);
+            datPhongObj mDatPhongObj = mDatPhongDao.getByMaPhong(phongObj.getMaPhong());
+            khachHangDao mKhachHangDao = new khachHangDao(quanLyTang_phong.this);
+            khachHangObj mKhachHangObj = mKhachHangDao.getByMaKh(mDatPhongObj.getMaKh());
+            nguoiThue.setText(mKhachHangObj.getTenKh());
+            
+            thanhToan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pTthanhToan();
+                }
+            });
+            chiTiet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pTchiTiet(mDatPhongObj.getMaDatPhong());
+                    dialog.cancel();
+                }
+            });
+            //
+            
             tenPhong.setText(phongObj.getTenPhong());
             trangThai.setText(phongObj.getTrangThai());
             dialog.show();
         }
 
     }
-    private void taoPhieuThuePhong(){
+
+    private void pTchiTiet(String maDatPhong) {
+        Intent intent = new Intent(quanLyTang_phong.this,chiTietHoaDon.class);
+        intent.putExtra("maDatPhong",maDatPhong);
+        startActivity(intent);
+    }
+
+    private void pTthanhToan() {
+        
+    }
+
+    private void taoPhieuThuePhong(phongObj phongObj){
       Intent intent = new Intent(quanLyTang_phong.this, taoPhieuDatPhong.class);
-      startActivity(intent);
       Bundle bundle = new Bundle();
-      bundle.putSerializable("itemSend", items_nhan);
+      bundle.putSerializable("itemSend", phongObj);
       intent.putExtra("intentSend",bundle);
+      startActivity(intent);
     }
     @Override
     protected void onRestart() {

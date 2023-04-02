@@ -40,6 +40,10 @@ public class datPhongDao {
             items.setMaPhong(mCursor.getString(mCursor.getColumnIndex("maPhong")));
             items.setCheckIn(mCursor.getString(mCursor.getColumnIndex("checkIn")));
             items.setGioVao(mCursor.getString(mCursor.getColumnIndex("gioVao")));
+            items.setGiaTien(mCursor.getString(mCursor.getColumnIndex("giaThue")));
+            items.setGioRa(mCursor.getString(mCursor.getColumnIndex("gioRa")));
+            items.setNgayRa(mCursor.getString(mCursor.getColumnIndex("checkOut")));
+            items.setSoGioDat(mCursor.getString(mCursor.getColumnIndex("soGioThue")));
             mList.add(items);
         }
         return mList;
@@ -52,9 +56,11 @@ public class datPhongDao {
         values.put("maPhong",items.getMaPhong());
         values.put("checkIn",items.getCheckIn());
         values.put("gioVao",items.getGioVao());
-        values.put("checkOut",items.checkOut());
-        values.put("gioRa",items.setGioRa());
-        return db.insert("datPhongObj",null,values);
+        values.put("checkOut",items.getNgayRa());
+        values.put("gioRa",items.getGioRa());
+        values.put("giaThue", items.getGiaTien());
+        values.put("soGioThue",items.getSoGioDat());
+        return db.insert("datPhong",null,values);
     }
     public int updateDatPhong(datPhongObj items){
         ContentValues values = new ContentValues();
@@ -64,31 +70,33 @@ public class datPhongDao {
         values.put("maPhong",items.getMaPhong());
         values.put("checkIn",items.getCheckIn());
         values.put("gioVao",items.getGioVao());
-        values.put("checkOut",items.checkOut());
-        values.put("gioRa",items.setGioRa());
-        return db.update("datPhongObj",values,"maDatPhong = ?"
+        values.put("giaThue",items.getGiaTien());
+        values.put("checkOut",items.getNgayRa());
+        values.put("gioRa",items.getGioRa());
+        values.put("soGioThue",items.getSoGioDat());
+        return db.update("datPhong",values,"maDatPhong = ?"
                 , new String[]{items.getMaDatPhong()});
     }
     public int deleteDatPhong(String maDatPhong){
-        return db.delete("datPhongObj","maDatPhong = ?", new String[]{maDatPhong});
+        return db.delete("datPhong","maDatPhong = ?", new String[]{maDatPhong});
     }
     public datPhongObj getBymaDatPhong(String maDatPhong){
-        String sql = "SELECT * FROM datPhongObj WHERE maDatPhong = ?";
+        String sql = "SELECT * FROM datPhong WHERE maDatPhong = ?";
         List<datPhongObj> mList = get(sql,maDatPhong);
         return mList.get(0);
     }
     public datPhongObj getBymaKh(String maKh){
-        String sql = "SELECT * FROM datPhongObj WHERE maKh = ?";
+        String sql = "SELECT * FROM datPhong WHERE maKh = ?";
         List<datPhongObj> mList = get(sql,maKh);
         return mList.get(0);
     }
     public datPhongObj getByMaNhanVien(String maNhanVien){
-        String sql = "SELECT * FROM datPhongObj WHERE maNhanVien = ?";
+        String sql = "SELECT * FROM datPhong WHERE maNhanVien = ?";
         List<datPhongObj> mList = get(sql,maNhanVien);
         return mList.get(0);
     }
     public datPhongObj getByMaPhong(String maPhong){
-        String sql = "SELECT * FROM datPhongObj WHERE maPhong = ?";
+        String sql = "SELECT * FROM datPhong WHERE maPhong = ?";
         List<datPhongObj> mList = get(sql,maPhong);
         return mList.get(0);
     }

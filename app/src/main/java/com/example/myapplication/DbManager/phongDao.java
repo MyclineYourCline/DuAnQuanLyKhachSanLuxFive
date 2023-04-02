@@ -59,7 +59,6 @@ public class phongDao {
         values.put("tenPhong",items.getTenPhong());
         values.put("maLoai",items.getMaLoai());
         values.put("trangThai",items.getTrangThai());
-        values.put("soPhong",items.getSoPhong());
         return db.update("phong", values,"maPhong = ?"
                 , new String[]{items.getMaPhong()});
     }
