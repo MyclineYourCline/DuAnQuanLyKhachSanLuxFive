@@ -48,7 +48,6 @@ public class dichVu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 themDichVu();
-                Log.d("cachung", "onClick: "+layTatCaDichVu().size());
             }
         });
 

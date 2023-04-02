@@ -1,10 +1,17 @@
 package com.example.myapplication.AdapterManager;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
@@ -17,8 +24,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.DbManager.khachHangDao;
+import com.example.myapplication.DbManager.loaiPhongDao;
 import com.example.myapplication.InterfaceManager.sendKhachHang;
 import com.example.myapplication.ObjectManager.khachHangObj;
+import com.example.myapplication.ObjectManager.loaiPhongObj;
 import com.example.myapplication.R;
 import com.example.myapplication.khachHang;
 
@@ -30,7 +39,6 @@ public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.kha
     private List<khachHangObj> mList;
     private List<khachHangObj> mListOld;
     private sendKhachHang mListener;
-    private AlertDialog dialog;
     private khachHangDao dao;
 
     public khachHangAdapter(Context mContext, sendKhachHang mListener) {
@@ -64,7 +72,7 @@ public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.kha
         holder.item_khach_hang_tv_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ShowDialogUpdateKhachHang(mList.get(position));
+                ShowDialogUpdateKhachHang(Gravity.CENTER,position,mList.get(position));
             }
         });
 
@@ -86,31 +94,100 @@ public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.kha
             item_khach_hang_tv_update = itemView.findViewById(R.id.item_khach_hang_tv_update);
         }
     }
-    private void ShowDialogUpdateKhachHang(khachHangObj khachHangObj){
-        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_update_khach_hang,null);
-        EditText edtCMT = view.findViewById(R.id.dialog_update_khach_hang_edittext_cmt);
-        EditText edtTen = view.findViewById(R.id.dialog_update_khach_hang_textEdit_nameKhach);
-        EditText edtNgaySinh = view.findViewById(R.id.dialog_update_khach_hang_textEdit_ngaySinh);
-        EditText edtSDT = view.findViewById(R.id.dialog_update_khach_hang_textEdit_soDt);
-        Button btnUpdate = view.findViewById(R.id.dialog_update_nhan_vien_btnUpdateKhachHang);
-        ImageView imageView = view.findViewById(R.id.dialog_khach_hang_vien_img_back);
-        builder.setView(view);
+    private void ShowDialogUpdateKhachHang(int gravity, int pos, khachHangObj khachHangObj){
+        final Dialog dialog = new Dialog(mContext);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_update_khach_hang);
+        dao = new khachHangDao(mContext);
+
+        Window window = dialog.getWindow();
+        if(window == null){
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAttribute = window.getAttributes();
+        windowAttribute.gravity =gravity;
+        window.setAttributes(windowAttribute);
+
+        //Xử lý click ra ngoài dialog
+        if(Gravity.BOTTOM == gravity){
+            dialog.setCancelable(true);
+        } else {
+            dialog.setCancelable(false);
+        }
+        //Khai báo các phần tử dialog
+        EditText edtCMT,edtTen,edtNgaySinh,edtSDT;
+        edtCMT = dialog.findViewById(R.id.dialog_update_khach_hang_edittext_cmt);
+        edtTen = dialog.findViewById(R.id.dialog_update_khach_hang_textEdit_nameKhach);
+        edtNgaySinh = dialog.findViewById(R.id.dialog_update_khach_hang_textEdit_ngaySinh);
+        edtSDT = dialog.findViewById(R.id.dialog_update_khach_hang_textEdit_soDt);
+        ImageView imgBack = dialog.findViewById(R.id.dialog_khach_hang_vien_img_back);
+
+        Button btnUpdate = dialog.findViewById(R.id.dialog_update_nhan_vien_btnUpdateKhachHang);
 
         edtCMT.setText(khachHangObj.getSoCMT());
         edtTen.setText(khachHangObj.getTenKh());
         edtNgaySinh.setText(khachHangObj.getNgaySinh());
         edtSDT.setText(khachHangObj.getSoDienThoai());
 
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
+        //Xử lý nút trong Dialog
+        //Nút hủy thoát Dialog
+        imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.cancel();
+            }
+        });
+
+        //Nút Sửa thông tin
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String CMT = edtCMT.getText().toString();
+                String Ten = edtTen.getText().toString();
+                String ngaySinh = edtNgaySinh.getText().toString();
+                String SDT = edtSDT.getText().toString();
+                if (CMT.isEmpty() || Ten.isEmpty() || ngaySinh.isEmpty() || SDT.isEmpty()){
+                    if (CMT.isEmpty()){
+                        edtCMT.setError("Không được để trống");
+                        return;
+                    }
+                    if (Ten.isEmpty()){
+                        edtTen.setError("Không được để trống");
+                        return;
+                    }
+                    if (ngaySinh.isEmpty()){
+                        edtNgaySinh.setError("Không được để trống");
+                        return;
+                    }
+                    if (SDT.isEmpty()){
+                        edtSDT.setError("Không được để trống");
+                        return;
+                    }
+                }
+                else{
+                    boolean checkTonTaiML = dao.checkKhachHang(CMT.trim());
+                    khachHangObj itemUpdate = new khachHangObj();
+                    itemUpdate.setSoCMT(CMT.trim());
+                    itemUpdate.setTenKh(Ten.trim());
+                    itemUpdate.setNgaySinh(ngaySinh.trim());
+                    itemUpdate.setSoDienThoai(SDT.trim());
+                    if (dao.updateKhachHangObj(itemUpdate)>0){
+                        dialog.cancel();
+                        updateData(pos , itemUpdate);
+                        Toast.makeText(mContext, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(mContext, "Mã loại đã tồn tại", Toast.LENGTH_SHORT).show();
+                    }
+                }
 
             }
         });
-        dialog = builder.create();
-        dialog.show();
 
+        dialog.show();
     }
     @Override
     public Filter getFilter() {
@@ -125,6 +202,10 @@ public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.kha
 
             }
         };
+    }
+    public void updateData(int position, khachHangObj updatedObject){
+        mList.set(position,updatedObject); // updating source
+        notifyDataSetChanged(); // notify adapter to refresh
     }
 
 }

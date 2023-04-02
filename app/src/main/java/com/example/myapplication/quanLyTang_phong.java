@@ -2,18 +2,23 @@ package com.example.myapplication;
 
 import static android.util.Log.d;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.AdapterManager.phongAdapter;
 import com.example.myapplication.AdapterManager.spinerTenLoaiAdapter;
@@ -33,6 +38,7 @@ import java.util.List;
 public class quanLyTang_phong extends AppCompatActivity {
     private Intent mIntent;
     private  Bundle mBundle;
+    private AlertDialog dialogTaoPhieuDatPhong;
     private RecyclerView mRecyclerView;
     private FloatingActionButton btn_add;
     private phongObj mPhongObj;
@@ -40,17 +46,28 @@ public class quanLyTang_phong extends AppCompatActivity {
     private phongDao mPhongDao;
     private loaiPhongDao mLoaiPhongDao;
     private String maTang;
+    private tangObj items_nhan;
+
     private spinerTenLoaiAdapter spinerLoaiPhongAdapter;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quan_ly_phong_tang);
-        mIntent = getIntent();
-        mBundle = mIntent.getBundleExtra("bundle_senTang");
-        tangObj items_nhan = (tangObj) mBundle.getSerializable("items");
-        maTang = items_nhan.getMaTang();
+        d("ca" + "chung", "onCreate: chung");
+        //
+        if (savedInstanceState != null){
+           items_nhan = (tangObj) savedInstanceState.getSerializable("itemSave");
+        }
+        else{
+            mIntent = getIntent();
+            mBundle = mIntent.getBundleExtra("bundle_senTang");
+            items_nhan = (tangObj) mBundle.getSerializable("items");
+            maTang = items_nhan.getMaTang();
+        }
+
         getSupportActionBar().setTitle("Quản lý phòng "+items_nhan.getTenTang());
+
         //
 
 
@@ -149,6 +166,7 @@ public class quanLyTang_phong extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     taoPhieuThuePhong();
+                    dialog.cancel();
                 }
             });
             btn_sua.setOnClickListener(new View.OnClickListener() {
@@ -177,6 +195,15 @@ public class quanLyTang_phong extends AppCompatActivity {
 
     }
     private void taoPhieuThuePhong(){
-
+      Intent intent = new Intent(quanLyTang_phong.this, taoPhieuDatPhong.class);
+      startActivity(intent);
+      Bundle bundle = new Bundle();
+      bundle.putSerializable("itemSend", items_nhan);
+      intent.putExtra("intentSend",bundle);
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        capNhapDuLieu();
     }
 }

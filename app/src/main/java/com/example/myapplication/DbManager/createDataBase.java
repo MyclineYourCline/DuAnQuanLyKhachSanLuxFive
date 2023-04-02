@@ -130,6 +130,8 @@ public class createDataBase extends SQLiteOpenHelper {
 
 
 
+
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_CHITIETDICHVU);
@@ -141,6 +143,11 @@ public class createDataBase extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_NHANVIEN);
         db.execSQL(CREATE_TABLE_LOAIPHONG);
         db.execSQL(CREATE_TABLE_PHONG);
+
+
+
+
+
 
 
     }
