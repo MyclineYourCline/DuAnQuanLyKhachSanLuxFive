@@ -105,7 +105,7 @@ public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.kha
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         WindowManager.LayoutParams windowAttribute = window.getAttributes();
         windowAttribute.gravity =gravity;

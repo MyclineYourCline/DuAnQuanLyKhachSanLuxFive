@@ -27,7 +27,7 @@ public class manHinhDangNhap extends AppCompatActivity {
         btn_dangNhap = findViewById(R.id.dangNhap_btn_dangNhap);
         btnDangKy = findViewById(R.id.dangNhap_btn_dangKy);
 
-        dataAdmin();
+
         btnDangKy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,42 +37,33 @@ public class manHinhDangNhap extends AppCompatActivity {
         btn_dangNhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-        if(nvDao.CheckByMaNhanVien(tenDangNhap.getText().toString(),  matKhau.getText().toString())){
-            nhanVienObj obj = nvDao.getByMaNhanVien(tenDangNhap.getText().toString());
+//        if(nvDao.CheckByMaNhanVien(tenDangNhap.getText().toString(), matKhau.getText().toString())){
+//            nhanVienObj obj = nvDao.getByMaNhanVien(tenDangNhap.getText().toString());
 
             Intent intent = new Intent(manHinhDangNhap.this,Home.class);
+            startActivity(intent);
 
-            SharedPreferences sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("maNv",obj.getMaNhanVien());
-
-            editor.apply();
-                startActivity(intent);
-                finish();
-        }else {
-            Toast.makeText(manHinhDangNhap.this, "sai mã nhân viên và mật khẩu ", Toast.LENGTH_SHORT).show();
-        }
-
-
-
+//            SharedPreferences sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.putString("maNv",obj.getMaNhanVien());
 //
-            }
+//            editor.apply();
+//                startActivity(intent);
+//                finish();
+//        }else {
+//            Toast.makeText(manHinhDangNhap.this, "sai mã nhân viên và mật khẩu ", Toast.LENGTH_SHORT).show();
+//        }
+//
+//
+//
+////
+          }
         });
 
 
 
     }
 
-    public  void dataAdmin(){
-        nhanVienObj obj = new nhanVienObj();
-        obj.setMaNhanVien("admin1");
-        obj.setAnhNhanVien("content://com.miui.gallery.open/raw/%2Fstorage%2Femulated%2F0%2FDCIM%2FCamera%2FIMG_20230325_151021.jpg");
-        obj.setMatKhau("1");
-        obj.setSoDienThoai("033434343");
-        obj.setTenNhanVien("nhóm lux five");
 
-       nvDao = new nhanVienDao(getApplicationContext());
-       nvDao.insertNhanVien(obj);
-    }
 
 }
