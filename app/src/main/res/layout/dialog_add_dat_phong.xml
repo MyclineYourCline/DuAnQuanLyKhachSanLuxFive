@@ -18,7 +18,7 @@
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dialog_add_dat_phong_maKhachHang"
-                android:hint="Mã khách hàng"
+                android:hint="Cmt khách hàng"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/black"
@@ -65,20 +65,35 @@
                 android:textSize="20dp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_margin="15sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:startIconDrawable="@drawable/baseline_date_range_24"
-            >
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/dialog_add_dat_phong_ngayDat"
-                android:hint="Ngày đặt"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@color/black"
-                android:textSize="20dp"/>
-        </com.google.android.material.textfield.TextInputLayout>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:weightSum="3">
+
+           <com.google.android.material.textfield.TextInputLayout
+               android:layout_margin="15sp"
+               android:layout_weight="3"
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               app:startIconDrawable="@android:drawable/ic_menu_my_calendar">
+               <com.google.android.material.textfield.TextInputEditText
+                   android:id="@+id/dialog_add_dat_phong_ngayDat"
+                   android:hint="Ngày đặt"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:textColor="@color/black"
+                   android:textSize="20dp"/>
+           </com.google.android.material.textfield.TextInputLayout>
+
+
+           <ImageView
+               android:id="@+id/dialog_add_dat_phong_Img_datePiker"
+               android:src="@drawable/baseline_date_range_24"
+               android:layout_width="50dp"
+               android:layout_height="match_parent"/>
+
+       </LinearLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
