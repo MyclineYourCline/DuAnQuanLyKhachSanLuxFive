@@ -14,7 +14,7 @@
         android:id="@+id/loaiPhongItem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/purple_200"
+        android:background="@color/cardview_shadow_start_color"
         android:gravity="center"
         android:orientation="vertical">
 

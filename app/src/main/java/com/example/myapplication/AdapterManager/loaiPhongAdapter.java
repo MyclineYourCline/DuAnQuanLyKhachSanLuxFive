@@ -60,13 +60,13 @@ public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loai
 
     @Override
     public void onBindViewHolder(@NonNull loaiPhongViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        loaiPhongObj loaiPhongObj = mList.get(position);
-        if (loaiPhongObj == null){
+        loaiPhongObj mloaiPhongObj = mList.get(position);
+        if (mloaiPhongObj == null){
             return;
         }
 
-        holder.edtMaLoaiPhong.setText(loaiPhongObj.getMaLoai());
-        holder.edtTenLoaiPhong.setText(loaiPhongObj.getTenLoaiPhong());
+        holder.edtMaLoaiPhong.setText(mloaiPhongObj.getMaLoai());
+        holder.edtTenLoaiPhong.setText(mloaiPhongObj.getTenLoaiPhong());
 
         //onclick Sửa hiện dialog
         holder.loaiPhongItem.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +103,8 @@ public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loai
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_update_loai_phong);
         mloaiPhongDao = new loaiPhongDao(mContext);
+        loaiPhongObj mloaiPhongObj = mList.get(pos);
+
 
         Window window = dialog.getWindow();
         if(window == null){
@@ -127,6 +129,9 @@ public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loai
         EditText maLoai, tenLoai;
         maLoai = dialog.findViewById(R.id.dialog_update_loai_phong_edtMaLoaiPhong);
         tenLoai = dialog.findViewById(R.id.dialog_update_loai_phong_edtTenLoaiPhong);
+
+        maLoai.setText(mloaiPhongObj.getMaLoai());
+        tenLoai.setText(mloaiPhongObj.getTenLoaiPhong());
 
         //Xử lý nút trong Dialog
             //Nút hủy thoát Dialog
