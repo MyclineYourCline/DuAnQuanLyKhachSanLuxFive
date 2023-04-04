@@ -97,7 +97,7 @@ public class nhanVien extends AppCompatActivity {
     }
 
 
-    private boolean checkStoragePermission() {
+    public boolean checkStoragePermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             // Quyền chưa được cấp, yêu cầu người dùng cấp quyền
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_REQUEST);

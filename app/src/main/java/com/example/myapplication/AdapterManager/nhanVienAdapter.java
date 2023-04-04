@@ -1,18 +1,23 @@
 package com.example.myapplication.AdapterManager;
 
-import android.content.ContentResolver;
+import android.app.Dialog;
+
 import android.content.Context;
+
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,18 +27,25 @@ import com.example.myapplication.DbManager.nhanVienDao;
 import com.example.myapplication.InterfaceManager.sendNhanVien;
 import com.example.myapplication.ObjectManager.nhanVienObj;
 import com.example.myapplication.R;
-import com.example.myapplication.add_Nhanvien;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import com.example.myapplication.nhanVien;
+import com.example.myapplication.updateNhanVien;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
+
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVienViewHolder>
-        implements Filterable  {
+        implements Filterable {
     private Context mContext;
     private List<nhanVienObj> mList;
     private List<nhanVienObj> mListOld;
     private sendNhanVien mListener;
+
+    nhanVien  nhanVien;
 
     nhanVienDao dao;
     int count = 1;
@@ -74,9 +86,7 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
         }
 
 
-
-            Glide.with(mContext).load(items.getAnhNhanVien()).into(holder.item_nhan_vien_avata);
-
+        Glide.with(mContext).load(items.getAnhNhanVien()).into(holder.item_nhan_vien_avata);
 
 
         holder.item_nhan_vien_tv_ten.setText(items.getTenNhanVien());
@@ -85,18 +95,53 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
         holder.img_xoa_nhanvien.setVisibility(View.GONE);
 
 
-
-
-
         holder
                 .itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Intent intent = new Intent(mContext , updateNhanVien.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("maNhanVien" , items.getMaNhanVien());
+                        intent.putExtra("toUpdate" , bundle);
+                        mContext.startActivity(intent);
 
 
-
-                    }
-                });
+//
+//                        Button sua_nhanvien_dialog = dialog.findViewById(R.id.sua_nhanvien_dialog);
+//                        sua_nhanvien_dialog.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                if (dao.CheckByMaNhanVien(dialog_update_nhan_vien_Edt_manv.getText().toString(), dialog_update_nhan_vien_Edt_matkhau.getText().toString())) {
+//                                    nhanVienObj obj2 = new nhanVienObj();
+//                                    obj2.setMaNhanVien(dialog_update_nhan_vien_Edt_manv.getText().toString());
+//                                    obj2.setTenNhanVien(items.getTenNhanVien());
+//
+//
+//                                    obj2.setAnhNhanVien("android.resource://com.example.myapplication/2131165466");
+//                                    obj2.setSoDienThoai(dialog_update_nhan_vien_Edt_sdt.getText().toString());
+//                                    obj2.setMatKhau(dialog_update_nhan_vien_Edt_matkhauMoi.getText().toString());
+//                                    if (dao.updateNhanVien(obj2) > 0) {
+//                                        Toast.makeText(mContext, "sửa thành công", Toast.LENGTH_SHORT).show();
+//                                    }
+//
+//                                } else {
+//                                    update_nhan_vien_textInput_matkhau.setError("tài khoản này có chắc của bạn !");
+//                                }
+//                            }
+//                        });
+//
+//                        ///
+//
+//
+//                        img_back.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                dialog.dismiss();
+//                            }
+//                        });
+//
+//
+                    }});
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -123,7 +168,6 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
         });
 
 
-
     }
 
     @Override
@@ -133,7 +177,6 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
         }
         return 0;
     }
-
 
 
     public final class nhanVienViewHolder extends RecyclerView.ViewHolder {
@@ -165,4 +208,8 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
             }
         };
     }
+
+
+
+
 }

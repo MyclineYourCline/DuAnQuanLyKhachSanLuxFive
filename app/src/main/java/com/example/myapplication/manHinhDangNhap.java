@@ -63,13 +63,16 @@ public class manHinhDangNhap extends AppCompatActivity {
 
     public  void dataAdmin(){
         nhanVienObj obj = new nhanVienObj();
+
+
         obj.setMaNhanVien("admin1");
-        obj.setAnhNhanVien(String.valueOf(R.drawable.user));
+        obj.setAnhNhanVien("android.resource://com.example.myapplication/2131165466");
         obj.setMatKhau("1");
         obj.setSoDienThoai("033434343");
         obj.setTenNhanVien("nhóm lux five");
 
        nvDao = new nhanVienDao(getApplicationContext());
+       nvDao.deleteNhanVien("admin1");
        nvDao.insertNhanVien(obj);
     }
 

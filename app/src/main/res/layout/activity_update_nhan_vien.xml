@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context=".updateNhanVien">
+
 
 
 
@@ -22,20 +25,20 @@
         android:layout_marginBottom="10dp"
         android:src="@drawable/baseline_arrow_back" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/dialog_update_nhan_vien_avata"
         android:src="@drawable/user"
         android:layout_below="@id/dialog_update_nhan_vien_img"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-80dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="120dp"
+        android:layout_height="130dp"/>
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dialog_update_nhan_vien_textInput_manv"
         android:layout_below="@id/dialog_update_nhan_vien_avata"
-        android:layout_margin="15sp"
+        android:layout_margin="10dp"
         app:startIconDrawable="@drawable/baseline_person"
         app:endIconMode="clear_text"
         android:layout_width="match_parent"
@@ -50,7 +53,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dialog_update_nhan_vien_textInput_sdt"
         android:layout_below="@id/dialog_update_nhan_vien_textInput_manv"
-        android:layout_margin="20sp"
+        android:layout_margin="10dp"
         app:startIconDrawable="@drawable/baseline_local_phone"
         app:endIconMode="clear_text"
         android:layout_width="match_parent"
@@ -66,7 +69,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dialog_update_nhan_vien_textInput_matkhau"
         android:layout_below="@id/dialog_update_nhan_vien_textInput_sdt"
-        android:layout_margin="20sp"
+        android:layout_margin="10dp"
         app:startIconDrawable="@drawable/baseline_password"
         app:endIconMode="password_toggle"
         android:layout_width="match_parent"
@@ -82,7 +85,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dialog_update_nhan_vien_textInput_matkhauMoi"
         android:layout_below="@id/dialog_update_nhan_vien_textInput_matkhau"
-        android:layout_margin="20sp"
+        android:layout_margin="10dp"
         app:startIconDrawable="@drawable/baseline_password"
         app:endIconMode="password_toggle"
         android:layout_width="match_parent"
@@ -95,25 +98,18 @@
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-   <Button
-
-       android:text="Sửa"
-       android:layout_alignParentStart="true"
-       android:layout_marginLeft="30dp"
-       android:backgroundTint="@color/teal_700"
-       android:layout_below="@id/dialog_update_nhan_vien_textInput_matkhauMoi"
-       android:layout_width="100dp"
-       android:layout_height="wrap_content"/>
-
     <Button
+        android:id="@+id/sua_nhanvien_dialog"
+        android:layout_width="200dp"
 
-        android:text="Xóa"
-        android:backgroundTint="@color/red"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="30dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/dialog_update_nhan_vien_textInput_matkhauMoi"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"/>
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/teal_700"
+        android:text="Sửa" />
+
 
 
 </RelativeLayout>
