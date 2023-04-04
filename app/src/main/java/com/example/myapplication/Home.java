@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.myapplication.AdapterManager.manHinhChinhAdapter;
+import com.example.myapplication.DbManager.nhanVienDao;
 import com.example.myapplication.ObjectManager.manHinhChinhObj;
 import com.google.android.material.navigation.NavigationView;
 
@@ -26,6 +27,9 @@ public class Home extends AppCompatActivity {
     private NavigationView mNavigationView;
     private manHinhChinhAdapter adapter;
     private Intent mIntent;
+
+    private nhanVienDao nvDao;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +95,10 @@ public class Home extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.menu_nav_taiKhoanCuaBan:
                         intent = new Intent(Home.this, nhanVien.class);
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("maNhanVien" , items.getMaNhanVien());
+//                        intent.putExtra("toUpdate" , bundle);
+
                         startActivity(intent);
                         break;
                     case R.id.menu_nav_dangXuat:

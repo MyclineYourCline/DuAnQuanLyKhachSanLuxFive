@@ -152,7 +152,6 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
                 } else {
                     holder.img_xoa_nhanvien.setVisibility(View.GONE);
                 }
-
                 return true;
             }
         });

@@ -46,7 +46,6 @@ public class updateNhanVien extends AppCompatActivity {
             dialog_update_nhan_vien_Edt_sdt.setText(obj.getSoDienThoai());
             dialog_update_nhan_vien_Edt_matkhau.setText(obj.getMatKhau());
 
-
         }
 
         sua_nhanvien.setOnClickListener(new View.OnClickListener() {

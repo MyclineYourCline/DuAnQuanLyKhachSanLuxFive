@@ -65,11 +65,16 @@ public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loai
             return;
         }
 
-        holder.edtMaLoaiPhong.setText(mloaiPhongObj.getMaLoai());
         holder.edtTenLoaiPhong.setText(mloaiPhongObj.getTenLoaiPhong());
 
         //onclick Sửa hiện dialog
         holder.loaiPhongItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSuaLoaiPhongDialog(Gravity.CENTER, position);
+            }
+        });
+        holder.edtTenLoaiPhong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openSuaLoaiPhongDialog(Gravity.CENTER, position);
@@ -87,11 +92,10 @@ public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loai
     public final class loaiPhongViewHolder extends RecyclerView.ViewHolder {
         //khai báo các phần tử trong View
         TextInputEditText edtMaLoaiPhong,edtTenLoaiPhong;
-        LinearLayout loaiPhongItem;
+        CardView loaiPhongItem;
         public loaiPhongViewHolder(@NonNull View itemView) {
             super(itemView);
             //gán view cho từng phần tử
-            edtMaLoaiPhong = itemView.findViewById(R.id.edtMaLoaiPhong);
             edtTenLoaiPhong = itemView.findViewById(R.id.edtTenLoaiPhong);
             loaiPhongItem = itemView.findViewById(R.id.loaiPhongItem);
         }
@@ -127,10 +131,8 @@ public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loai
         Button btnHuy =dialog.findViewById(R.id.dialog_update_loai_phong_btnHuy);
         Button btnSua =dialog.findViewById(R.id.dialog_update_loai_phong_btnSua);
         EditText maLoai, tenLoai;
-        maLoai = dialog.findViewById(R.id.dialog_update_loai_phong_edtMaLoaiPhong);
         tenLoai = dialog.findViewById(R.id.dialog_update_loai_phong_edtTenLoaiPhong);
 
-        maLoai.setText(mloaiPhongObj.getMaLoai());
         tenLoai.setText(mloaiPhongObj.getTenLoaiPhong());
 
         //Xử lý nút trong Dialog
@@ -145,36 +147,38 @@ public class loaiPhongAdapter extends RecyclerView.Adapter<loaiPhongAdapter.loai
             btnSua.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (tenLoai.getText().toString().isEmpty()
-                            || maLoai.getText().toString().isEmpty()){
+                    if (tenLoai.getText().toString().isEmpty())
+                    {
                         if (tenLoai.getText().toString().isEmpty()){
                             tenLoai.setError("Không được để trống");
                             return;
                         }
-                        if (maLoai.getText().toString().isEmpty()){
-                            maLoai.setError("Không được để trống");
-                            return;
-                        }
+//                        if (maLoai.getText().toString().isEmpty()){
+//                            maLoai.setError("Không được để trống");
+//                            return;
+
                     }
-                    else{
-                        boolean checkTonTaiML = checkMaLoai(maLoai.getText().toString().trim());
-                        if (checkTonTaiML){
+                    else
+                    {
+//                        boolean checkTonTaiML = checkMaLoai(maLoai.getText().toString().trim());
+//                        if (checkTonTaiML){
                             loaiPhongObj itemUpdate = new loaiPhongObj();
                             loaiPhongDao loaiPhongDao = new loaiPhongDao(mContext);
-                            itemUpdate.setMaLoai(maLoai.getText().toString().trim());
+//                            itemUpdate.setMaLoai(maLoai.getText().toString().trim());
                             itemUpdate.setTenLoaiPhong(tenLoai.getText().toString().trim());
                             mloaiPhongDao.updateLoaiPhong(itemUpdate);
                             dialog.cancel();
                             updateData(pos , itemUpdate);
                             Toast.makeText(mContext, "Sửa thành công", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            Toast.makeText(mContext, "Mã loại đã tồn tại", Toast.LENGTH_SHORT).show();
-                        }
                     }
+//                        else{
+//                            Toast.makeText(mContext, "Mã loại đã tồn tại", Toast.LENGTH_SHORT).show();
+//                        }
+
 
                 }
         });
+
 
         dialog.show();
     }

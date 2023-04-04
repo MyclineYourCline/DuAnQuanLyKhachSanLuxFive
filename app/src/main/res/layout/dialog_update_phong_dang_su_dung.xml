@@ -56,10 +56,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/dialog_update_phong_dang_su_dung_thanhToan"

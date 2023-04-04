@@ -73,6 +73,7 @@ public class loaiPhong extends AppCompatActivity {
             public void onClick(View v) {
                 openThemLoaiPhongDialog(Gravity.CENTER);
             }
+
         });
 
     }
@@ -101,9 +102,9 @@ public class loaiPhong extends AppCompatActivity {
 
         Button btnHuy =dialog.findViewById(R.id.dialog_add_loaiPhong_tenLoai_btnHuy);
         Button btnThem =dialog.findViewById(R.id.dialog_add_loaiPhong_btnThem);
-        EditText maLoai, tenLoai;
-        maLoai = dialog.findViewById(R.id.dialog_add_loaiPhong_maLoai);
+        EditText tenLoai;
         tenLoai = dialog.findViewById(R.id.dialog_add_loaiPhong_tenLoai);
+
 
         //Xử lý nút trong Dialog
         btnHuy.setOnClickListener(new View.OnClickListener() {
@@ -115,22 +116,19 @@ public class loaiPhong extends AppCompatActivity {
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            if (tenLoai.getText().toString().isEmpty()
-            || maLoai.getText().toString().isEmpty()){
+            if (tenLoai.getText().toString().isEmpty())
+            {
                 if (tenLoai.getText().toString().isEmpty()){
                     tenLoai.setError("Không được để trống");
                     return;
                 }
-                if (maLoai.getText().toString().isEmpty()){
-                    maLoai.setError("Không được để trống");
-                    return;
-                }
             }
-            else{
-                boolean checkTonTaiML = checkMaLoai(maLoai.getText().toString());
-                if (checkTonTaiML){
+            else
+            {
+//                boolean checkTonTaiML = checkMaLoai(maLoai.getText().toString());
+//                if (checkTonTaiML){
                     loaiPhongObj itemInsert = new loaiPhongObj();
-                    itemInsert.setMaLoai(maLoai.getText().toString().trim());
+//                    itemInsert.setMaLoai(maLoai.getText().toString().trim());
                     itemInsert.setTenLoaiPhong(tenLoai.getText().toString().trim());
                     mLoaiPhongDao.insertLoaiPhong(itemInsert);
                     capNhatRec();
@@ -138,10 +136,9 @@ public class loaiPhong extends AppCompatActivity {
                     Toast.makeText(loaiPhong.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
 
                 }
-                else{
-                    Toast.makeText(loaiPhong.this, "Mã loại đã tồn tại", Toast.LENGTH_SHORT).show();
-                }
-            }
+//                else{
+//                    Toast.makeText(loaiPhong.this, "Mã loại đã tồn tại", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
 
@@ -156,24 +153,24 @@ public class loaiPhong extends AppCompatActivity {
         List<loaiPhongObj> list = mLoaiPhongDao.getAll();
         return list;
     }
-    public boolean checkMaLoai(String maLoai){
-        boolean check = true;
-        List<loaiPhongObj> loaiPhongs = mLoaiPhongDao.getAll();
-        if (loaiPhongs == null){
-            check = true;
-        }
-        else{
-            for (loaiPhongObj items : loaiPhongs){
-                if (items.getMaLoai().toLowerCase().equals(maLoai)){
-                    check = false;
-                    break;
-                }
-                else{
-                    check = true;
-                }
-            }
-
-        }
-       return check;
-    }
+//    public boolean checkMaLoai(String maLoai){
+//        boolean check = true;
+//        List<loaiPhongObj> loaiPhongs = mLoaiPhongDao.getAll();
+//        if (loaiPhongs == null){
+//            check = true;
+//        }
+//        else{
+//            for (loaiPhongObj items : loaiPhongs){
+//                if (items.getMaLoai().toLowerCase().equals(maLoai)){
+//                    check = false;
+//                    break;
+//                }
+//                else{
+//                    check = true;
+//                }
+//            }
+//
+//        }
+//       return check;
+//    }
 }
