@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +27,7 @@ public class updateNhanVien extends AppCompatActivity {
     private static final int STORAGE_PERMISSION = 23;
     nhanVienDao nvDao;
     Button sua_nhanvien;
-    String pattern = "(\\+84|03)\\d{8}";
+    String pattern = "(\\+84|03)\\d{8,9}";
     ImageView img_back , img_avata;
     TextInputLayout update_nhan_vien_textInput_manv , update_nhan_vien_textInput_sdt , update_nhan_vien_textInput_matkhau, update_nhan_vien_textInput_rematKhau;
     TextInputEditText dialog_update_nhan_vien_Edt_manv, dialog_update_nhan_vien_Edt_sdt,dialog_update_nhan_vien_Edt_matkhau,dialog_update_nhan_vien_Edt_matkhauMoi;
@@ -36,12 +37,12 @@ public class updateNhanVien extends AppCompatActivity {
         setContentView(R.layout.activity_update_nhan_vien);
         getSupportActionBar().setTitle("sửa thông tin nhân viên");
         initUi();
-       Bundle bundle = getIntent().getBundleExtra("toUpdate");
-      String ma = bundle.getString("maNhanVien" , "");
+      
+      SharedPreferences preferences = getSharedPreferences("my_prefs" , MODE_PRIVATE);
+      String ma  = preferences.getString("maNv" , "");
       nvDao = new nhanVienDao(updateNhanVien.this);
       nhanVienObj obj = nvDao.getByMaNhanVien(ma);
         if (checkStoragePermission()){
-            Glide.with(updateNhanVien.this).load(obj.getAnhNhanVien()).into(img_avata);
             dialog_update_nhan_vien_Edt_manv.setText(obj.getMaNhanVien());
             dialog_update_nhan_vien_Edt_sdt.setText(obj.getSoDienThoai());
             dialog_update_nhan_vien_Edt_matkhau.setText(obj.getMatKhau());

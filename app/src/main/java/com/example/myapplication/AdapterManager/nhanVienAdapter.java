@@ -95,53 +95,20 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
         holder.img_xoa_nhanvien.setVisibility(View.GONE);
 
 
-        holder
-                .itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(mContext , updateNhanVien.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("maNhanVien" , items.getMaNhanVien());
-                        intent.putExtra("toUpdate" , bundle);
-                        mContext.startActivity(intent);
-
-
-//
-//                        Button sua_nhanvien_dialog = dialog.findViewById(R.id.sua_nhanvien_dialog);
-//                        sua_nhanvien_dialog.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                if (dao.CheckByMaNhanVien(dialog_update_nhan_vien_Edt_manv.getText().toString(), dialog_update_nhan_vien_Edt_matkhau.getText().toString())) {
-//                                    nhanVienObj obj2 = new nhanVienObj();
-//                                    obj2.setMaNhanVien(dialog_update_nhan_vien_Edt_manv.getText().toString());
-//                                    obj2.setTenNhanVien(items.getTenNhanVien());
+//        holder
+//                .itemView.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Intent intent = new Intent(mContext , updateNhanVien.class);
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("maNhanVien" , items.getMaNhanVien());
+//                        intent.putExtra("toUpdate" , bundle);
+//                        mContext.startActivity(intent);
 //
 //
-//                                    obj2.setAnhNhanVien("android.resource://com.example.myapplication/2131165466");
-//                                    obj2.setSoDienThoai(dialog_update_nhan_vien_Edt_sdt.getText().toString());
-//                                    obj2.setMatKhau(dialog_update_nhan_vien_Edt_matkhauMoi.getText().toString());
-//                                    if (dao.updateNhanVien(obj2) > 0) {
-//                                        Toast.makeText(mContext, "sửa thành công", Toast.LENGTH_SHORT).show();
-//                                    }
-//
-//                                } else {
-//                                    update_nhan_vien_textInput_matkhau.setError("tài khoản này có chắc của bạn !");
-//                                }
-//                            }
-//                        });
-//
-//                        ///
-//
-//
-//                        img_back.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                dialog.dismiss();
-//                            }
-//                        });
-//
-//
-                    }});
+////
+////
+//                    }});
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
