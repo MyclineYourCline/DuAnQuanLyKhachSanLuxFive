@@ -90,7 +90,7 @@ public class Home extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.menu_nav_taiKhoanCuaBan:
-                        intent = new Intent(Home.this, updateNhanVien.class);
+                        intent = new Intent(Home.this, nhanVien.class);
                         startActivity(intent);
                         break;
                     case R.id.menu_nav_dangXuat:
