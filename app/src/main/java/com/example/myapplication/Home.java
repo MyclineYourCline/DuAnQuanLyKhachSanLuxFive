@@ -89,6 +89,10 @@ public class Home extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
+                    case R.id.menu_nav_taiKhoanCuaBan:
+                        intent = new Intent(Home.this, updateNhanVien.class);
+                        startActivity(intent);
+                        break;
                     case R.id.menu_nav_dangXuat:
                         intent = new Intent(Home.this, manHinhDangNhap.class);
                         startActivity(intent);

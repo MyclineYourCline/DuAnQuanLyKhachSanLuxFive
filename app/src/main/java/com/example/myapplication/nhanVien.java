@@ -51,7 +51,7 @@ public class nhanVien extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nhan_vien);
-        getSupportActionBar().setTitle("Quản lý Nhân viên");
+        getSupportActionBar().setTitle("Quản lý Tài Khoản Nhân Viên");
         initUi();
 
         loadData();

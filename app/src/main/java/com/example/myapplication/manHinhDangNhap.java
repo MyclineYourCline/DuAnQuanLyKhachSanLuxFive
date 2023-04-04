@@ -30,6 +30,7 @@ public class manHinhDangNhap extends AppCompatActivity {
         btnDangKy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Todo ...................
 
             }
         });
