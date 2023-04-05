@@ -91,7 +91,6 @@ public class dichVu extends AppCompatActivity {
                 }
             }
         });
-
         dialog.show();
     }
 
