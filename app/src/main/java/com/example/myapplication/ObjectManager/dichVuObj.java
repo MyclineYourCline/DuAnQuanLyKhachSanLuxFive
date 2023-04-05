@@ -23,6 +23,9 @@ public class dichVuObj {
 
     public dichVuObj() {
     }
+    public double tinhTongTien (){
+        return  Double.parseDouble(giaDichVu) * Double.parseDouble(soLuong);
+    }
 
     public String getMaDichVu() {
         return maDichVu;

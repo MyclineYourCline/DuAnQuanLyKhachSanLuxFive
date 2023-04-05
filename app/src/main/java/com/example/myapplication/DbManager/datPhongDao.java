@@ -44,6 +44,7 @@ public class datPhongDao {
             items.setGioRa(mCursor.getString(mCursor.getColumnIndex("gioRa")));
             items.setNgayRa(mCursor.getString(mCursor.getColumnIndex("checkOut")));
             items.setSoGioDat(mCursor.getString(mCursor.getColumnIndex("soGioThue")));
+            items.setMaChiTietDV(mCursor.getString(mCursor.getColumnIndex("maChiTietDV")));
             mList.add(items);
         }
         return mList;
@@ -60,6 +61,8 @@ public class datPhongDao {
         values.put("gioRa",items.getGioRa());
         values.put("giaThue", items.getGiaTien());
         values.put("soGioThue",items.getSoGioDat());
+        values.put("maChiTietDV",items.getMaChiTietDV());
+        values.put("trangThai", "1");
         return db.insert("datPhong",null,values);
     }
     public int updateDatPhong(datPhongObj items){
@@ -73,7 +76,9 @@ public class datPhongDao {
         values.put("giaThue",items.getGiaTien());
         values.put("checkOut",items.getNgayRa());
         values.put("gioRa",items.getGioRa());
+        values.put("maChiTietDV",items.getMaChiTietDV());
         values.put("soGioThue",items.getSoGioDat());
+        values.put("trangThai", "2");
         return db.update("datPhong",values,"maDatPhong = ?"
                 , new String[]{items.getMaDatPhong()});
     }
@@ -96,7 +101,7 @@ public class datPhongDao {
         return mList.get(0);
     }
     public datPhongObj getByMaPhong(String maPhong){
-        String sql = "SELECT * FROM datPhong WHERE maPhong = ?";
+        String sql = "SELECT * FROM datPhong WHERE maPhong = ? and trangThai = '1'";
         List<datPhongObj> mList = get(sql,maPhong);
         return mList.get(0);
     }

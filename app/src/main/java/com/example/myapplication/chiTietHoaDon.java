@@ -1,10 +1,16 @@
 package com.example.myapplication;
 
+import static android.util.Log.d;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.icu.text.DecimalFormat;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +30,7 @@ import com.example.myapplication.ObjectManager.nhanVienObj;
 import com.example.myapplication.ObjectManager.phongObj;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.time.LocalTime;
 import java.util.List;
 
 
@@ -44,6 +51,7 @@ public class chiTietHoaDon extends AppCompatActivity {
     private itemRcy_dichVu_chiTietPhieuDat adapter;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +60,13 @@ public class chiTietHoaDon extends AppCompatActivity {
         maDatPhong = mIntent.getStringExtra("maDatPhong");
         getSupportActionBar().setTitle("Chi tiết phiếu đặt");
         InitUI();
-
         capNhapDuLieu();
+
     }
     private List<chiTietDichVuOBJ> listChiTietDV (){
         mChiTietDichVuDao = new chiTietDichVuDao(chiTietHoaDon.this);
-        return mChiTietDichVuDao.getByMaChiTietDV(maDatPhong);
+        d("ca" + "chung", "listChiTietDV: "+maDatPhong);
+        return mChiTietDichVuDao.getByMaDP(maDatPhong);
     }
     private void capNhapDuLieu(){
         adapter =new itemRcy_dichVu_chiTietPhieuDat(chiTietHoaDon.this);
@@ -80,6 +89,7 @@ public class chiTietHoaDon extends AppCompatActivity {
         mKhachHangDao = new khachHangDao(chiTietHoaDon.this);
         mPhongDao = new phongDao(chiTietHoaDon.this);
         mNhanVienDao = new nhanVienDao(chiTietHoaDon.this);
+        mChiTietDichVuDao = new chiTietDichVuDao(chiTietHoaDon.this);
         //
         mDatPhongObj = mDatPhongDao.getBymaDatPhong(maDatPhong);
         phongObj mPhongObj = mPhongDao.getByMaPhong(mDatPhongObj.getMaPhong());
@@ -92,9 +102,36 @@ public class chiTietHoaDon extends AppCompatActivity {
         ngayDat.setText(mDatPhongObj.getGioVao()+"/"+mDatPhongObj.getCheckIn());
         ngayTra.setText(mDatPhongObj.getGioRa()+"/"+mDatPhongObj.getNgayRa());
         tongSoGio.setText(mDatPhongObj.getSoGioDat()+" ("+mDatPhongObj.getGiaTien()+"/Giờ)");
+        //
+        tongTien.setText(tinhTongTienDP()+tinhTongTienDV(mDatPhongObj.getMaDatPhong())+" VND");
 
+    }
+    private double tinhTongTienDP(){
+        String timeString = mDatPhongObj.getSoGioDat();
+        LocalTime time = LocalTime.parse(timeString);
+        double hour = time.getHour() + (time.getMinute() / 60.0) + (time.getSecond() / 3600.0);
+        double tongTienDP = Double.parseDouble(mDatPhongObj.getGiaTien())* hour;
+        DecimalFormat decimalFormat = new DecimalFormat("#.0");
+        String formattedNumber = decimalFormat.format(tongTienDP);
+        return Double.parseDouble(formattedNumber);
+    }
+    private double tinhTongTienDV(String maDatPhong){
+        d("ca" + "chung", "tinhTongTienDV: "+mChiTietDichVuDao.tongTienDv(maDatPhong));
+       return mChiTietDichVuDao.tongTienDv(maDatPhong);
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_back,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_back:
+                finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

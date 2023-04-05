@@ -61,8 +61,9 @@ public class chiTietDichVuOBJ {
     public void setGiaTien(String giaTien) {
         this.giaTien = giaTien;
     }
-    public double tongTien(String soLuong, String giaTien){
+    public double tongTien(){
         double tongTien = Double.parseDouble(soLuong)*Double.parseDouble(giaTien);
         return tongTien;
     }
+
 }
