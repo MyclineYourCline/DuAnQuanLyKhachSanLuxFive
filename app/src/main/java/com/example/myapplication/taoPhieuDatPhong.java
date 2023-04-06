@@ -165,10 +165,10 @@ public class taoPhieuDatPhong extends AppCompatActivity {
                         itemInsert.setGioRa(itemInsert.checkTimeOut());
                         itemInsert.setNgayRa(itemInsert.checkDayOut());
                         itemInsert.setGiaTien(giaThue.getText().toString().trim());
+                        itemInsert.setMaChiTietDV(id_phieuDatPhong);
                         mDatPhongDao.inserDatPhong(itemInsert);
                         //
                         phongObj itemPhong = mPhongDao.getByMaPhong(items_nhan.getMaPhong());
-
                         itemPhong.setTrangThai("đang dùng");
                         mPhongDao.updatePhong(itemPhong);
                         //
@@ -179,7 +179,6 @@ public class taoPhieuDatPhong extends AppCompatActivity {
                         Toast.makeText(this, "Định dạng giờ hoặc ngày tháng bị sai", Toast.LENGTH_LONG).show();
                     }
 
-
                 }
                 else{
                     maNhanVien.setError("mã nhân viên không đúng");
@@ -189,6 +188,20 @@ public class taoPhieuDatPhong extends AppCompatActivity {
             }
 
         }
+    }
+    private String tinhTongGio (String thoiGianDat){
+        double  totalHours = Double.parseDouble(thoiGianDat);
+        int hours = (int) totalHours;
+        int minutes = (int) ((totalHours - hours) * 60);
+        String hourStrirg = hours+"";
+        String hourminutes = minutes+"";
+        if (hours< 10){
+            hourStrirg = "0"+hours;
+        }
+        if (minutes<10){
+            hourminutes = "0"+minutes;
+        }
+        return hourStrirg+":"+hourminutes+":00";
     }
 
     private void goTochiTietDichVu() {

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.DbManager.chiTietDichVuDao;
 import com.example.myapplication.DbManager.dichVuDao;
 import com.example.myapplication.ObjectManager.chiTietDichVuOBJ;
 import com.example.myapplication.ObjectManager.dichVuObj;
@@ -21,10 +22,12 @@ public class itemRcy_dichVu_chiTietPhieuDat extends RecyclerView.Adapter<itemRcy
     private Context context;
     private List<chiTietDichVuOBJ> mList;
     private dichVuDao mDichVuDao;
+    private chiTietDichVuDao mChiTietDichVuDao;
 
     public itemRcy_dichVu_chiTietPhieuDat(Context context) {
         this.context = context;
         mDichVuDao = new dichVuDao(context);
+        mChiTietDichVuDao = new chiTietDichVuDao(context);
     }
     public void setmList(List<chiTietDichVuOBJ> mList){
         this.mList = mList;
@@ -47,8 +50,9 @@ public class itemRcy_dichVu_chiTietPhieuDat extends RecyclerView.Adapter<itemRcy
         }
         dichVuObj mDichVuObj = mDichVuDao.getByMaDV(items.getMaDichVu());
         holder.tenDV.setText(mDichVuObj.getTenDichVu());
-        holder.giaDV.setText(items.getGiaTien());
         holder.soLuong.setText(items.getSoLuong());
+        double totolMony = Double.parseDouble(items.getSoLuong()) * Double.parseDouble(items.getGiaTien());
+        holder.giaDV.setText(totolMony+"");
     }
 
     @Override

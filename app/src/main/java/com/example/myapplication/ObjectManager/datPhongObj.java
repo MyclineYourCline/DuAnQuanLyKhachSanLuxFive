@@ -20,7 +20,8 @@ public class datPhongObj {
     //gioVao
     //gioRa
     private String maDatPhong, maKh,maNhanVien, maPhong,checkIn,
-            gioVao,ghiChu,soGioDat, giaTien,gioRa,ngayRa;
+            gioVao,ghiChu,soGioDat, giaTien,gioRa,ngayRa
+            ,maChiTietDV;
 
     public String checkTimeOut(){
         String timeIn = gioVao;
@@ -46,9 +47,8 @@ public class datPhongObj {
         return newDateTimeString;
     }
 
-    public datPhongObj(String maDatPhong, String maKh, String maNhanVien, String maPhong, String checkIn,
-                       String gioVao, String ghiChu, String soGioDat, String giaTien,
-                       String gioRa, String ngayRa) {
+    public datPhongObj(String maDatPhong, String maKh, String maNhanVien, String maPhong, String checkIn, String gioVao,
+                       String ghiChu, String soGioDat, String giaTien, String gioRa, String ngayRa, String maChiTietDV) {
         this.maDatPhong = maDatPhong;
         this.maKh = maKh;
         this.maNhanVien = maNhanVien;
@@ -60,6 +60,15 @@ public class datPhongObj {
         this.giaTien = giaTien;
         this.gioRa = gioRa;
         this.ngayRa = ngayRa;
+        this.maChiTietDV = maChiTietDV;
+    }
+
+    public String getMaChiTietDV() {
+        return maChiTietDV;
+    }
+
+    public void setMaChiTietDV(String maChiTietDV) {
+        this.maChiTietDV = maChiTietDV;
     }
 
     public String getMaDatPhong() {

@@ -56,7 +56,7 @@ public class chiTietDichVuAdapter extends
         dichVuObj itemDichVu = mDichVuDao.getByMaDV(items.getMaDichVu());
         holder.tenDichVu.setText(itemDichVu.getTenDichVu());
         holder.soLuong.setText(items.getSoLuong());
-        holder.tongTien.setText(items.tongTien(items.getSoLuong(),items.getGiaTien())+"");
+        holder.tongTien.setText(items.tongTien()+"");
     }
 
     @Override

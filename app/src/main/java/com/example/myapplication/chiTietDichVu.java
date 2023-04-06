@@ -146,7 +146,7 @@ public class chiTietDichVu extends AppCompatActivity {
         mRecyclerView.setAdapter(adapter);
     }
     private List<chiTietDichVuOBJ> getChiTietDichVu(){
-        return mChiTietDichVuDao.getByMaChiTietDV(maDatPhong);
+        return mChiTietDichVuDao.getByMaDP(maDatPhong);
     }
     private List<dichVuObj> getDichVu (){
         return mDichVuDao.getAll();

@@ -128,7 +128,6 @@ public class Home extends AppCompatActivity {
         list.add(new manHinhChinhObj(R.drawable.thongke,"Doanh thu"));
         return list;
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_home,menu);

@@ -11,6 +11,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.icu.text.DecimalFormat;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.LayoutInflater;
@@ -24,7 +25,9 @@ import android.widget.Toast;
 import com.example.myapplication.AdapterManager.phongAdapter;
 import com.example.myapplication.AdapterManager.spinerTenLoaiAdapter;
 import com.example.myapplication.AdapterManager.tangAdapter;
+import com.example.myapplication.DbManager.chiTietDichVuDao;
 import com.example.myapplication.DbManager.datPhongDao;
+import com.example.myapplication.DbManager.hoaDonDao;
 import com.example.myapplication.DbManager.khachHangDao;
 import com.example.myapplication.DbManager.loaiPhongDao;
 import com.example.myapplication.DbManager.phongDao;
@@ -32,26 +35,32 @@ import com.example.myapplication.DbManager.tangDao;
 import com.example.myapplication.InterfaceManager.sendPhong;
 import com.example.myapplication.InterfaceManager.sendTang;
 import com.example.myapplication.ObjectManager.datPhongObj;
+import com.example.myapplication.ObjectManager.hoaDonObj;
 import com.example.myapplication.ObjectManager.khachHangObj;
 import com.example.myapplication.ObjectManager.loaiPhongObj;
 import com.example.myapplication.ObjectManager.phongObj;
 import com.example.myapplication.ObjectManager.tangObj;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public class quanLyTang_phong extends AppCompatActivity {
     private Intent mIntent;
     private  Bundle mBundle;
-    private AlertDialog dialogTaoPhieuDatPhong;
     private RecyclerView mRecyclerView;
     private FloatingActionButton btn_add;
-    private phongObj mPhongObj;
     private phongAdapter adapter;
     private phongDao mPhongDao;
     private loaiPhongDao mLoaiPhongDao;
+    private datPhongDao mDatPhongDao;
+    private datPhongObj mDatPhongObj;
+    private  phongObj mPhongObj;
     private String maTang;
     private tangObj items_nhan;
+    private hoaDonDao mHoaDonDao;
+    private hoaDonObj mHoaDonObj;
 
     private spinerTenLoaiAdapter spinerLoaiPhongAdapter;
     @SuppressLint("MissingInflatedId")
@@ -69,7 +78,8 @@ public class quanLyTang_phong extends AppCompatActivity {
         getSupportActionBar().setTitle("Quản lý phòng "+items_nhan.getTenTang());
 
         //
-
+        mHoaDonDao = new hoaDonDao(quanLyTang_phong.this);
+        mDatPhongDao = new datPhongDao(quanLyTang_phong.this);
 
         //
         mRecyclerView = findViewById(R.id.quan_ly_phong_tang_recyclereView);
@@ -87,6 +97,7 @@ public class quanLyTang_phong extends AppCompatActivity {
         adapter = new phongAdapter(quanLyTang_phong.this, new sendPhong() {
             @Override
             public void sendPhong(phongObj items) {
+
                 clickItemPhong(items);
             }
         });
@@ -207,23 +218,28 @@ public class quanLyTang_phong extends AppCompatActivity {
             Button thanhToan = dialog.findViewById(R.id.dialog_update_phong_dang_su_dung_thanhToan);
             Button chiTiet = dialog.findViewById(R.id.dialog_update_phong_dang_su_dung_chiTiet);
             //
+
             datPhongDao mDatPhongDao = new datPhongDao(quanLyTang_phong.this);
             datPhongObj mDatPhongObj = mDatPhongDao.getByMaPhong(phongObj.getMaPhong());
+            d("ca" + "chung", "clickItemPhong: "+mDatPhongObj.getMaDatPhong());
+
             khachHangDao mKhachHangDao = new khachHangDao(quanLyTang_phong.this);
             khachHangObj mKhachHangObj = mKhachHangDao.getByMaKh(mDatPhongObj.getMaKh());
+
             nguoiThue.setText(mKhachHangObj.getTenKh());
             
             thanhToan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    pTthanhToan();
+                    pTthanhToan(phongObj);
+
+                    dialog.cancel();
                 }
             });
             chiTiet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     pTchiTiet(mDatPhongObj.getMaDatPhong());
-                    dialog.cancel();
                 }
             });
             //
@@ -238,11 +254,35 @@ public class quanLyTang_phong extends AppCompatActivity {
     private void pTchiTiet(String maDatPhong) {
         Intent intent = new Intent(quanLyTang_phong.this,chiTietHoaDon.class);
         intent.putExtra("maDatPhong",maDatPhong);
+        d("ca" + "chung", "pTchiTiet: "+maDatPhong);
         startActivity(intent);
     }
 
-    private void pTthanhToan() {
-        
+    private void pTthanhToan(phongObj items) {
+        mDatPhongObj = mDatPhongDao.getByMaPhong(items.getMaPhong());
+        chiTietDichVuDao mChiTietDichVuDao = new chiTietDichVuDao(quanLyTang_phong.this);
+        double tienDv = mChiTietDichVuDao.tongTienDv(mDatPhongObj.getMaDatPhong());
+        mHoaDonObj = new hoaDonObj();
+        mHoaDonObj.setNgayThang(getDate());
+        mHoaDonObj.setMaDatPhong(mDatPhongObj.getMaDatPhong());
+        mHoaDonObj.setTongTien(String.valueOf(tienDv + tinhTongTienDP()));
+        mHoaDonObj.setMaChiTietDV(mDatPhongObj.getMaChiTietDV());
+        mHoaDonDao.inserHoaDonThanhToan(mHoaDonObj);
+        //
+        mDatPhongDao.updateDatPhong(mDatPhongObj);
+        items.setTrangThai("phòng trống");
+        mPhongDao.updatePhong(items);
+        Toast.makeText(this, "Thanh toán thành công", Toast.LENGTH_LONG).show();
+        capNhapDuLieu();
+    }
+    private double tinhTongTienDP(){
+        String timeString = mDatPhongObj.getSoGioDat();
+        LocalTime time = LocalTime.parse(timeString);
+        double hour = time.getHour() + (time.getMinute() / 60.0) + (time.getSecond() / 3600.0);
+        double tongTienDP = Double.parseDouble(mDatPhongObj.getGiaTien())* hour;
+        DecimalFormat decimalFormat = new DecimalFormat("#.0");
+        String formattedNumber = decimalFormat.format(tongTienDP);
+        return Double.parseDouble(formattedNumber);
     }
 
     private void taoPhieuThuePhong(phongObj phongObj){
@@ -256,5 +296,9 @@ public class quanLyTang_phong extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         capNhapDuLieu();
+    }
+    private  String getDate(){
+        LocalDate currentDate = LocalDate.now();
+         return currentDate.toString();
     }
 }

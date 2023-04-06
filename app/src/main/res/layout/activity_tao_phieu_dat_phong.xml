@@ -48,6 +48,7 @@
             android:id="@+id/activity_tao_phieu_dat_phong_nhanVien"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:editable="false"
             android:textColor="@color/black"
             android:textSize="20dp" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -66,6 +67,7 @@
             android:id="@+id/activity_tao_phieu_dat_phong_tenPhong"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:editable="false"
             android:textColor="@color/black"
             android:textSize="20dp"/>
     </com.google.android.material.textfield.TextInputLayout>
