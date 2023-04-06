@@ -86,7 +86,7 @@
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/lin1"
 
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="10dp"
         android:padding="15dp"
         />
 
@@ -97,7 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/rcv_thongKe"
-        android:layout_marginTop="-100dp"
+        android:layout_marginTop="-40dp"
         android:text="Tổng Tiền :"
         android:textColor="@color/black"
         android:textSize="30dp" />
@@ -107,7 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rcv_thongKe"
-        android:layout_marginTop="-100dp"
+        android:layout_marginTop="-40dp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="16dp"
         android:layout_toEndOf="@+id/tv1"

@@ -1,12 +1,14 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -47,7 +49,7 @@ public class Home extends AppCompatActivity {
             }
 
             private void chuyenManHinh(manHinhChinhObj items) {
-                switch (items.getName().trim()){
+                switch (items.getName().trim()) {
                     case "Quản lý Tầng":
                         mIntent = new Intent(Home.this, quanLyTang.class);
                         startActivity(mIntent);
@@ -90,54 +92,79 @@ public class Home extends AppCompatActivity {
         // click vào item trong navigation
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             private Intent intent;
+
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.menu_nav_taiKhoanCuaBan:
-                        intent = new Intent(Home.this, nhanVien.class);
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("maNhanVien" , items.getMaNhanVien());
-//                        intent.putExtra("toUpdate" , bundle);
-
+                        intent = new Intent(Home.this, updateNhanVien.class);
                         startActivity(intent);
                         break;
                     case R.id.menu_nav_dangXuat:
-                        intent = new Intent(Home.this, manHinhDangNhap.class);
-                        startActivity(intent);
-                        finish();
+
+                        /// alert dialog hỏi đăng xuất
+//                        intent = new Intent(Home.this, manHinhDangNhap.class);
+//                        startActivity(intent);
+//                        finish();
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+                        builder.setTitle("thoát ứng dụng ? ");
+                        builder.setMessage("bạn muốn thoát ứng dụng !");
+                        builder.setNegativeButton("có", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                intent = new Intent(Home.this, manHinhDangNhap.class);
+                                startActivity(intent);
+                                finish();
+
+                            }
+                        });
+
+
+                        builder.setPositiveButton("không", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+
+
+                        builder.create();
+
+                        builder.show();
                         break;
 
 
-
                 }
-                    return true;
+                return true;
             }
         });
 
     }
+
     // chung set giá trị cho list
     private List<manHinhChinhObj> getmList() {
         List<manHinhChinhObj> list = new ArrayList<>();
-        list.add(new manHinhChinhObj(R.drawable.tang_icon,"Quản lý Tầng"));
-        list.add(new manHinhChinhObj(R.drawable.phong_icon,"Quản lý phòng"));
-        list.add(new manHinhChinhObj(R.drawable.loai_phong_icon,"Loại phòng"));
-        list.add(new manHinhChinhObj(R.drawable.user,"Khách hàng"));
-        list.add(new manHinhChinhObj(R.drawable.dich_vu_icon,"Dịch vụ"));
-        list.add(new manHinhChinhObj(R.drawable.hoa_don_icon,"Hóa đơn"));
-        list.add(new manHinhChinhObj(R.drawable.quan_ly_nhanvien_icon,"Nhân viên"));
-        list.add(new manHinhChinhObj(R.drawable.thongke,"Doanh thu"));
+        list.add(new manHinhChinhObj(R.drawable.tang_icon, "Quản lý Tầng"));
+        list.add(new manHinhChinhObj(R.drawable.phong_icon, "Quản lý phòng"));
+        list.add(new manHinhChinhObj(R.drawable.loai_phong_icon, "Loại phòng"));
+        list.add(new manHinhChinhObj(R.drawable.user, "Khách hàng"));
+        list.add(new manHinhChinhObj(R.drawable.dich_vu_icon, "Dịch vụ"));
+        list.add(new manHinhChinhObj(R.drawable.hoa_don_icon, "Hóa đơn"));
+        list.add(new manHinhChinhObj(R.drawable.quan_ly_nhanvien_icon, "Nhân viên"));
+        list.add(new manHinhChinhObj(R.drawable.thongke, "Doanh thu"));
         return list;
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_home,menu);
+        getMenuInflater().inflate(R.menu.menu_home, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_home_navigation:
                 mDrawerLayout.openDrawer(GravityCompat.START);
         }

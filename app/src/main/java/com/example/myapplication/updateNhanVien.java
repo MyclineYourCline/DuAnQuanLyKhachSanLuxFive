@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -7,8 +8,11 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.SharedPreferences;
+
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,8 +23,8 @@ import com.example.myapplication.DbManager.nhanVienDao;
 import com.example.myapplication.ObjectManager.nhanVienObj;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.squareup.picasso.Picasso;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class updateNhanVien extends AppCompatActivity {
 
@@ -42,12 +46,14 @@ public class updateNhanVien extends AppCompatActivity {
       String ma  = preferences.getString("maNv" , "");
       nvDao = new nhanVienDao(updateNhanVien.this);
       nhanVienObj obj = nvDao.getByMaNhanVien(ma);
-        if (checkStoragePermission()){
+
+        Uri uri = Uri.parse(obj.getAnhNhanVien());
+        Picasso.get().load(obj.getAnhNhanVien()).into(img_avata);
             dialog_update_nhan_vien_Edt_manv.setText(obj.getMaNhanVien());
             dialog_update_nhan_vien_Edt_sdt.setText(obj.getSoDienThoai());
             dialog_update_nhan_vien_Edt_matkhau.setText(obj.getMatKhau());
 
-        }
+
 
         sua_nhanvien.setOnClickListener(new View.OnClickListener() {
             @Override
