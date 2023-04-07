@@ -82,15 +82,15 @@ public class phongAdapter extends RecyclerView.Adapter<phongAdapter.phongViewHol
             mDatPhongObj = mDatPhongDao.getByMaPhong(items.getMaPhong());
             String timeCheck = mDatPhongObj.getNgayRa()+" "+mDatPhongObj.getGioRa();
             try {
+                d("ca" + "chung", "onBindViewHolder: timcheeck"+timeCheck);
+                d("ca" + "chung", "onBindViewHolder: "+kiemTraTinhTrang(timeCheck));
                 if (kiemTraTinhTrang(timeCheck)){
                     holder.trangThai.setImageResource(R.drawable.phong_dang_dung);
-                    d("ca" + "chung", "onBindViewHolder chua qua han: "+kiemTraTinhTrang(timeCheck));
-                    items.setTrangThai("Quá hạn");
-                    mPhongDao.updatePhong(items);
                 }
                 else{
                     holder.trangThai.setImageResource(R.drawable.phong_qua_han);
-                    d("ca" + "chung", "onBindViewHolder: qua han"+kiemTraTinhTrang(timeCheck));
+                    items.setTrangThai("Quá hạn");
+                    mPhongDao.updatePhong(items);
                 }
             } catch (ParseException e) {
                 throw new RuntimeException(e);
@@ -103,10 +103,10 @@ public class phongAdapter extends RecyclerView.Adapter<phongAdapter.phongViewHol
         loaiPhongObj loaiPhongObj =  loaiPhongDao.getByMaLoaiPhong(items.getMaLoai());
 
         if (loaiPhongObj.getTenLoaiPhong().toLowerCase().equals("phòng đơn")){
-            holder.anhPhong.setImageResource(R.drawable.bed_single);
+            holder.anhPhong.setImageResource(R.drawable.baseline_bedroom_child_24);
         }
         else if (loaiPhongObj.getTenLoaiPhong().toLowerCase().equals("phòng đôi")){
-            holder.anhPhong.setImageResource(R.drawable.bed_double);
+            holder.anhPhong.setImageResource(R.drawable.baseline_bedroom_parent_24);
         }
         else{
             holder.anhPhong.setImageResource(R.drawable.phong_icon);
@@ -157,14 +157,10 @@ public class phongAdapter extends RecyclerView.Adapter<phongAdapter.phongViewHol
     }
     private boolean kiemTraTinhTrang(String thoiGianVe) throws ParseException {
         Date currentDate = new Date();
-        LocalDateTime currentDateTime = LocalDateTime.now();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date dateToCompare = dateFormat.parse(thoiGianVe);
         int compareResult = currentDate.compareTo(dateToCompare);
-        if (compareResult == 0){
-                return true;
-        }
-        else if (compareResult < 0){
+        if (compareResult <= 0){
                 return true;
         }
         else{
