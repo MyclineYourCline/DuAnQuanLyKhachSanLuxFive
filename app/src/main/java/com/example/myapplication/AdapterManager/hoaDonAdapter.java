@@ -77,7 +77,7 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
         holder.item_hoaDon_tvNgayThang.setText(items.getNgayThang());
         holder.item_hoaDon_tvTongTien.setText(items.getTongTien() + " VNĐ");
         //                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.item_hoaDon_btn_chitiet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListenr.sendHoaDon(items);

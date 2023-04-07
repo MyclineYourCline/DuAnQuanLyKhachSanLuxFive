@@ -23,6 +23,7 @@
             android:layout_marginTop="250dp"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
+            android:textSize="30dp"
             android:text="Welome to LUX FIVE Hotel"
             android:textStyle="bold"
             android:layout_height="wrap_content"/>

@@ -8,20 +8,30 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.myapplication.AdapterManager.manHinhChinhAdapter;
 import com.example.myapplication.DbManager.nhanVienDao;
 import com.example.myapplication.ObjectManager.manHinhChinhObj;
+import com.example.myapplication.ObjectManager.nhanVienObj;
 import com.google.android.material.navigation.NavigationView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Home extends AppCompatActivity {
     private RecyclerView mRecyclerView;
@@ -31,6 +41,8 @@ public class Home extends AppCompatActivity {
     private Intent mIntent;
 
     private nhanVienDao nvDao;
+    private String maNV;
+    private nhanVienObj item_nhanVien;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,6 +53,20 @@ public class Home extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.activity_home_recycleView);
         mDrawerLayout = findViewById(R.id.activity_home_drawer);
         mNavigationView = findViewById(R.id.activity_home_navigation);
+
+        nvDao = new nhanVienDao(Home.this);
+        //nVienObj
+        //
+        SharedPreferences sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
+        maNV = sharedPreferences.getString("maNv","");
+        item_nhanVien = nvDao.getByMaNhanVien(maNV);
+        View headerView = mNavigationView.getHeaderView(0);
+        CircleImageView avatar = headerView.findViewById(R.id.title_navigation_img);
+        avatar.setImageURI(Uri.parse(item_nhanVien.getAnhNhanVien()));
+        TextView name = headerView.findViewById(R.id.title_navigation_text);
+        name.setText(item_nhanVien.getTenNhanVien());
+
+
         //
         adapter = new manHinhChinhAdapter(Home.this, new manHinhChinhAdapter.senData() {
             @Override
@@ -82,7 +108,10 @@ public class Home extends AppCompatActivity {
                         mIntent = new Intent(Home.this, quanLyPhong.class);
                         startActivity(mIntent);
                         break;
-
+                    case "Phiếu đặt":
+                        mIntent = new Intent(Home.this, quanLyPhong.class);
+                        startActivity(mIntent);
+                        break;
                 }
             }
         });
@@ -101,11 +130,6 @@ public class Home extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.menu_nav_dangXuat:
-
-                        /// alert dialog hỏi đăng xuất
-//                        intent = new Intent(Home.this, manHinhDangNhap.class);
-//                        startActivity(intent);
-//                        finish();
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
                         builder.setTitle("thoát ứng dụng ? ");
@@ -153,12 +177,12 @@ public class Home extends AppCompatActivity {
         list.add(new manHinhChinhObj(R.drawable.hoa_don_icon, "Hóa đơn"));
         list.add(new manHinhChinhObj(R.drawable.quan_ly_nhanvien_icon, "Nhân viên"));
         list.add(new manHinhChinhObj(R.drawable.thongke, "Doanh thu"));
+        list.add(new manHinhChinhObj(R.drawable.reload, "Phiếu đặt"));
         return list;
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_home, menu);
-
         return super.onCreateOptionsMenu(menu);
     }
 

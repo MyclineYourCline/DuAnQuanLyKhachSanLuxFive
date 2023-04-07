@@ -110,4 +110,8 @@ public class chiTietDichVuDao {
         }
         return tongTien;
     }
+    public List<chiTietDichVuOBJ> getLisByMaDP(String maHD){
+        String sql = "SELECT * FROM chiTietDichVu WHERE maDatPhong = ?";
+        return get(sql,maHD);
+    }
 }
