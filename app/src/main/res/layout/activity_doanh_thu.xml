@@ -76,6 +76,14 @@
 
     </LinearLayout>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_thong_ke"
+        android:layout_below="@+id/lin1"
+        android:text="Thong ke"
+        />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_thongKe"
@@ -84,7 +92,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/lin1"
+        android:layout_below="@+id/btn_thong_ke"
 
         android:layout_marginTop="10dp"
         android:padding="15dp"
