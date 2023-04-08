@@ -17,7 +17,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.myapplication.AdapterManager.manHinhChinhAdapter;
@@ -25,8 +24,6 @@ import com.example.myapplication.DbManager.nhanVienDao;
 import com.example.myapplication.ObjectManager.manHinhChinhObj;
 import com.example.myapplication.ObjectManager.nhanVienObj;
 import com.google.android.material.navigation.NavigationView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -171,7 +168,7 @@ public class Home extends AppCompatActivity {
         List<manHinhChinhObj> list = new ArrayList<>();
         list.add(new manHinhChinhObj(R.drawable.tang_icon, "Quản lý Tầng"));
         list.add(new manHinhChinhObj(R.drawable.phong_icon, "Quản lý phòng"));
-        list.add(new manHinhChinhObj(R.drawable.loai_phong_icon, "Loại phòng"));
+        list.add(new manHinhChinhObj(R.drawable.phong_don_icon, "Loại phòng"));
         list.add(new manHinhChinhObj(R.drawable.user, "Khách hàng"));
         list.add(new manHinhChinhObj(R.drawable.dich_vu_icon, "Dịch vụ"));
         list.add(new manHinhChinhObj(R.drawable.hoa_don_icon, "Hóa đơn"));

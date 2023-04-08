@@ -103,10 +103,10 @@ public class phongAdapter extends RecyclerView.Adapter<phongAdapter.phongViewHol
         loaiPhongObj loaiPhongObj =  loaiPhongDao.getByMaLoaiPhong(items.getMaLoai());
 
         if (loaiPhongObj.getTenLoaiPhong().toLowerCase().equals("phòng đơn")){
-            holder.anhPhong.setImageResource(R.drawable.baseline_bedroom_child_24);
+            holder.anhPhong.setImageResource(R.drawable.phong_don_icon);
         }
         else if (loaiPhongObj.getTenLoaiPhong().toLowerCase().equals("phòng đôi")){
-            holder.anhPhong.setImageResource(R.drawable.baseline_bedroom_parent_24);
+            holder.anhPhong.setImageResource(R.drawable.phong_doi_icon);
         }
         else{
             holder.anhPhong.setImageResource(R.drawable.phong_icon);
