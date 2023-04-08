@@ -55,13 +55,6 @@ public class nhanVien extends AppCompatActivity {
         initUi();
 
         loadData();
-
-
-
-
-
-
-
         floating_btn_nhanvien_activity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,45 +100,6 @@ public class nhanVien extends AppCompatActivity {
             return true;
         }
     }
-
-
-//    private void checkPermission ( ){
-//        PermissionListener permissionlistener = new PermissionListener() {
-//            @Override
-//            public void onPermissionGranted() {
-//                Toast.makeText(nhanVien.this, "Permission Granted"
-//                        , Toast.LENGTH_SHORT).show();
-////                TedBottomSheetDialogFragment.OnImageSelectedListener listener
-////                        = new TedBottomSheetDialogFragment.OnImageSelectedListener() {
-////                    @Override
-////                    public void onImageSelected(Uri uri) {
-////                        try {
-////                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-////                            imageView.setImageBitmap(bitmap);
-////                        } catch (IOException e) {
-////                            throw new RuntimeException(e);
-////                        }
-////                    }
-////                };
-//
-//            }
-//
-//            @Override
-//            public void onPermissionDenied(List<String> deniedPermissions) {
-//                Toast.makeText(nhanVien.this, "Permission Denied\n"
-//                        + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
-//            }
-//
-//            };
-//        TedPermission.create()
-//                .setPermissionListener(permissionlistener)
-//                .setDeniedMessage("If you reject permission,you can not use this service\n" +
-//                        "\nPlease turn on permissions at [Setting] > [Permission]")
-//                .setPermissions(android.Manifest.permission.CAMERA
-//                        , android.Manifest.permission.READ_EXTERNAL_STORAGE)
-//                .check();
-//    }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

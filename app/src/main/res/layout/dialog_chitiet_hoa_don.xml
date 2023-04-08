@@ -56,43 +56,29 @@
 
 
             <TableRow
-                android:weightSum="3"
                 android:padding="10dp">
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="70dp"
                     android:src="@drawable/avata_khach_hang"
                     />
-                <TextView android:text=":"
-                    android:textColor="@color/white"/>
                 <TextView
                     android:id="@+id/update_hoadon_tv_tenKhachHang"
                     android:layout_marginStart="15dp"
                     android:layout_weight="2"
-                  android:layout_marginTop="10dp"
-                   android:gravity="start"
+                    android:layout_marginTop="20dp"
                     android:textSize="23dp"
                     android:text="nguyễn trần khả " />
             </TableRow>
-            <TableRow
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                android:weightSum="3"
-                android:padding="15dp">
-
+            <TableRow>
                 <TextView
                     android:layout_weight="1"
+                    android:padding="5dp"
                     android:text="Người tạo"
                     android:textColor="@color/black"
                     android:textSize="20dp"
 
                     />
-
-                <TextView android:text=":"
-                    android:textSize="20dp"
-                    android:textColor="@color/black"/>
-
-
                 <TextView
                     android:id="@+id/dialog_chitiet_hoadon_tv_NguoiTao"
                     android:layout_marginStart="15dp"
@@ -100,29 +86,18 @@
                     android:textSize="20dp"
                     android:text="dsdsds" />
             </TableRow>
-
-
             <TableRow
-
-                android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
-                android:weightSum="3"
-                android:padding="15dp">
+                android:weightSum="3">
 
                 <TextView
+                    android:padding="5dp"
                     android:layout_weight="1"
                     android:text="Phòng Thuê"
                     android:textColor="@color/black"
                     android:textSize="18dp"
 
                     tools:ignore="SpUsage" />
-
-                <TextView android:text=":"
-                    android:textSize="18dp"
-                    android:textColor="@color/black"
-                    tools:ignore="HardcodedText,SpUsage" />
-
-
                 <TextView
                     android:id="@+id/dialog_chitiet_hoadon_tv_tienPhong"
                     android:layout_marginStart="15dp"
@@ -134,26 +109,15 @@
 
 <!--cột ngày đặt -->
             <TableRow
-
-                android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
-                android:weightSum="3"
-                android:padding="15dp">
-
+                android:weightSum="3">
                 <TextView
                     android:layout_weight="1"
+                    android:padding="5dp"
                     android:text="Ngày Đặt"
                     android:textColor="@color/black"
                     android:textSize="18dp"
-
                     tools:ignore="SpUsage" />
-
-                <TextView android:text=":"
-                    android:textSize="18dp"
-                    android:textColor="@color/black"
-                    tools:ignore="HardcodedText,SpUsage" />
-
-
                 <TextView
                     android:id="@+id/dialog_chitiet_hoadon_tv_NgayDat"
                     android:layout_marginStart="15dp"
@@ -164,89 +128,72 @@
             </TableRow>
 
             <TableRow
-
-                android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
-                android:weightSum="3"
-                android:padding="15dp">
-
+                android:weightSum="3">
                 <TextView
+                    android:padding="5dp"
                     android:layout_weight="1"
                     android:text="Ngày Trả"
                     android:textColor="@color/black"
                     android:textSize="18dp"
-
                     tools:ignore="SpUsage" />
-
-                <TextView android:text=":"
-                    android:textSize="18dp"
-                    android:textColor="@color/black"
-                    tools:ignore="HardcodedText,SpUsage" />
-
 
                 <TextView
                     android:id="@+id/dialog_chitiet_hoadon_tv_NgayTra"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_weight="2"
+                    android:text="Nam"
                     android:textSize="18dp"
-                    tools:ignore="HardcodedText,SpUsage"
+                    tools:ignore="HardcodedText,SpUsage" />
+            </TableRow>
+            <TableRow
+                android:layout_marginEnd="5dp"
+                android:weightSum="3">
+                <TextView
+                    android:text="Số giờ thuê/giá"
+                    android:padding="5dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:textSize="18dp" />
+                <TextView
+                    android:id="@+id/dialog_chitiet_hoadon_tv_gia"
+                    android:textSize="18dp"
+                    android:paddingStart="15dp"
+                    android:layout_weight="2"
                     android:text="Nam" />
             </TableRow>
 
             <TableRow
-
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:weightSum="4"
                 android:padding="5dp">
-
                 <TextView
-                    android:layout_weight="0.5"
-                    android:text="Tên"
-                    android:gravity="center"
-                    android:textColor="@color/black"
                     android:textSize="18dp"
-
-                    tools:ignore="SpUsage" />
-
-                <TextView android:text="SL"
-                    android:textSize="18dp"
-                    android:gravity="center"
+                    android:layout_marginStart="15dp"
                     android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:layout_weight="1"
                     android:textColor="@color/black"
-                    tools:ignore="HardcodedText,SpUsage" />
-
-
-                <TextView
-
-
-
-                    android:textSize="18dp"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:layout_marginStart="10dp"
                     tools:ignore="HardcodedText,SpUsage"
-                    android:text="tổng tiền" />
+                    android:text="Dịch vụ đã dùng" />
             </TableRow>
-
-
-
         </TableLayout>
-
-
-
-
     </androidx.cardview.widget.CardView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dialog_chitiet_hoaDon_recyclle_dichVu"
-        android:layout_below="@+id/card"
-        android:layout_above="@+id/dialog_chitiet_hoaDon_tvTongtien"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
         android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp"
+        android:layout_above="@+id/dialog_chitiet_hoaDon_tvTongtien"
+        android:layout_below="@+id/card"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="2dp" />
+
     <TextView
         android:id="@+id/tv_tongtiern"
         android:layout_width="wrap_content"
@@ -265,10 +212,10 @@
         android:layout_marginBottom="5dp"
         android:layout_marginStart="20dp"
         android:layout_toEndOf="@+id/tv_tongtiern"
-
         android:textSize="20dp"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textColor="@color/phongQuaHan"
        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"/>

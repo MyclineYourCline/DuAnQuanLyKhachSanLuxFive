@@ -176,6 +176,7 @@ public class quanLyTang_phong extends AppCompatActivity {
         return list;
     }
     private void clickItemPhong(phongObj phongObj){
+        capNhapDuLieu();
         if (phongObj.getTrangThai().toLowerCase().equals("phòng trống")){
             Dialog dialog = new Dialog(quanLyTang_phong.this
             , androidx.appcompat.R.style.Base_Theme_AppCompat_Dialog_Alert);
@@ -221,7 +222,6 @@ public class quanLyTang_phong extends AppCompatActivity {
 
             datPhongDao mDatPhongDao = new datPhongDao(quanLyTang_phong.this);
             datPhongObj mDatPhongObj = mDatPhongDao.getByMaPhong(phongObj.getMaPhong());
-            d("ca" + "chung", "clickItemPhong: "+mDatPhongObj.getMaDatPhong());
 
             khachHangDao mKhachHangDao = new khachHangDao(quanLyTang_phong.this);
             khachHangObj mKhachHangObj = mKhachHangDao.getByMaKh(mDatPhongObj.getMaKh());
@@ -232,8 +232,8 @@ public class quanLyTang_phong extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     pTthanhToan(phongObj);
-
                     dialog.cancel();
+                    capNhapDuLieu();
                 }
             });
             chiTiet.setOnClickListener(new View.OnClickListener() {
@@ -254,7 +254,6 @@ public class quanLyTang_phong extends AppCompatActivity {
     private void pTchiTiet(String maDatPhong) {
         Intent intent = new Intent(quanLyTang_phong.this,chiTietHoaDon.class);
         intent.putExtra("maDatPhong",maDatPhong);
-        d("ca" + "chung", "pTchiTiet: "+maDatPhong);
         startActivity(intent);
     }
 

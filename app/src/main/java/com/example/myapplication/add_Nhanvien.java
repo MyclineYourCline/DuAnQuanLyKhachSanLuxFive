@@ -67,7 +67,6 @@ public class add_Nhanvien extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
-
         btn_them.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
