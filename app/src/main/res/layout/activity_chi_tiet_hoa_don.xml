@@ -77,10 +77,23 @@
                 android:padding="5dp"
                 android:layout_marginEnd="5dp">
                 <TextView
-                    android:text="Tổng số giờ"
+                    android:text="Tổng thời gian"
                     android:textSize="18dp" />
                 <TextView
                     android:id="@+id/activity_chi_tiet_hoa_don_tongSoGio"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
+                    android:text="Nam" />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="5dp"
+                android:padding="5dp"
+                android:layout_marginEnd="5dp">
+                <TextView
+                    android:text="Giá thuê"
+                    android:textSize="18dp" />
+                <TextView
+                    android:id="@+id/activity_chi_tiet_hoa_don_giaThue"
                     android:textStyle="bold"
                     android:textSize="18dp"
                     android:text="Nam" />
@@ -136,10 +149,8 @@
         android:layout_width="wrap_content"
         android:text="20000vnd"
         android:layout_marginBottom="5dp"
-        android:layout_marginStart="20dp"
         android:layout_toEndOf="@+id/tv_tongtiern"
         android:textSize="20dp"
-        android:textAlignment="center"
         android:textColor="@color/red"
         android:layout_alignParentEnd="true"
         android:textStyle="bold"

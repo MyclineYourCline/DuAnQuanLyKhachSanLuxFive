@@ -89,6 +89,7 @@ public class createDataBase extends SQLiteOpenHelper {
             ",soGioThue TEXT"+
             ",maChiTietDV TEXT" +
             ",trangThai TEXT"+
+            ", tongTien TEXT"+
             ",FOREIGN KEY (maChiTietDV) REFERENCES chiTietDichVu(maChiTietDV)"+
             ", FOREIGN KEY (maKh) REFERENCES khachHang(maKh)" +
             " ,FOREIGN KEY (maNhanVien) REFERENCES nhanVien(maNhanVien)" +
@@ -101,9 +102,7 @@ public class createDataBase extends SQLiteOpenHelper {
     private final static String CREATE_TABLE_DICHVUTHEM
             = "CREATE TABLE dichVuThem (" +
             "maDichVu INTEGER PRIMARY KEY AUTOINCREMENT" +
-            ", tenDichVu TEXT UNIQUE" +
-            ", giaDichVu DOUBLE" +
-            ", soLuong INTEGER)";
+            ", tenDichVu TEXT UNIQUE)";
     //maHoaDon
     //maDatPhong
     //trangThai
@@ -114,7 +113,6 @@ public class createDataBase extends SQLiteOpenHelper {
             = "CREATE TABLE hoaDonThanhToan(" +
             "maHoaDon INTEGER PRIMARY KEY AUTOINCREMENT" +
             ", maDatPhong TEXT" +
-            ", trangThai TEXT" +
             ", tongTien DOUBLE" +
             ", ngayThang TEXT" +
             ", maChiTietDV TEXT" +
@@ -131,7 +129,8 @@ public class createDataBase extends SQLiteOpenHelper {
             ", maDichVu INTEGER" +
             ", maDatPhong TEXT" +
             ", soLuong INT"+
-            ", giaTien DOUBLE" +
+            ", giaTien DOUBLE"
+            +",tongTien DOUBLE"+
             ", FOREIGN KEY(maDichVu) REFERENCES dichVuThem(maDichVu)" +
             ", FOREIGN KEY(maDatPhong) REFERENCES datPhong(maDatPhong))";
 

@@ -31,7 +31,6 @@ public class hoaDonDao {
         while (cursor.moveToNext()){
             hoaDonObj hoaDonObj = new hoaDonObj();
             hoaDonObj.setMaHoaDon(cursor.getString(cursor.getColumnIndex("maHoaDon")));
-            hoaDonObj.setTrangThai(cursor.getString(cursor.getColumnIndex("trangThai")));
             hoaDonObj.setTongTien(cursor.getString(cursor.getColumnIndex("tongTien")));
             hoaDonObj.setNgayThang(cursor.getString(cursor.getColumnIndex("ngayThang")));
             hoaDonObj.setMaDatPhong(cursor.getString(cursor.getColumnIndex("maDatPhong")));
@@ -47,7 +46,6 @@ public class hoaDonDao {
     public Long inserHoaDonThanhToan(hoaDonObj items){
         ContentValues values = new ContentValues();
         values.put("maHoaDon",items.getMaHoaDon());
-        values.put("trangThai",items.getTrangThai());
         values.put("tongTien",items.getTongTien());
         values.put("ngayThang",items.getNgayThang());
         values.put("maDatPhong",items.getMaDatPhong());
@@ -58,7 +56,6 @@ public class hoaDonDao {
     public int updateHoaDonThanhToan(hoaDonObj items){
         ContentValues values = new ContentValues();
         values.put("maHoaDon",items.getMaHoaDon());
-        values.put("trangThai",items.getTrangThai());
         values.put("tongTien",items.getTongTien());
         values.put("ngayThang",items.getNgayThang());
         values.put("maDatPhong",items.getMaDatPhong());

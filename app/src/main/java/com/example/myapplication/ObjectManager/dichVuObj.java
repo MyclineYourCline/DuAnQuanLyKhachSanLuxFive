@@ -6,25 +6,14 @@ public class dichVuObj {
     //giaDichVu
     //maChiTietDV
     //soLuong
-    private String maDichVu, tenDichVu, giaDichVu , soLuong;
+    private String maDichVu, tenDichVu;
 
-    public dichVuObj(String maDichVu, String tenDichVu, String giaDichVu, String soLuong) {
+    public dichVuObj(String maDichVu, String tenDichVu) {
         this.maDichVu = maDichVu;
         this.tenDichVu = tenDichVu;
-        this.giaDichVu = giaDichVu;
-        this.soLuong = soLuong;
-    }
-
-    public dichVuObj(String tenDichVu, String giaDichVu, String soLuong) {
-        this.tenDichVu = tenDichVu;
-        this.giaDichVu = giaDichVu;
-        this.soLuong = soLuong;
     }
 
     public dichVuObj() {
-    }
-    public double tinhTongTien (){
-        return  Double.parseDouble(giaDichVu) * Double.parseDouble(soLuong);
     }
 
     public String getMaDichVu() {
@@ -41,21 +30,5 @@ public class dichVuObj {
 
     public void setTenDichVu(String tenDichVu) {
         this.tenDichVu = tenDichVu;
-    }
-
-    public String getGiaDichVu() {
-        return giaDichVu;
-    }
-
-    public void setGiaDichVu(String giaDichVu) {
-        this.giaDichVu = giaDichVu;
-    }
-
-    public String getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(String soLuong) {
-        this.soLuong = soLuong;
     }
 }

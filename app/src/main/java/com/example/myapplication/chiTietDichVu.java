@@ -128,6 +128,7 @@ public class chiTietDichVu extends AppCompatActivity {
                         CTDVinsert.setMaDichVu(itemsDV.getMaDichVu());
                         CTDVinsert.setGiaTien(giaDv.getText().toString().trim());
                         CTDVinsert.setMaDatPhong(id_chiTietDichVu);
+                        CTDVinsert.setTongTien(String.valueOf(CTDVinsert.tinhTongTien()));
                         mChiTietDichVuDao.inserChiTietDichVu(CTDVinsert);
                         capNhapDuLieu();
                         dialog.cancel();

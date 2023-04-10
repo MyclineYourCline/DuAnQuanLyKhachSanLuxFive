@@ -38,7 +38,7 @@ public class chiTietHoaDon extends AppCompatActivity {
     private Intent mIntent;
     private String maDatPhong;
     private TextView tenKH, tenNguoiTao, tenPhongThue,
-    ngayDat, ngayTra,tongTien,tongSoGio;
+    ngayDat, ngayTra,tongTien,tongSoGio, giaThue;
     private FloatingActionButton btn_thanhToan;
     private datPhongDao mDatPhongDao;
     private RecyclerView mListView;
@@ -84,6 +84,7 @@ public class chiTietHoaDon extends AppCompatActivity {
         mListView = findViewById(R.id.activity_chi_tiet_hoa_don_lv_chiTietDV);
         btn_thanhToan = findViewById(R.id.activity_chi_tiet_hoa_don_btn_sua);
         tongSoGio = findViewById(R.id.activity_chi_tiet_hoa_don_tongSoGio);
+        giaThue = findViewById(R.id.activity_chi_tiet_hoa_don_giaThue);
         //
         mDatPhongDao = new datPhongDao(chiTietHoaDon.this);
         mKhachHangDao = new khachHangDao(chiTietHoaDon.this);
@@ -101,9 +102,12 @@ public class chiTietHoaDon extends AppCompatActivity {
         tenNguoiTao.setText(mNhanVienObj.getTenNhanVien());
         ngayDat.setText(mDatPhongObj.getGioVao()+"/"+mDatPhongObj.getCheckIn());
         ngayTra.setText(mDatPhongObj.getGioRa()+"/"+mDatPhongObj.getNgayRa());
-        tongSoGio.setText(mDatPhongObj.getSoGioDat()+" ("+mDatPhongObj.getGiaTien()+"/Giờ)");
+        tongSoGio.setText(mDatPhongObj.getSoGioDat());
+        giaThue.setText(mDatPhongObj.getGiaTien()+" VND");
         //
-        tongTien.setText(tinhTongTienDP()+tinhTongTienDV(mDatPhongObj.getMaDatPhong())+" VND");
+        float tongTienF = Float.parseFloat(mDatPhongObj.getTongTien())+   Float.parseFloat(String.valueOf(tinhTongTienDV(mDatPhongObj.getMaDatPhong())));
+        String tongTienString = String.format("%.1f", tongTienF);
+        tongTien.setText(tongTienString);
 
     }
     private double tinhTongTienDP(){
@@ -115,7 +119,7 @@ public class chiTietHoaDon extends AppCompatActivity {
         String formattedNumber = decimalFormat.format(tongTienDP);
         return Double.parseDouble(formattedNumber);
     }
-    private double tinhTongTienDV(String maDatPhong){
+    private float tinhTongTienDV(String maDatPhong){
         d("ca" + "chung", "tinhTongTienDV: "+mChiTietDichVuDao.tongTienDv(maDatPhong));
        return mChiTietDichVuDao.tongTienDv(maDatPhong);
     }

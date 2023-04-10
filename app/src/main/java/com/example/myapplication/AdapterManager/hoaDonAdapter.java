@@ -19,9 +19,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.DbManager.chiTietDichVuDao;
 import com.example.myapplication.DbManager.datPhongDao;
 import com.example.myapplication.DbManager.phongDao;
 import com.example.myapplication.InterfaceManager.sendHoaDon;
+import com.example.myapplication.ObjectManager.chiTietDichVuOBJ;
 import com.example.myapplication.ObjectManager.datPhongObj;
 import com.example.myapplication.ObjectManager.dichVuObj;
 import com.example.myapplication.ObjectManager.hoaDonObj;
@@ -41,11 +43,14 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
     private datPhongObj mDatPhongObj;
     private phongDao mPhongDao;
     private phongObj mPhongObj;
+    private chiTietDichVuDao mChiTietDichVuDao;
+    private chiTietDichVuOBJ mChiTietDichVuOBJ;
 
     public hoaDonAdapter(Context mContext, sendHoaDon mListenr) {
         this.mContext = mContext;
         this.mListenr = mListenr;
         mDatPhongDao = new datPhongDao(mContext);
+        mChiTietDichVuDao = new chiTietDichVuDao(mContext);
         mPhongDao = new phongDao(mContext);
     }
 
@@ -75,7 +80,7 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
         // gán view cho từng phần tử
         holder.item_hoaDon_tvNamePhong.setText(mPhongObj.getTenPhong());
         holder.item_hoaDon_tvNgayThang.setText(items.getNgayThang());
-        holder.item_hoaDon_tvTongTien.setText(items.getTongTien() + " VNĐ");
+        holder.item_hoaDon_tvTongTien.setText(items.getTongTien());
         //                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         holder.item_hoaDon_btn_chitiet.setOnClickListener(new View.OnClickListener() {
             @Override

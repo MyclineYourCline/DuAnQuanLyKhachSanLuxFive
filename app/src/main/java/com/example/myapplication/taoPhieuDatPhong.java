@@ -2,17 +2,22 @@ package com.example.myapplication;
 
 import static android.util.Log.d;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.ContextParams;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.DbManager.chiTietDichVuDao;
@@ -26,7 +31,10 @@ import com.example.myapplication.ObjectManager.tangObj;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -44,6 +52,7 @@ public class taoPhieuDatPhong extends AppCompatActivity {
     private chiTietDichVuDao mChiTietDichVuDao;
     private datPhongDao mDatPhongDao;
     private phongDao mPhongDao;
+    private TextView hinhThucDat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,45 +147,13 @@ public class taoPhieuDatPhong extends AppCompatActivity {
                     return;
                 }
                 if (maNhanVien.getText().toString().trim().equals(maNV)){
-                    double number = Double.parseDouble(thoiGianDat.getText().toString().trim());
-                    int hour = (int) number;
-                    String hourString = hour+"";
-                    int minute = (int) ((number - hour) * 60);
-                    String munuteString = minute+"";
-                    if (hour < 10){
-                        hourString = "0"+hour;
+                    if (hinhThucDat.getText().toString().toLowerCase().equals("giờ")){
+                        if (Integer.parseInt(thoiGianDat.getText().toString().trim()) < 24){
+                            taoPhieuTheoGio();
+                        }
                     }
-                    if (minute < 10){
-                        munuteString = "0"+minute;
-                    }
-
-                    String timeString = hourString + ":" + munuteString+":00";
-
-                    //
-                    try {
-                        datPhongObj itemInsert = new datPhongObj();
-                        itemInsert.setMaDatPhong(id_phieuDatPhong);
-                        itemInsert.setMaPhong(maPhong);
-                        itemInsert.setCheckIn(ngayDat.getText().toString().trim());
-                        itemInsert.setGioVao(gioDat.getText().toString().trim());
-                        itemInsert.setMaKh(maKh.getText().toString().trim());
-                        itemInsert.setMaNhanVien(maNV);
-                        itemInsert.setSoGioDat(timeString);
-                        itemInsert.setGioRa(itemInsert.checkTimeOut());
-                        itemInsert.setNgayRa(itemInsert.checkDayOut());
-                        itemInsert.setGiaTien(giaThue.getText().toString().trim());
-                        itemInsert.setMaChiTietDV(id_phieuDatPhong);
-                        mDatPhongDao.inserDatPhong(itemInsert);
-                        //
-                        phongObj itemPhong = mPhongDao.getByMaPhong(items_nhan.getMaPhong());
-                        itemPhong.setTrangThai("đang dùng");
-                        mPhongDao.updatePhong(itemPhong);
-                        //
-                        finish();
-                        Toast.makeText(this, "Tạo phiếu đặt phòng thành công", Toast.LENGTH_SHORT).show();
-                    }
-                    catch (Exception e){
-                        Toast.makeText(this, "Định dạng giờ hoặc ngày tháng bị sai", Toast.LENGTH_LONG).show();
+                    else if (hinhThucDat.getText().toString().toLowerCase().equals("ngày")){
+                        taoPhieuTheoNgay(thoiGianDat.getText().toString().trim());
                     }
 
                 }
@@ -289,12 +266,88 @@ public class taoPhieuDatPhong extends AppCompatActivity {
          huy = findViewById(R.id.activity_tao_phieu_dat_phong_btnHuy);
          taoPhieu = findViewById(R.id.activity_tao_phieu_dat_phong_btnTaoPhieu);
          giaThue = findViewById(R.id.activity_tao_phieu_dat_phong_giaThuePhong);
+         hinhThucDat = findViewById(R.id.activity_tao_phieu_dat_phong_gio);
+         registerForContextMenu(hinhThucDat);
     }
     private String  getDate(){
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = sdf.format(date);
         return dateString;
+    }
+    private void taoPhieuTheoGio(){
+        double number = Double.parseDouble(thoiGianDat.getText().toString().trim());
+        int hour = (int) number;
+        String hourString = hour+"";
+        int minute = (int) ((number - hour) * 60);
+        String munuteString = minute+"";
+        if (hour < 10){
+            hourString = "0"+hour;
+        }
+        if (minute < 10){
+            munuteString = "0"+minute;
+        }
+        String timeString = hourString + ":" + munuteString+":00";
+        //
+        try {
+            datPhongObj itemInsert = new datPhongObj();
+            itemInsert.setMaDatPhong(id_phieuDatPhong);
+            itemInsert.setMaPhong(maPhong);
+            itemInsert.setCheckIn(ngayDat.getText().toString().trim());
+            itemInsert.setGioVao(gioDat.getText().toString().trim());
+            itemInsert.setMaKh(maKh.getText().toString().trim());
+            itemInsert.setMaNhanVien(maNV);
+            itemInsert.setSoGioDat(timeString);
+            itemInsert.setGioRa(itemInsert.checkTimeOut());
+            itemInsert.setNgayRa(itemInsert.checkDayOut());
+            itemInsert.setGiaTien(giaThue.getText().toString().trim());
+            itemInsert.setMaChiTietDV(id_phieuDatPhong);
+            itemInsert.setTongTien(String.valueOf(tinhTongTien(thoiGianDat.getText().toString().trim(), giaThue.getText().toString().trim())));
+            mDatPhongDao.inserDatPhong(itemInsert);
+            //
+            phongObj itemPhong = mPhongDao.getByMaPhong(items_nhan.getMaPhong());
+            itemPhong.setTrangThai("đang dùng");
+            mPhongDao.updatePhong(itemPhong);
+            //
+            finish();
+            Toast.makeText(this, "Tạo phiếu đặt phòng thành công", Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e){
+            Toast.makeText(this, "Định dạng giờ hoặc ngày tháng bị sai", Toast.LENGTH_LONG).show();
+        }
+
+    }
+    private double tinhTongTien (String thoigiandat, String gia){
+        double tongTien = Double.parseDouble(thoigiandat) * Double.parseDouble(gia);
+        return tongTien;
+    }
+    private void taoPhieuTheoNgay(String soNgay){
+        datPhongObj itemInsert = new datPhongObj();
+        LocalDateTime dateTime = tinhNgayRa(thoiGianDat.getText().toString().trim());
+        d("ca" + "chung", "taoPhieuTheoNgay: "+dateTime);
+        itemInsert.setMaDatPhong(id_phieuDatPhong);
+        itemInsert.setMaPhong(maPhong);
+        itemInsert.setCheckIn(ngayDat.getText().toString().trim());
+        itemInsert.setGioVao(gioDat.getText().toString().trim());
+        itemInsert.setMaKh(maKh.getText().toString().trim());
+        itemInsert.setMaNhanVien(maNV);
+        DateTimeFormatter formatYear = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String YDM = dateTime.format(formatYear);
+        String HMS = dateTime.format(formatTime);
+        itemInsert.setSoGioDat(soNgay +" " +hinhThucDat.getText().toString().trim());
+        itemInsert.setGioRa(HMS);
+        itemInsert.setNgayRa(YDM);
+        itemInsert.setGiaTien(giaThue.getText().toString().trim());
+        itemInsert.setMaChiTietDV(id_phieuDatPhong);
+        itemInsert.setTongTien(String.valueOf(tinhTongTien(thoiGianDat.getText().toString().trim(), giaThue.getText().toString().trim())));
+        itemInsert.setTongTien(String.valueOf(tinhTongTien(thoiGianDat.getText().toString().trim(), giaThue.getText().toString().trim())));
+        mDatPhongDao.inserDatPhong(itemInsert);
+        phongObj itemPhong = mPhongDao.getByMaPhong(items_nhan.getMaPhong());
+        itemPhong.setTrangThai("đang dùng");
+        mPhongDao.updatePhong(itemPhong);
+        finish();
+        Toast.makeText(this, "Tạo phiếu đặt phòng thành công", Toast.LENGTH_SHORT).show();
     }
     private String getTime (){
         Calendar calendar = Calendar.getInstance();
@@ -320,5 +373,38 @@ public class taoPhieuDatPhong extends AppCompatActivity {
         int minute = calendar.get(Calendar.MINUTE);
         int second = calendar.get(Calendar.SECOND);
         return dateString+hour+minute+second;
+    }
+    private LocalDateTime tinhNgayRa(String soNgayDat){
+       int chuyendoi [] =  chuyenDoiNgay(Double.parseDouble(soNgayDat));
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime result = now.plusDays(chuyendoi[0]).plusHours(chuyendoi[1]);
+        return  result;
+    }
+    private int [] chuyenDoiNgay (double soChuyen){
+        double daysToAdd = soChuyen;
+        int wholeDays = (int) daysToAdd;
+        int hoursToAdd = (int) ((daysToAdd - wholeDays) * 24);
+        int [] result =   {wholeDays, hoursToAdd};
+        return  result;
+    }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle("Hình thức thuê");
+        getMenuInflater().inflate(R.menu.menu_ngay_gio, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_gio:
+                hinhThucDat.setText("Giờ");
+                return true;
+            case R.id.menu_ngay:
+                hinhThucDat.setText("Ngày");
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 }

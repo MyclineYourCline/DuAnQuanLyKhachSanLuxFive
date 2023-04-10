@@ -31,8 +31,6 @@ public class dichVuDao {
             dichVuObj dichVuObj = new dichVuObj();
             dichVuObj.setMaDichVu(cursor.getString(cursor.getColumnIndex("maDichVu")));
             dichVuObj.setTenDichVu(cursor.getString(cursor.getColumnIndex("tenDichVu")));
-            dichVuObj.setGiaDichVu(cursor.getString(cursor.getColumnIndex("giaDichVu")));
-            dichVuObj.setSoLuong(cursor.getString(cursor.getColumnIndex("soLuong")));
             mList.add(dichVuObj);
         }
         return mList;
@@ -45,16 +43,12 @@ public class dichVuDao {
         ContentValues values = new ContentValues();
         values.put("maDichVu",items.getMaDichVu());
         values.put("tenDichVu",items.getTenDichVu());
-        values.put("giaDichVu",items.getGiaDichVu());
-        values.put("soLuong",items.getSoLuong());
         return db.insert("dichVuThem",null,values);
     }
     public int updateDichVuThem (dichVuObj items){
         ContentValues values = new ContentValues();
         values.put("maDichVu",items.getMaDichVu());
         values.put("tenDichVu",items.getTenDichVu());
-        values.put("giaDichVu",items.getGiaDichVu());
-        values.put("soLuong",items.getSoLuong());
         return db.update("dichVuThem",values,"maDichVu = ?"
                 , new String[]{items.getMaDichVu()});
     }

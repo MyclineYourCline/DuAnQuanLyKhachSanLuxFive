@@ -108,23 +108,40 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        app:startIconDrawable="@drawable/baseline_edit_note_24"
-        android:layout_width="match_parent"
-        android:hint="Thời gian đặt"
-        android:layout_height="wrap_content"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/activity_tao_phieu_dat_phong_thoiGianDat"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/black"
-            android:inputType="numberDecimal"
-            android:textSize="20dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_marginTop="10dp"
+       android:layout_marginRight="5dp"
+       android:layout_marginLeft="5dp"
+       android:layout_height="wrap_content">
+       <com.google.android.material.textfield.TextInputLayout
+           app:startIconDrawable="@drawable/baseline_edit_note_24"
+           android:layout_width="match_parent"
+           android:layout_toStartOf="@+id/activity_tao_phieu_dat_phong_gio"
+           android:hint="Thời gian đặt"
+           android:layout_centerVertical="true"
+           android:layout_height="wrap_content"
+           >
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/activity_tao_phieu_dat_phong_thoiGianDat"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textColor="@color/black"
+               android:inputType="numberDecimal"
+               android:textSize="20dp"/>
+       </com.google.android.material.textfield.TextInputLayout>
+       <TextView
+           android:id="@+id/activity_tao_phieu_dat_phong_gio"
+           android:layout_width="wrap_content"
+           android:text="Ngày"
+           android:textSize="20dp"
+           android:layout_marginStart="10dp"
+           android:layout_centerVertical="true"
+           android:textColor="@color/black"
+           android:textStyle="bold"
+           android:layout_alignParentEnd="true"
+           android:layout_height="wrap_content"/>
+   </RelativeLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"

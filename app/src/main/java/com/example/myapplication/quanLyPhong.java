@@ -7,13 +7,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.icu.text.DecimalFormat;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.myapplication.AdapterManager.phongAdapter;
+import com.example.myapplication.DbManager.chiTietDichVuDao;
 import com.example.myapplication.DbManager.datPhongDao;
+import com.example.myapplication.DbManager.hoaDonDao;
 import com.example.myapplication.DbManager.khachHangDao;
 import com.example.myapplication.DbManager.loaiPhongDao;
 import com.example.myapplication.DbManager.phongDao;
@@ -29,6 +33,8 @@ import com.example.myapplication.ObjectManager.phongObj;
 import com.example.myapplication.ObjectManager.tangObj;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +46,10 @@ public class quanLyPhong extends AppCompatActivity {
     private phongDao mPhongDao;
 
     private loaiPhongDao mLoaiPhong;
+    private  datPhongObj mDatPhongObj;
+    private datPhongDao mDatPhongDao;
+    private hoaDonDao mHoaDonDao;
+    private hoaDonObj mHoaDonObj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +57,8 @@ public class quanLyPhong extends AppCompatActivity {
         setContentView(R.layout.activity_quan_ly_phong);
         getSupportActionBar().setTitle("Quản lý phòng");
 
+        mDatPhongDao = new datPhongDao(quanLyPhong.this);
+        mHoaDonDao = new hoaDonDao(quanLyPhong.this);
         mRecyclerView = findViewById(R.id.activity_quan_ly_phong_recycleView);
         mPhongDao = new phongDao(quanLyPhong.this);
 
@@ -57,9 +69,12 @@ public class quanLyPhong extends AppCompatActivity {
                 clickItemPhong(items);
             }
         });
+            capNhapDuLieu();
+
+    }
+    private void capNhapDuLieu(){
         mAdapter.setmList(getListPhong());
         mRecyclerView.setAdapter(mAdapter);
-
     }
 
     private List<phongObj> getListPhong() {
@@ -82,6 +97,11 @@ public class quanLyPhong extends AppCompatActivity {
             btn_TaoPhieu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent intent = new Intent(quanLyPhong.this, taoPhieuDatPhong.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("itemSend", phongObj);
+                    intent.putExtra("intentSend",bundle);
+                    startActivity(intent);
                     dialog.cancel();
                 }
             });
@@ -120,13 +140,14 @@ public class quanLyPhong extends AppCompatActivity {
             thanhToan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    pTthanhToan(phongObj);
                     dialog.cancel();
                 }
             });
             chiTiet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    pTchiTiet(phongObj.getMaPhong());
                 }
             });
             //
@@ -136,7 +157,38 @@ public class quanLyPhong extends AppCompatActivity {
         }
 
     }
+    private void pTthanhToan(phongObj items) {
+        mDatPhongObj = mDatPhongDao.getByMaPhong(items.getMaPhong());
+        chiTietDichVuDao mChiTietDichVuDao = new chiTietDichVuDao(quanLyPhong.this);
+        double tienDv = mChiTietDichVuDao.tongTienDv(mDatPhongObj.getMaDatPhong());
+        mHoaDonObj = new hoaDonObj();
+        mHoaDonObj.setNgayThang(getDate());
+        mHoaDonObj.setMaDatPhong(mDatPhongObj.getMaDatPhong());
+        mHoaDonObj.setTongTien(String.valueOf(tienDv + Double.parseDouble(mDatPhongObj.getTongTien())));
+        mHoaDonObj.setMaChiTietDV(mDatPhongObj.getMaChiTietDV());
+        mHoaDonDao.inserHoaDonThanhToan(mHoaDonObj);
+        //
+        mDatPhongDao.updateDatPhong(mDatPhongObj);
+        items.setTrangThai("phòng trống");
+        mPhongDao.updatePhong(items);
+        Toast.makeText(this, "Thanh toán thành công", Toast.LENGTH_LONG).show();
+        capNhapDuLieu();
+    }
+    private void pTchiTiet(String maPhong) {
+        mDatPhongObj = mDatPhongDao.getByMaPhong(maPhong);
+        Intent intent = new Intent(quanLyPhong.this,chiTietHoaDon.class);
+        intent.putExtra("maDatPhong",mDatPhongObj.getMaDatPhong());
+        startActivity(intent);
+    }
+    private  String getDate(){
+        LocalDate currentDate = LocalDate.now();
+        return currentDate.toString();
+    }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        capNhapDuLieu();
+    }
 }
 

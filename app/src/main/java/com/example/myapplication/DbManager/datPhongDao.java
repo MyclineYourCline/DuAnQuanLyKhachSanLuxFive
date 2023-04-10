@@ -45,6 +45,7 @@ public class datPhongDao {
             items.setNgayRa(mCursor.getString(mCursor.getColumnIndex("checkOut")));
             items.setSoGioDat(mCursor.getString(mCursor.getColumnIndex("soGioThue")));
             items.setMaChiTietDV(mCursor.getString(mCursor.getColumnIndex("maChiTietDV")));
+            items.setTongTien(mCursor.getString(mCursor.getColumnIndex("tongTien")));
             mList.add(items);
         }
         return mList;
@@ -63,6 +64,7 @@ public class datPhongDao {
         values.put("soGioThue",items.getSoGioDat());
         values.put("maChiTietDV",items.getMaChiTietDV());
         values.put("trangThai", "1");
+        values.put("tongTien", items.getTongTien());
         return db.insert("datPhong",null,values);
     }
     public int updateDatPhong(datPhongObj items){
@@ -78,6 +80,7 @@ public class datPhongDao {
         values.put("gioRa",items.getGioRa());
         values.put("maChiTietDV",items.getMaChiTietDV());
         values.put("soGioThue",items.getSoGioDat());
+        values.put("tongTien", items.getTongTien());
         values.put("trangThai", "2");
         return db.update("datPhong",values,"maDatPhong = ?"
                 , new String[]{items.getMaDatPhong()});

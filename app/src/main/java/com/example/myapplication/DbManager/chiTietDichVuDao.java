@@ -34,6 +34,7 @@ public class chiTietDichVuDao {
             itemsResult.setMaDatPhong(mCursor.getString(mCursor.getColumnIndex("maDatPhong")));
             itemsResult.setSoLuong(mCursor.getString(mCursor.getColumnIndex("soLuong")));
             itemsResult.setGiaTien(mCursor.getString(mCursor.getColumnIndex("giaTien")));
+            itemsResult.setTongTien(mCursor.getString(mCursor.getColumnIndex("tongTien")));
             mList.add(itemsResult);
         }
         return mList;
@@ -51,6 +52,7 @@ public class chiTietDichVuDao {
         values.put("maDatPhong", items.getMaDatPhong());
         values.put("giaTien", items.getGiaTien());
         values.put("soLuong", items.getSoLuong());
+        values.put("tongTien", items.tinhTongTien());
         return db.insert("chiTietDichVu", null, values);
     }
 
@@ -61,6 +63,7 @@ public class chiTietDichVuDao {
         values.put("maDatPhong", items.getMaDatPhong());
         values.put("giaTien", items.getGiaTien());
         values.put("soLuong", items.getSoLuong());
+        values.put("tongTien", items.getTongTien());
         return db.update("chiTietDichVu", values, "maChiTietDV = ?"
                 , new String[]{items.getMaChiTietDV()});
     }
@@ -102,8 +105,8 @@ public class chiTietDichVuDao {
     }
 
     @SuppressLint("Range")
-    public double tongTienDv(String maDatPhong) {
-        double tongTien = 0;
+    public float tongTienDv(String maDatPhong) {
+        float tongTien = 0;
         List<chiTietDichVuOBJ> list = getByMaDP(maDatPhong);
         for (chiTietDichVuOBJ x : list) {
             tongTien += x.tongTien();

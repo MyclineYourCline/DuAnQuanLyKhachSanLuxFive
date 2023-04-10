@@ -264,7 +264,7 @@ public class quanLyTang_phong extends AppCompatActivity {
         mHoaDonObj = new hoaDonObj();
         mHoaDonObj.setNgayThang(getDate());
         mHoaDonObj.setMaDatPhong(mDatPhongObj.getMaDatPhong());
-        mHoaDonObj.setTongTien(String.valueOf(tienDv + tinhTongTienDP()));
+        mHoaDonObj.setTongTien(String.valueOf(tienDv +Double.parseDouble(mDatPhongObj.getTongTien())));
         mHoaDonObj.setMaChiTietDV(mDatPhongObj.getMaChiTietDV());
         mHoaDonDao.inserHoaDonThanhToan(mHoaDonObj);
         //
@@ -274,16 +274,6 @@ public class quanLyTang_phong extends AppCompatActivity {
         Toast.makeText(this, "Thanh toán thành công", Toast.LENGTH_LONG).show();
         capNhapDuLieu();
     }
-    private double tinhTongTienDP(){
-        String timeString = mDatPhongObj.getSoGioDat();
-        LocalTime time = LocalTime.parse(timeString);
-        double hour = time.getHour() + (time.getMinute() / 60.0) + (time.getSecond() / 3600.0);
-        double tongTienDP = Double.parseDouble(mDatPhongObj.getGiaTien())* hour;
-        DecimalFormat decimalFormat = new DecimalFormat("#.0");
-        String formattedNumber = decimalFormat.format(tongTienDP);
-        return Double.parseDouble(formattedNumber);
-    }
-
     private void taoPhieuThuePhong(phongObj phongObj){
       Intent intent = new Intent(quanLyTang_phong.this, taoPhieuDatPhong.class);
       Bundle bundle = new Bundle();

@@ -10,13 +10,28 @@ public class chiTietDichVuOBJ {
     private String maDatPhong;
     private String soLuong;
     private String giaTien;
+    private String tongTien;
 
-    public chiTietDichVuOBJ(String maChiTietDV, String maDichVu, String maDatPhong, String soLuong, String giaTien) {
+    public chiTietDichVuOBJ(String maChiTietDV, String maDichVu, String maDatPhong, String soLuong, String giaTien, String tongTien) {
         this.maChiTietDV = maChiTietDV;
         this.maDichVu = maDichVu;
         this.maDatPhong = maDatPhong;
         this.soLuong = soLuong;
         this.giaTien = giaTien;
+        this.tongTien = tongTien;
+
+    }
+
+    public String getTongTien() {
+        return tongTien;
+    }
+    public double tinhTongTien (){
+       double tongTien = Double.parseDouble(soLuong) * Double.parseDouble(giaTien);
+       return tongTien;
+    }
+
+    public void setTongTien(String tongTien) {
+        this.tongTien = tongTien;
     }
 
     public chiTietDichVuOBJ() {

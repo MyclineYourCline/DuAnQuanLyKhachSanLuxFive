@@ -51,8 +51,7 @@ public class itemRcy_dichVu_chiTietPhieuDat extends RecyclerView.Adapter<itemRcy
         dichVuObj mDichVuObj = mDichVuDao.getByMaDV(items.getMaDichVu());
         holder.tenDV.setText(mDichVuObj.getTenDichVu());
         holder.soLuong.setText(items.getSoLuong());
-        double totolMony = Double.parseDouble(items.getSoLuong()) * Double.parseDouble(items.getGiaTien());
-        holder.giaDV.setText(totolMony+"");
+        holder.giaDV.setText(items.getGiaTien());
     }
 
     @Override
