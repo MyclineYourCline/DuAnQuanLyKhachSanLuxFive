@@ -148,7 +148,7 @@ public class taoPhieuDatPhong extends AppCompatActivity {
                 }
                 if (maNhanVien.getText().toString().trim().equals(maNV)){
                     if (hinhThucDat.getText().toString().toLowerCase().equals("giờ")){
-                        if (Integer.parseInt(thoiGianDat.getText().toString().trim()) < 24){
+                        if (Double.parseDouble(thoiGianDat.getText().toString().trim()) < 24){
                             taoPhieuTheoGio();
                         }
                     }
@@ -324,7 +324,6 @@ public class taoPhieuDatPhong extends AppCompatActivity {
     private void taoPhieuTheoNgay(String soNgay){
         datPhongObj itemInsert = new datPhongObj();
         LocalDateTime dateTime = tinhNgayRa(thoiGianDat.getText().toString().trim());
-        d("ca" + "chung", "taoPhieuTheoNgay: "+dateTime);
         itemInsert.setMaDatPhong(id_phieuDatPhong);
         itemInsert.setMaPhong(maPhong);
         itemInsert.setCheckIn(ngayDat.getText().toString().trim());
@@ -338,9 +337,10 @@ public class taoPhieuDatPhong extends AppCompatActivity {
         itemInsert.setSoGioDat(soNgay +" " +hinhThucDat.getText().toString().trim());
         itemInsert.setGioRa(HMS);
         itemInsert.setNgayRa(YDM);
+        itemInsert.setYDMint(ngayDat.getText().toString().trim()+" "+gioDat.getText().toString().trim());
+        itemInsert.setYDMout(YDM+" "+HMS);
         itemInsert.setGiaTien(giaThue.getText().toString().trim());
         itemInsert.setMaChiTietDV(id_phieuDatPhong);
-        itemInsert.setTongTien(String.valueOf(tinhTongTien(thoiGianDat.getText().toString().trim(), giaThue.getText().toString().trim())));
         itemInsert.setTongTien(String.valueOf(tinhTongTien(thoiGianDat.getText().toString().trim(), giaThue.getText().toString().trim())));
         mDatPhongDao.inserDatPhong(itemInsert);
         phongObj itemPhong = mPhongDao.getByMaPhong(items_nhan.getMaPhong());

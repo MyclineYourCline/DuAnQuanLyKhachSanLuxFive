@@ -269,7 +269,7 @@ public class quanLyTang_phong extends AppCompatActivity {
         mHoaDonDao.inserHoaDonThanhToan(mHoaDonObj);
         //
         mDatPhongDao.updateDatPhong(mDatPhongObj);
-        items.setTrangThai("phòng trống");
+        items.setTrangThai("Phòng trống");
         mPhongDao.updatePhong(items);
         Toast.makeText(this, "Thanh toán thành công", Toast.LENGTH_LONG).show();
         capNhapDuLieu();

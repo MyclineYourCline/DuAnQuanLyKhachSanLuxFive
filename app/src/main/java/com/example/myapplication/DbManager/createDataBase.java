@@ -90,6 +90,8 @@ public class createDataBase extends SQLiteOpenHelper {
             ",maChiTietDV TEXT" +
             ",trangThai TEXT"+
             ", tongTien TEXT"+
+            ", YDMIN TEXT"+
+            ", YDMout TEXT"+
             ",FOREIGN KEY (maChiTietDV) REFERENCES chiTietDichVu(maChiTietDV)"+
             ", FOREIGN KEY (maKh) REFERENCES khachHang(maKh)" +
             " ,FOREIGN KEY (maNhanVien) REFERENCES nhanVien(maNhanVien)" +

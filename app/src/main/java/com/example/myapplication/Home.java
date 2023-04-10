@@ -106,7 +106,7 @@ public class Home extends AppCompatActivity {
                         startActivity(mIntent);
                         break;
                     case "Phiếu đặt":
-                        mIntent = new Intent(Home.this, quanLyPhong.class);
+                        mIntent = new Intent(Home.this, manHinhPhieuDat.class);
                         startActivity(mIntent);
                         break;
                 }

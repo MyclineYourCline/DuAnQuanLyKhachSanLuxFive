@@ -21,7 +21,7 @@ public class datPhongObj {
     //gioRa
     private String maDatPhong, maKh,maNhanVien, maPhong,checkIn,
             gioVao,ghiChu,soGioDat, giaTien,gioRa,ngayRa
-            ,maChiTietDV, tongTien;
+            ,maChiTietDV, tongTien,YDMint, YDMout;
 
     public String checkTimeOut(){
         String timeIn = gioVao;
@@ -69,6 +69,22 @@ public class datPhongObj {
 
     public String getTongTien() {
         return tongTien;
+    }
+
+    public String getYDMint() {
+        return YDMint;
+    }
+
+    public void setYDMint(String YDMint) {
+        this.YDMint = YDMint;
+    }
+
+    public String getYDMout() {
+        return YDMout;
+    }
+
+    public void setYDMout(String YDMout) {
+        this.YDMout = YDMout;
     }
 
     public void setTongTien(String tongTien) {
