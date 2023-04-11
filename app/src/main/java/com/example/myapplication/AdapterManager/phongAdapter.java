@@ -32,6 +32,7 @@ import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -144,12 +145,30 @@ public class phongAdapter extends RecyclerView.Adapter<phongAdapter.phongViewHol
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                return null;
+                    String stringSearch = constraint.toString();
+                    if (stringSearch.isEmpty()){
+                        mList = mListOld;
+                    }
+                    else {
+                        List<phongObj> list = new ArrayList<>();
+                        for (phongObj x: mList){
+                            loaiPhongObj loaiPhong = loaiPhongDao.getByMaLoaiPhong(x.getMaLoai());
+                            if (x.getTenPhong().toLowerCase().contains(stringSearch.toLowerCase()) ||
+                                    loaiPhong.getTenLoaiPhong().toLowerCase().contains(stringSearch.toLowerCase())){
+                                list.add(x);
+                            }
+                        }
+                        mList = list;
+                    }
+                FilterResults results = new FilterResults();
+                results.values = mList;
+                return results;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-
+                mList= (List<phongObj>) results.values;
+                notifyDataSetChanged();
             }
         };
     }

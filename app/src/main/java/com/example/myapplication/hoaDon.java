@@ -3,12 +3,14 @@ package com.example.myapplication;
 import static android.util.Log.d;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -90,7 +92,7 @@ public class hoaDon extends AppCompatActivity {
         Dialog dialog = new Dialog(hoaDon.this);
         dialog.setContentView(R.layout.dialog_chitiet_hoa_don);
         dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        TextView nguoiTao, phongThue, ngayDat, ngayTra, nguoiDat, tongTien, giaThue;
+        TextView nguoiTao, phongThue, ngayDat, ngayTra, nguoiDat, tongTien, giaThue,gioTra, gioDat;
         ImageView dialog_cancel;
         RecyclerView mRecyclerView ;
         nguoiDat = dialog.findViewById(R.id.update_hoadon_tv_tenKhachHang);
@@ -101,8 +103,12 @@ public class hoaDon extends AppCompatActivity {
         mRecyclerView = dialog.findViewById(R.id.dialog_chitiet_hoaDon_recyclle_dichVu);
         tongTien = dialog.findViewById(R.id.dialog_chitiet_hoaDon_tvTongtien);
         giaThue = dialog.findViewById(R.id.dialog_chitiet_hoadon_tv_gia);
+        gioTra = dialog.findViewById(R.id.dialog_chitiet_hoadon_tv_gioTra);
+        gioDat = dialog.findViewById(R.id.dialog_chitiet_hoadon_tv_gioDat);
         dialog_cancel = dialog.findViewById(R.id.dialog_chitiet_hoaDon_OutDialog);
         //
+        gioTra.setText(mDatPhongObj.getGioRa());
+        gioDat.setText(mDatPhongObj.getGioVao());
         nguoiDat.setText(mKhachHangObj.getTenKh());
         nguoiTao.setText(mNhanVien.getTenNhanVien());
         phongThue.setText(mPhongObj.getTenPhong());
@@ -123,5 +129,26 @@ public class hoaDon extends AppCompatActivity {
     private List<chiTietDichVuOBJ> getListCTHV(String mahd){
         chiTietDichVuDao chiTietDichVuDao = new chiTietDichVuDao(hoaDon.this);
         return chiTietDichVuDao.getLisByMaDP(mahd);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        MenuItem menuItem = menu.findItem(R.id.menu_search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Ngày tháng,tên phòng,CMT...");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                hoadon_adapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                hoadon_adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 }

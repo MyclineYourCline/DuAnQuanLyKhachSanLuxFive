@@ -21,12 +21,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.DbManager.chiTietDichVuDao;
 import com.example.myapplication.DbManager.datPhongDao;
+import com.example.myapplication.DbManager.khachHangDao;
 import com.example.myapplication.DbManager.phongDao;
 import com.example.myapplication.InterfaceManager.sendHoaDon;
 import com.example.myapplication.ObjectManager.chiTietDichVuOBJ;
 import com.example.myapplication.ObjectManager.datPhongObj;
 import com.example.myapplication.ObjectManager.dichVuObj;
 import com.example.myapplication.ObjectManager.hoaDonObj;
+import com.example.myapplication.ObjectManager.khachHangObj;
 import com.example.myapplication.ObjectManager.phongObj;
 import com.example.myapplication.R;
 
@@ -45,6 +47,8 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
     private phongObj mPhongObj;
     private chiTietDichVuDao mChiTietDichVuDao;
     private chiTietDichVuOBJ mChiTietDichVuOBJ;
+    private khachHangDao mKhachHangDao;
+    private khachHangObj mKhachHangObj;
 
     public hoaDonAdapter(Context mContext, sendHoaDon mListenr) {
         this.mContext = mContext;
@@ -52,6 +56,7 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
         mDatPhongDao = new datPhongDao(mContext);
         mChiTietDichVuDao = new chiTietDichVuDao(mContext);
         mPhongDao = new phongDao(mContext);
+        mKhachHangDao = new khachHangDao(mContext);
     }
 
     public void setmList(List<hoaDonObj> mList) {
@@ -93,7 +98,6 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
 
     }
 
-
     @Override
     public int getItemCount() {
         if (mList != null) {
@@ -123,12 +127,34 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                return null;
+                String search = constraint.toString();
+                if (search.isEmpty()){
+                    mList = mListOld;
+                }
+                else{
+                    List<hoaDonObj> list = new ArrayList<>();
+
+                    for (hoaDonObj x: mListOld){
+                        mDatPhongObj = mDatPhongDao.getBymaDatPhong(x.getMaDatPhong());
+                        mPhongObj = mPhongDao.getByMaPhong(mDatPhongObj.getMaPhong());
+                        mKhachHangObj = mKhachHangDao.getByMaKh(mDatPhongObj.getMaKh());
+                        if (mPhongObj.getTenPhong().toLowerCase().contains(search.toLowerCase())||
+                        x.getNgayThang().toLowerCase().contains(search.toLowerCase())
+                        || mKhachHangObj.getSoCMT().toLowerCase().contains(search.toLowerCase())){
+                            list.add(x);
+                        }
+                    }
+                    mList = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mList;
+                return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-
+                mList= (List<hoaDonObj>) results.values;
+                notifyDataSetChanged();
             }
         };
     }

@@ -34,6 +34,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -94,22 +95,6 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
 
         holder.img_xoa_nhanvien.setVisibility(View.GONE);
 
-
-//        holder
-//                .itemView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Intent intent = new Intent(mContext , updateNhanVien.class);
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("maNhanVien" , items.getMaNhanVien());
-//                        intent.putExtra("toUpdate" , bundle);
-//                        mContext.startActivity(intent);
-//
-//
-////
-////
-//                    }});
-
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -165,12 +150,29 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                return null;
+                String search = constraint.toString();
+                if (search.isEmpty()){
+                    mList = mListOld;
+                }
+                else{
+                    List<nhanVienObj> list = new ArrayList<>();
+                    for (nhanVienObj x: mListOld){
+                        if (x.getMaNhanVien().toLowerCase().contains(search.toLowerCase())||
+                        x.getSoDienThoai().toLowerCase().contains(search.toLowerCase())){
+                            list.add(x);
+                        }
+                    }
+                    mList = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mList;
+                return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-
+                mList = (List<nhanVienObj>) results.values;
+                notifyDataSetChanged();
             }
         };
     }

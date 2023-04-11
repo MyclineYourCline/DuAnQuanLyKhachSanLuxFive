@@ -4,14 +4,18 @@ import static android.util.Log.d;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -71,37 +75,50 @@ public class manHinhPhieuDat extends AppCompatActivity implements View.OnClickLi
     }
 
     private void clickItem(phongObj items) {
-        Dialog dialog = new Dialog(manHinhPhieuDat.this);
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
-        dialog.setContentView(R.layout.dialog_phieu_dat);
-        EditText tenPhong = dialog.findViewById(R.id.dialog_phieu_dat_tenPhong);
-        EditText trangThai = dialog.findViewById(R.id.dialog_phieu_dat_trangThai);
-        Button btn_huy = dialog.findViewById(R.id.dialog_phieu_dat_thoat);
-        Button btn_taoPhieu = dialog.findViewById(R.id.dialog_phieu_dat_taoPhieu);
-        tenPhong.setText(items.getTenPhong());
-        trangThai.setText(items.getTrangThai());
-        btn_huy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.cancel();
-            }
-        });
-        btn_taoPhieu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(manHinhPhieuDat.this, taoPhieuDatPhong.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("itemSend", items);
-                bundle.putString("ngayDat", mEditText_d1.getText().toString().trim());
-                bundle.putString("gioDat", mEditText_d3.getText().toString().trim());
-                bundle.putString("trangThaiPhieu", "3");
-                intent.putExtra("intentSend",bundle);
-                startActivity(intent);
-                dialog.cancel();
-            }
-        });
+        if (mEditText_d1.getText().toString().isEmpty() || mEditText_d3.getText().toString().isEmpty()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(manHinhPhieuDat.this);
+            builder.setTitle("Không được để trống ngày và giờ");
+            builder.setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            builder.show();
+        }
+        else {
+            Dialog dialog = new Dialog(manHinhPhieuDat.this);
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            dialog.setContentView(R.layout.dialog_phieu_dat);
+            EditText tenPhong = dialog.findViewById(R.id.dialog_phieu_dat_tenPhong);
+            EditText trangThai = dialog.findViewById(R.id.dialog_phieu_dat_trangThai);
+            Button btn_huy = dialog.findViewById(R.id.dialog_phieu_dat_thoat);
+            Button btn_taoPhieu = dialog.findViewById(R.id.dialog_phieu_dat_taoPhieu);
+            tenPhong.setText(items.getTenPhong());
+            trangThai.setText(items.getTrangThai());
+            btn_huy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.cancel();
+                }
+            });
+            btn_taoPhieu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(manHinhPhieuDat.this, taoPhieuDatPhong.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("itemSend", items);
+                    bundle.putString("ngayDat", mEditText_d1.getText().toString().trim());
+                    bundle.putString("gioDat", mEditText_d3.getText().toString().trim());
+                    bundle.putString("trangThaiPhieu", "3");
+                    intent.putExtra("intentSend", bundle);
+                    startActivity(intent);
+                    dialog.cancel();
+                }
+            });
 
-        dialog.show();
+            dialog.show();
+        }
     }
 
     private void  unNitIu(){
@@ -183,6 +200,12 @@ public class manHinhPhieuDat extends AppCompatActivity implements View.OnClickLi
     private List<phongObj> getPhongObj() {
         List<phongObj> list = mPhongDao.getAll();
         return list;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        capNhapDuLieu(getPhongObj());
     }
 
 }

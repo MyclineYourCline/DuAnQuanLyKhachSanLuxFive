@@ -15,6 +15,7 @@ import com.example.myapplication.InterfaceManager.sendDichVu;
 import com.example.myapplication.ObjectManager.dichVuObj;
 import com.example.myapplication.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class dichVuAdapter extends RecyclerView.Adapter<dichVuAdapter.dichVuViewHolder>
@@ -71,11 +72,28 @@ public class dichVuAdapter extends RecyclerView.Adapter<dichVuAdapter.dichVuView
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                return null;
+                String search = constraint.toString();
+                if (search.isEmpty()){
+                    mList = mListOld;
+                }
+                else{
+                    List<dichVuObj> list = new ArrayList<>();
+                    for (dichVuObj x: mListOld){
+                        if (x.getTenDichVu().toLowerCase().contains(search.toLowerCase())){
+                            list.add(x);
+                        }
+                    }
+                    mList = list;
+                }
+                FilterResults results = new FilterResults();
+                results.values = mList;
+                return results;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
+                mList = (List<dichVuObj>) results.values;
+                notifyDataSetChanged();
 
             }
         };

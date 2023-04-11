@@ -2,11 +2,16 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.myapplication.AdapterManager.datPhongAdapter;
 import com.example.myapplication.DbManager.datPhongDao;
@@ -35,7 +40,29 @@ public class quanLyPhieuDat extends AppCompatActivity {
         adapter = new datPhongAdapter(quanLyPhieuDat.this, new sendDatPhong() {
             @Override
             public void sendDatPhong(datPhongObj items) {
-                clickLenDon(items);
+                if (items.getTrangThai().equals("4")){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(quanLyPhieuDat.this);
+                    builder.setTitle("Bạn thật sự muốn xóa phiếu này");
+                    builder.setPositiveButton("Đồng ý ", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            mDatPhongDao.deleteDatPhong(items.getMaDatPhong());
+                            Toast.makeText(quanLyPhieuDat.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                            capNhapDuLieu();
+                        }
+                    });
+                    builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.show();
+                }
+                else {
+                    clickLenDon(items);
+                }
+
             }
         });
         capNhapDuLieu();
@@ -87,5 +114,26 @@ public class quanLyPhieuDat extends AppCompatActivity {
     private List<datPhongObj> layPhieuDat(){
         List<datPhongObj> list = mDatPhongDao.layPhieuDat("3");
         return list;
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        MenuItem menuItem =menu.findItem(R.id.menu_search);
+        androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Nhập tên hoặc ngày đặt...");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 }

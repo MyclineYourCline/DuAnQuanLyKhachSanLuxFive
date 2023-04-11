@@ -31,6 +31,7 @@ import com.example.myapplication.ObjectManager.loaiPhongObj;
 import com.example.myapplication.R;
 import com.example.myapplication.khachHang;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.khachHangViewHolder>
@@ -105,7 +106,6 @@ public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.kha
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-//        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         WindowManager.LayoutParams windowAttribute = window.getAttributes();
         windowAttribute.gravity =gravity;
@@ -132,8 +132,6 @@ public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.kha
         edtNgaySinh.setText(khachHangObj.getNgaySinh());
         edtSDT.setText(khachHangObj.getSoDienThoai());
 
-        //Xử lý nút trong Dialog
-        //Nút hủy thoát Dialog
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -141,7 +139,6 @@ public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.kha
             }
         });
 
-        //Nút Sửa thông tin
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -194,12 +191,30 @@ public class khachHangAdapter  extends RecyclerView.Adapter<khachHangAdapter.kha
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                return null;
+                String search = constraint.toString();
+                if (search.isEmpty()){
+                    mList = mListOld;
+                }
+                else{
+                    List<khachHangObj> list = new ArrayList<>();
+                    for (khachHangObj x: mListOld){
+                        if (x.getSoCMT().toLowerCase().contains(search.toLowerCase())||
+                        x.getTenKh().toLowerCase().contains(search.toLowerCase())||
+                        x.getSoDienThoai().toLowerCase().contains(search.toLowerCase())){
+                            list.add(x);
+                        }
+                    }
+                    mList = list;
+                }
+                FilterResults results = new FilterResults();
+                results.values = mList;
+                return results;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-
+                    mList = (List<khachHangObj>) results.values;
+                    notifyDataSetChanged();
             }
         };
     }
