@@ -61,6 +61,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_update_nhan_vien_Edt_sdt"
             android:hint="Sđt Nhân viên"
+            android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>

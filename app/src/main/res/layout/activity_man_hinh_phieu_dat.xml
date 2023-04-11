@@ -13,6 +13,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:hint="Từ ngày"
+            app:errorTextAppearance="@style/ErrorTextAppearance"
             android:layout_toStartOf="@+id/activity_man_hinh_phieu_dat_image1"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
@@ -33,13 +34,13 @@
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputLayout
-            android:hint="Thời gian đặt"
+            android:hint="Bắt đầu từ"
             android:layout_width="match_parent"
+            app:errorTextAppearance="@style/ErrorTextAppearance"
             android:layout_toStartOf="@+id/activity_man_hinh_phieu_dat_image3"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:editable="false"
                 android:id="@+id/activity_man_hinh_phieu_dat_txtImage3"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>

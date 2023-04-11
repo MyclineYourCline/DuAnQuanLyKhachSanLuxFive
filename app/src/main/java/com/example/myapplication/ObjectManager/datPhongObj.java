@@ -8,20 +8,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class datPhongObj {
-    //maDatPhong
-    //maKh
-    //maNhanVien
-    //maPhong
-    //
-    //ghiChu
-    //checkIn
-    //checkOut
-    //maChiTietDV
-    //gioVao
-    //gioRa
     private String maDatPhong, maKh,maNhanVien, maPhong,checkIn,
             gioVao,ghiChu,soGioDat, giaTien,gioRa,ngayRa
-            ,maChiTietDV, tongTien,YDMint, YDMout;
+            ,maChiTietDV, tongTien, trangThai;
 
     public String checkTimeOut(){
         String timeIn = gioVao;
@@ -47,6 +36,14 @@ public class datPhongObj {
         return newDateTimeString;
     }
 
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+
     public datPhongObj(String maDatPhong, String maKh, String maNhanVien,
                        String maPhong, String checkIn, String gioVao,
                        String ghiChu, String soGioDat,
@@ -69,22 +66,6 @@ public class datPhongObj {
 
     public String getTongTien() {
         return tongTien;
-    }
-
-    public String getYDMint() {
-        return YDMint;
-    }
-
-    public void setYDMint(String YDMint) {
-        this.YDMint = YDMint;
-    }
-
-    public String getYDMout() {
-        return YDMout;
-    }
-
-    public void setYDMout(String YDMout) {
-        this.YDMout = YDMout;
     }
 
     public void setTongTien(String tongTien) {

@@ -7,11 +7,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -37,8 +40,8 @@ import java.util.Calendar;
 import java.util.List;
 
 public class manHinhPhieuDat extends AppCompatActivity implements View.OnClickListener {
-    private EditText mEditText_d1, mEditText_d2,mEditText_d3;
-    private ImageView mImageView_i1, mImageView_i2,mImageView_i3;
+    private EditText mEditText_d1,mEditText_d3;
+    private ImageView mImageView_i1, mImageView_i3;
     private phongAdapter adapter;
     private phongDao mPhongDao;
     private datPhongDao mDatPhongDao;
@@ -60,12 +63,47 @@ public class manHinhPhieuDat extends AppCompatActivity implements View.OnClickLi
         adapter = new phongAdapter(manHinhPhieuDat.this, new sendPhong() {
             @Override
             public void sendPhong(phongObj items) {
-
+                    clickItem(items);
             }
         });
         capNhapDuLieu(getPhongObj());
         //
     }
+
+    private void clickItem(phongObj items) {
+        Dialog dialog = new Dialog(manHinhPhieuDat.this);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.setContentView(R.layout.dialog_phieu_dat);
+        EditText tenPhong = dialog.findViewById(R.id.dialog_phieu_dat_tenPhong);
+        EditText trangThai = dialog.findViewById(R.id.dialog_phieu_dat_trangThai);
+        Button btn_huy = dialog.findViewById(R.id.dialog_phieu_dat_thoat);
+        Button btn_taoPhieu = dialog.findViewById(R.id.dialog_phieu_dat_taoPhieu);
+        tenPhong.setText(items.getTenPhong());
+        trangThai.setText(items.getTrangThai());
+        btn_huy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+        btn_taoPhieu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(manHinhPhieuDat.this, taoPhieuDatPhong.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("itemSend", items);
+                bundle.putString("ngayDat", mEditText_d1.getText().toString().trim());
+                bundle.putString("gioDat", mEditText_d3.getText().toString().trim());
+                bundle.putString("trangThaiPhieu", "3");
+                intent.putExtra("intentSend",bundle);
+                startActivity(intent);
+                dialog.cancel();
+            }
+        });
+
+        dialog.show();
+    }
+
     private void  unNitIu(){
         mEditText_d1 = findViewById(R.id.activity_man_hinh_phieu_dat_txtImage1);
         mImageView_i1 = findViewById(R.id.activity_man_hinh_phieu_dat_image1);
@@ -104,19 +142,20 @@ public class manHinhPhieuDat extends AppCompatActivity implements View.OnClickLi
                 clickImage(mEditText_d1);
                 break;
             case R.id.btnSearch:
-                if (mEditText_d1.getText().toString().isEmpty() && mEditText_d3.getText().toString().isEmpty()){
-                    capNhapDuLieu(getPhongObj());
-                    return;
-                }
 
+                    if (mEditText_d1.getText().toString().isEmpty() && mEditText_d3.getText().toString().isEmpty()) {
+                        capNhapDuLieu(getPhongObj());
+                        return;
+                    }
+                    else{
                         List<phongObj> list = mDatPhongDao.truyVanTaoPhieuCho(mEditText_d1.getText().toString().trim(),
                                 mEditText_d3.getText().toString().trim());
+                        d("ca" + "chung2", "onClick: size"+list.size());
                         capNhapDuLieu(list);
-
-                break;
-
+                    }
+                }
         }
-    }
+
     private void clickImage(TextView mTextView){
         DatePickerDialog dialog = new DatePickerDialog(manHinhPhieuDat.this);
         dialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
@@ -141,71 +180,9 @@ public class manHinhPhieuDat extends AppCompatActivity implements View.OnClickLi
        adapter.setmList(list);
        mRecyclerView.setAdapter(adapter);
     }
-    private List<phongObj> getPhongObj(){
-        List<phongObj > list = mPhongDao.getAll();
+    private List<phongObj> getPhongObj() {
+        List<phongObj> list = mPhongDao.getAll();
         return list;
-    }
-    private LocalTime chuyenDoiSoVeGio(double hour){
-        double hours = hour;
-        int seconds = (int) (hours * 3600);
-        LocalTime time = LocalTime.ofSecondOfDay(seconds);
-        return time;
-    }
-    public String checkTimeOut(){
-        String timeIn = mEditText_d3.getText().toString();
-        String thoiGianDat = mEditText_d2.getText().toString();
-        LocalTime t1 = LocalTime.parse(timeIn, DateTimeFormatter.ofPattern("HH:mm:ss"));
-        LocalTime timeLC = chuyenDoiSoVeGio(Double.parseDouble(thoiGianDat));
-        String getHourString = timeLC.getHour()+"";
-        String getMinuteString = timeLC.getMinute()+"";
-        if (timeLC.getHour() < 10 ){
-            getHourString = "0"+timeLC.getHour();
-        }
-        if (timeLC.getMinute() < 10){
-            getMinuteString = "0"+timeLC.getMinute();
-        }
-        String Tparse  = getHourString+":"+getMinuteString+":00";
-        LocalTime t2 = LocalTime.parse(Tparse, DateTimeFormatter.ofPattern("HH:mm:ss"));
-        LocalTime sum = t1.plusHours(t2.getHour())
-                .plusMinutes(t2.getMinute())
-                .plusSeconds(t2.getSecond());
-        String formattedTime = sum.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        return formattedTime;
-    }
-    public String checkDayOut (){
-        String dateString =  mEditText_d1.getText().toString().trim()+" "+ mEditText_d3.getText().toString().trim() ;
-        String thoiGianDat = mEditText_d2.getText().toString().trim();
-        LocalTime timeLC = chuyenDoiSoVeGio(Double.parseDouble(thoiGianDat));
-        String getHourString = timeLC.getHour()+"";
-        String getMinuteString = timeLC.getMinute()+"";
-        if (timeLC.getHour() < 10 ){
-            getHourString = "0"+timeLC.getHour();
-        }
-        if (timeLC.getMinute() < 10){
-            getMinuteString = "0"+timeLC.getMinute();
-        }
-        String Tparse  = getHourString+":"+getMinuteString+":00";
-        //
-        LocalDateTime dateTime = LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        LocalTime time = LocalTime.parse(Tparse, DateTimeFormatter.ofPattern("HH:mm:ss"));
-        LocalDateTime newDateTime = dateTime.plusHours(time.getHour()).plusMinutes(time.getMinute()).plusSeconds(time.getSecond());
-        String newDateTimeString = newDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); // Định dạng chuỗi kết quả
-        return newDateTimeString;
-    }
-    private LocalDateTime tinhNgayRa(){
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String timr = mEditText_d1.getText().toString().trim()+" "+mEditText_d3.getText().toString().trim();
-        LocalDateTime localTime = LocalDateTime.parse(timr,dateTimeFormatter);
-        int chuyendoi [] =  chuyenDoiNgay(Double.parseDouble(mEditText_d2.getText().toString().trim()));
-        LocalDateTime result = localTime.plusDays(chuyendoi[0]).plusHours(chuyendoi[1]);
-        return  result;
-    }
-    private int [] chuyenDoiNgay (double soChuyen){
-        double daysToAdd = soChuyen;
-        int wholeDays = (int) daysToAdd;
-        int hoursToAdd = (int) ((daysToAdd - wholeDays) * 24);
-        int [] result =   {wholeDays, hoursToAdd};
-        return  result;
     }
 
 }

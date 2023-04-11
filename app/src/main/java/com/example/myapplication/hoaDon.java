@@ -108,7 +108,8 @@ public class hoaDon extends AppCompatActivity {
         phongThue.setText(mPhongObj.getTenPhong());
         ngayDat.setText(mDatPhongObj.getCheckIn());
         ngayTra.setText(mDatPhongObj.getNgayRa());
-        tongTien.setText(items.getTongTien()+"VND");
+        String tongTienF = String.format("%.1f",Float.parseFloat(items.getTongTien()));
+        tongTien.setText(tongTienF+"VND");
         giaThue.setText(mDatPhongObj.getSoGioDat()+"/"+mDatPhongObj.getGiaTien());
         mRecyclerView.setAdapter(chiTietDV_adapter);
         dialog_cancel.setOnClickListener(new View.OnClickListener() {

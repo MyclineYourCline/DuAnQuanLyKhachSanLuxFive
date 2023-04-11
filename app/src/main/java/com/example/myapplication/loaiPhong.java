@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -44,6 +46,7 @@ public class loaiPhong extends AppCompatActivity {
     private Bundle mBundle;
     private loaiPhongDao mLoaiPhongDao;
     private FloatingActionButton flb_AddLoaiPhong;
+    private String id_admin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,14 @@ public class loaiPhong extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.activity_quan_ly_loai_phong_recycleView);
         flb_AddLoaiPhong = findViewById(R.id.btnAddLoaiPhong);
         mLoaiPhongDao = new loaiPhongDao(loaiPhong.this);
+        SharedPreferences sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
+        id_admin = sharedPreferences.getString("maNv","");
+        if (id_admin.equals("admin1")){
+            flb_AddLoaiPhong.setVisibility(View.VISIBLE);
+        }
+        else{
+            flb_AddLoaiPhong.setVisibility(View.INVISIBLE);
+        }
 
         mAdapter = new loaiPhongAdapter(loaiPhong.this, new sendLoaiPhong() {
 
@@ -67,7 +78,6 @@ public class loaiPhong extends AppCompatActivity {
         });
        capNhatRec();
 
-        //Xử lý nút thêm loại phòng
         flb_AddLoaiPhong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +115,6 @@ public class loaiPhong extends AppCompatActivity {
         EditText tenLoai;
         tenLoai = dialog.findViewById(R.id.dialog_add_loaiPhong_tenLoai);
 
-
         //Xử lý nút trong Dialog
         btnHuy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,10 +134,7 @@ public class loaiPhong extends AppCompatActivity {
             }
             else
             {
-//                boolean checkTonTaiML = checkMaLoai(maLoai.getText().toString());
-//                if (checkTonTaiML){
                     loaiPhongObj itemInsert = new loaiPhongObj();
-//                    itemInsert.setMaLoai(maLoai.getText().toString().trim());
                     itemInsert.setTenLoaiPhong(tenLoai.getText().toString().trim());
                     mLoaiPhongDao.insertLoaiPhong(itemInsert);
                     capNhatRec();
@@ -136,9 +142,6 @@ public class loaiPhong extends AppCompatActivity {
                     Toast.makeText(loaiPhong.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
 
                 }
-//                else{
-//                    Toast.makeText(loaiPhong.this, "Mã loại đã tồn tại", Toast.LENGTH_SHORT).show();
-//                }
             }
         });
 
@@ -153,24 +156,4 @@ public class loaiPhong extends AppCompatActivity {
         List<loaiPhongObj> list = mLoaiPhongDao.getAll();
         return list;
     }
-//    public boolean checkMaLoai(String maLoai){
-//        boolean check = true;
-//        List<loaiPhongObj> loaiPhongs = mLoaiPhongDao.getAll();
-//        if (loaiPhongs == null){
-//            check = true;
-//        }
-//        else{
-//            for (loaiPhongObj items : loaiPhongs){
-//                if (items.getMaLoai().toLowerCase().equals(maLoai)){
-//                    check = false;
-//                    break;
-//                }
-//                else{
-//                    check = true;
-//                }
-//            }
-//
-//        }
-//       return check;
-//    }
 }

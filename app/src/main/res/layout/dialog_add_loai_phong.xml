@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_margin="20dp"
             android:hint="Ten Loại Phòng"
+            app:errorTextAppearance="@style/ErrorTextAppearance"
             app:startIconDrawable="@drawable/baseline_edit_note_24"
             android:layout_height="wrap_content">
 

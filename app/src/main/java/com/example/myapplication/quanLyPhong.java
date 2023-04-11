@@ -5,7 +5,9 @@ import static android.util.Log.d;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.DecimalFormat;
 import android.os.Bundle;
@@ -130,7 +132,6 @@ public class quanLyPhong extends AppCompatActivity {
 
             datPhongDao mDatPhongDao = new datPhongDao(quanLyPhong.this);
             datPhongObj mDatPhongObj = mDatPhongDao.getByMaPhong(phongObj.getMaPhong());
-            d("ca" + "chung", "clickItemPhong: "+mDatPhongObj.getMaDatPhong());
 
             khachHangDao mKhachHangDao = new khachHangDao(quanLyPhong.this);
             khachHangObj mKhachHangObj = mKhachHangDao.getByMaKh(mDatPhongObj.getMaKh());
@@ -158,21 +159,37 @@ public class quanLyPhong extends AppCompatActivity {
 
     }
     private void pTthanhToan(phongObj items) {
-        mDatPhongObj = mDatPhongDao.getByMaPhong(items.getMaPhong());
-        chiTietDichVuDao mChiTietDichVuDao = new chiTietDichVuDao(quanLyPhong.this);
-        double tienDv = mChiTietDichVuDao.tongTienDv(mDatPhongObj.getMaDatPhong());
-        mHoaDonObj = new hoaDonObj();
-        mHoaDonObj.setNgayThang(getDate());
-        mHoaDonObj.setMaDatPhong(mDatPhongObj.getMaDatPhong());
-        mHoaDonObj.setTongTien(String.valueOf(tienDv + Double.parseDouble(mDatPhongObj.getTongTien())));
-        mHoaDonObj.setMaChiTietDV(mDatPhongObj.getMaChiTietDV());
-        mHoaDonDao.inserHoaDonThanhToan(mHoaDonObj);
-        //
-        mDatPhongDao.updateDatPhong(mDatPhongObj);
-        items.setTrangThai("phòng trống");
-        mPhongDao.updatePhong(items);
-        Toast.makeText(this, "Thanh toán thành công", Toast.LENGTH_LONG).show();
-        capNhapDuLieu();
+        AlertDialog.Builder builder = new AlertDialog.Builder(quanLyPhong.this);
+        builder.setTitle("Bạn có muốn thanh toán hóa đơn này không ?");
+        builder.setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                capNhapDuLieu();
+            }
+        });
+        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mDatPhongObj = mDatPhongDao.getByMaPhong(items.getMaPhong());
+                chiTietDichVuDao mChiTietDichVuDao = new chiTietDichVuDao(quanLyPhong.this);
+                double tienDv = mChiTietDichVuDao.tongTienDv(mDatPhongObj.getMaDatPhong());
+                mHoaDonObj = new hoaDonObj();
+                mHoaDonObj.setNgayThang(getDate());
+                mHoaDonObj.setMaDatPhong(mDatPhongObj.getMaDatPhong());
+                mHoaDonObj.setTongTien(String.valueOf(tienDv + Double.parseDouble(mDatPhongObj.getTongTien())));
+                mHoaDonObj.setMaChiTietDV(mDatPhongObj.getMaChiTietDV());
+                mHoaDonDao.inserHoaDonThanhToan(mHoaDonObj);
+                //
+                mDatPhongDao.updateDatPhong(mDatPhongObj);
+                items.setTrangThai("Phòng trống");
+                mPhongDao.updatePhong(items);
+                Toast.makeText(quanLyPhong.this, "Thanh toán thành công", Toast.LENGTH_LONG).show();
+                capNhapDuLieu();
+                dialog.cancel();
+            }
+        });
+        builder.show();
     }
     private void pTchiTiet(String maPhong) {
         mDatPhongObj = mDatPhongDao.getByMaPhong(maPhong);

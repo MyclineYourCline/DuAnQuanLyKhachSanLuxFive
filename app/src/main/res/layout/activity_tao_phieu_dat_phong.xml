@@ -13,6 +13,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
             android:layout_width="0dp"
+            app:errorTextAppearance="@style/ErrorTextAppearance"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Mã khách hàng"
@@ -42,6 +43,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
         android:hint="Mã nhân viên"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
         app:startIconDrawable="@drawable/baseline_person_24"
         >
         <com.google.android.material.textfield.TextInputEditText
@@ -61,6 +63,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
         android:hint="Tên Phòng"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
         app:startIconDrawable="@drawable/baseline_room_24"
         >
         <com.google.android.material.textfield.TextInputEditText
@@ -79,6 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Ngày đặt"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
         app:startIconDrawable="@drawable/baseline_date_range_24"
         >
         <com.google.android.material.textfield.TextInputEditText
@@ -97,6 +101,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Giờ đặt"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
         app:startIconDrawable="@drawable/baseline_hourglass_empty_24"
         >
         <com.google.android.material.textfield.TextInputEditText
@@ -119,6 +124,7 @@
            android:layout_width="match_parent"
            android:layout_toStartOf="@+id/activity_tao_phieu_dat_phong_gio"
            android:hint="Thời gian đặt"
+           app:errorTextAppearance="@style/ErrorTextAppearance"
            android:layout_centerVertical="true"
            android:layout_height="wrap_content"
            >
@@ -148,7 +154,8 @@
         android:layout_marginLeft="5dp"
         app:startIconDrawable="@drawable/baseline_edit_note_24"
         android:layout_width="match_parent"
-        android:hint="Gía thuê Phòng/giờ"
+        android:hint="Gía thuê Phòng/Đơn vị"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
         android:layout_height="wrap_content"
         >
         <com.google.android.material.textfield.TextInputEditText

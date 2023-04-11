@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
@@ -45,6 +47,7 @@ public class nhanVien extends AppCompatActivity {
 
     List<nhanVienObj> listNhanVien;
     nhanVienDao dao ;
+    private String id_admin;
 
 
     @Override
@@ -53,6 +56,14 @@ public class nhanVien extends AppCompatActivity {
         setContentView(R.layout.activity_nhan_vien);
         getSupportActionBar().setTitle("Quản lý Tài Khoản Nhân Viên");
         initUi();
+        SharedPreferences sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
+        id_admin = sharedPreferences.getString("maNv","");
+        if (id_admin.equals("admin1")){
+            floating_btn_nhanvien_activity.setVisibility(View.VISIBLE);
+        }
+        else{
+            floating_btn_nhanvien_activity.setVisibility(View.INVISIBLE);
+        }
 
         loadData();
         floating_btn_nhanvien_activity.setOnClickListener(new View.OnClickListener() {
@@ -64,9 +75,6 @@ public class nhanVien extends AppCompatActivity {
                 }else {
                     return;
                 }
-
-
-
             }
         });
 
@@ -92,11 +100,9 @@ public class nhanVien extends AppCompatActivity {
 
     public boolean checkStoragePermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            // Quyền chưa được cấp, yêu cầu người dùng cấp quyền
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_REQUEST);
             return false;
         } else {
-            // Quyền đã được cấp
             return true;
         }
     }
@@ -111,8 +117,6 @@ public class nhanVien extends AppCompatActivity {
         }else {
             Toast.makeText(nhanVien.this, "chưa cấp quyền thư viện", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
     @Override

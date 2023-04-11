@@ -53,11 +53,13 @@ public class taoPhieuDatPhong extends AppCompatActivity {
     private datPhongDao mDatPhongDao;
     private phongDao mPhongDao;
     private TextView hinhThucDat;
+    private String trangThaiPhieu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tao_phieu_dat_phong);
         iNitUI();
+
         //
         dao = new khachHangDao(taoPhieuDatPhong.this);
         mDatPhongDao = new datPhongDao(taoPhieuDatPhong.this);
@@ -71,6 +73,7 @@ public class taoPhieuDatPhong extends AppCompatActivity {
         mBundle = mIntent.getBundleExtra("intentSend");
         items_nhan = (phongObj) mBundle.getSerializable("itemSend");
         maPhong = items_nhan.getMaPhong();
+        trangThaiPhieu = mBundle.getString("trangThaiPhieu");
         //
         id_phieuDatPhong = getID();
         maNhanVien.setText(maNV);
@@ -79,6 +82,18 @@ public class taoPhieuDatPhong extends AppCompatActivity {
         gioDat.setText(getTime());
 
         //
+        if (trangThaiPhieu != null){
+            String ngayDat3 = mBundle.getString("ngayDat");
+            String gioDat3 = mBundle.getString("gioDat");
+            ngayDat.setText(ngayDat3);
+            gioDat.setText(gioDat3);
+            taoPhieuDat();
+
+        }
+        else if (trangThaiPhieu == null){
+            trangThaiPhieu = "2";
+        }
+
         btn_Huy = findViewById(R.id.activity_tao_phieu_dat_phong_btnHuy);
         
         btn_Huy.setOnClickListener(new View.OnClickListener() {
@@ -166,20 +181,6 @@ public class taoPhieuDatPhong extends AppCompatActivity {
 
         }
     }
-    private String tinhTongGio (String thoiGianDat){
-        double  totalHours = Double.parseDouble(thoiGianDat);
-        int hours = (int) totalHours;
-        int minutes = (int) ((totalHours - hours) * 60);
-        String hourStrirg = hours+"";
-        String hourminutes = minutes+"";
-        if (hours< 10){
-            hourStrirg = "0"+hours;
-        }
-        if (minutes<10){
-            hourminutes = "0"+minutes;
-        }
-        return hourStrirg+":"+hourminutes+":00";
-    }
 
     private void goTochiTietDichVu() {
         Intent intent = new Intent(taoPhieuDatPhong.this, chiTietDichVu.class);
@@ -253,7 +254,6 @@ public class taoPhieuDatPhong extends AppCompatActivity {
 
         dialog.show();
     }
-
     private void iNitUI(){
          maKh = findViewById(R.id.activity_tao_phieu_dat_phong_maKhachHang);
          maNhanVien = findViewById(R.id.activity_tao_phieu_dat_phong_nhanVien);
@@ -302,12 +302,15 @@ public class taoPhieuDatPhong extends AppCompatActivity {
             itemInsert.setNgayRa(itemInsert.checkDayOut());
             itemInsert.setGiaTien(giaThue.getText().toString().trim());
             itemInsert.setMaChiTietDV(id_phieuDatPhong);
+            itemInsert.setTrangThai(trangThaiPhieu);
             itemInsert.setTongTien(String.valueOf(tinhTongTien(thoiGianDat.getText().toString().trim(), giaThue.getText().toString().trim())));
             mDatPhongDao.inserDatPhong(itemInsert);
             //
-            phongObj itemPhong = mPhongDao.getByMaPhong(items_nhan.getMaPhong());
-            itemPhong.setTrangThai("đang dùng");
-            mPhongDao.updatePhong(itemPhong);
+            if (trangThaiPhieu.equals("2")){
+                phongObj itemPhong = mPhongDao.getByMaPhong(items_nhan.getMaPhong());
+                itemPhong.setTrangThai("Đang dùng");
+                mPhongDao.updatePhong(itemPhong);
+            }
             //
             finish();
             Toast.makeText(this, "Tạo phiếu đặt phòng thành công", Toast.LENGTH_SHORT).show();
@@ -337,15 +340,16 @@ public class taoPhieuDatPhong extends AppCompatActivity {
         itemInsert.setSoGioDat(soNgay +" " +hinhThucDat.getText().toString().trim());
         itemInsert.setGioRa(HMS);
         itemInsert.setNgayRa(YDM);
-        itemInsert.setYDMint(ngayDat.getText().toString().trim()+" "+gioDat.getText().toString().trim());
-        itemInsert.setYDMout(YDM+" "+HMS);
         itemInsert.setGiaTien(giaThue.getText().toString().trim());
         itemInsert.setMaChiTietDV(id_phieuDatPhong);
+        itemInsert.setTrangThai(trangThaiPhieu);
         itemInsert.setTongTien(String.valueOf(tinhTongTien(thoiGianDat.getText().toString().trim(), giaThue.getText().toString().trim())));
         mDatPhongDao.inserDatPhong(itemInsert);
-        phongObj itemPhong = mPhongDao.getByMaPhong(items_nhan.getMaPhong());
-        itemPhong.setTrangThai("đang dùng");
-        mPhongDao.updatePhong(itemPhong);
+        if (trangThaiPhieu.equals("2")){
+            phongObj itemPhong = mPhongDao.getByMaPhong(items_nhan.getMaPhong());
+            itemPhong.setTrangThai("Đang dùng");
+            mPhongDao.updatePhong(itemPhong);
+        }
         finish();
         Toast.makeText(this, "Tạo phiếu đặt phòng thành công", Toast.LENGTH_SHORT).show();
     }

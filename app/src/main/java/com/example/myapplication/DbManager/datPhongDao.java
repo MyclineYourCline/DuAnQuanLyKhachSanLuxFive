@@ -59,10 +59,8 @@ public class datPhongDao {
         values.put("giaThue", items.getGiaTien());
         values.put("soGioThue",items.getSoGioDat());
         values.put("maChiTietDV",items.getMaChiTietDV());
-        values.put("trangThai", "1");
+        values.put("trangThai", items.getTrangThai());
         values.put("tongTien", items.getTongTien());
-        values.put("YDMin",items.getYDMint());
-        values.put("YDMout",items.getYDMout());
         return db.insert("datPhong",null,values);
     }
     public Long inserDatPhongPhieuCho(datPhongObj items){
@@ -78,10 +76,8 @@ public class datPhongDao {
         values.put("giaThue", items.getGiaTien());
         values.put("soGioThue",items.getSoGioDat());
         values.put("maChiTietDV",items.getMaChiTietDV());
-        values.put("trangThai", "3");
+        values.put("trangThai", items.getTrangThai());
         values.put("tongTien", items.getTongTien());
-        values.put("YDMin",items.getYDMint());
-        values.put("YDMout",items.getYDMout());
         return db.insert("datPhong",null,values);
     }
     public int updateDatPhong(datPhongObj items){
@@ -98,9 +94,7 @@ public class datPhongDao {
         values.put("maChiTietDV",items.getMaChiTietDV());
         values.put("soGioThue",items.getSoGioDat());
         values.put("tongTien", items.getTongTien());
-        values.put("trangThai", "2");
-        values.put("YDMin",items.getYDMint());
-        values.put("YDMout",items.getYDMout());
+        values.put("trangThai", items.getTrangThai());
         return db.update("datPhong",values,"maDatPhong = ?"
                 , new String[]{items.getMaDatPhong()});
     }
@@ -130,18 +124,13 @@ public class datPhongDao {
     @SuppressLint("Range")
     public List<phongObj> truyVanTaoPhieuCho(String ngayVao, String gioVao){
         List<phongObj> list = new ArrayList<>();
-        String sql1 = "SELECT * FROM phong where trangThai = ?";
-        List<phongObj> list1 = mPhongDao.get(sql1, new String[]{"Phòng trống"});
-        for (phongObj x: list1){
-            list.add(x);
-        }
-        String sql2 = "SELECT phong.maPhong," +
+        String sql2 = "SELECT DISTINCT phong.maPhong," +
                 "phong.tenPhong," +
                 "phong.maTang," +
                 "phong.maLoai," +
-                "phong.trangThai from phong  INNER JOIN datPhong on phong.maPhong = datPhong.maPhong \n" +
-                "WHERE checkOut <= ? or ( checkOut <= ? and gioRa <= ?)  ";
-        Cursor cursor = db.rawQuery(sql2,new String[]{ngayVao,gioVao,ngayVao});
+                "phong.trangThai from phong  LEFT JOIN datPhong ON phong.maPhong = datPhong.maPhong \n" +
+                "WHERE  checkOut < ? OR (checkOut <= ? AND gioRa <= ? OR phong.trangThai = 'Phòng trống')";
+        Cursor cursor = db.rawQuery(sql2,new String[]{ngayVao,ngayVao,gioVao});
         while (cursor.moveToNext()){
             phongObj item = new phongObj();
             item.setMaPhong(cursor.getString(cursor.getColumnIndex("maPhong")));
@@ -150,6 +139,7 @@ public class datPhongDao {
             item.setMaLoai(cursor.getString(cursor.getColumnIndex("maLoai")));
             item.setTrangThai(cursor.getString(cursor.getColumnIndex("trangThai")));
             list.add(item);
+
         }
         return list;
     }

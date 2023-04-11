@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +29,7 @@ public class quanLyTang extends AppCompatActivity {
     private Intent mIntent;
     private Bundle mBundle;
     private tangDao mTangDao;
+    private String id_admin;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +37,15 @@ public class quanLyTang extends AppCompatActivity {
         setContentView(R.layout.activity_quan_ly_tang);
         getSupportActionBar().setTitle("Quản lý tầng");
         mRecyclerView = findViewById(R.id.activity_quan_ly_tang_recycleView);
-
         btn_add = findViewById(R.id.activity_quan_ly_tang_add);
-
+        SharedPreferences sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
+        id_admin = sharedPreferences.getString("maNv","");
+        if (id_admin.equals("admin1")){
+            btn_add.setVisibility(View.VISIBLE);
+        }
+        else{
+            btn_add.setVisibility(View.INVISIBLE);
+        }
         mTangDao = new tangDao(quanLyTang.this);
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override

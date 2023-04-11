@@ -8,17 +8,11 @@ import androidx.annotation.Nullable;
 
 public class createDataBase extends SQLiteOpenHelper {
     public final static String DB_NAME = "LUX_FIVE_HOTEL";
-    public final static int DB_VERSION = 2;
+    public final static int DB_VERSION = 1;
 
     public createDataBase(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
-    //maPhong
-    //maTang
-    //tenPhong
-    //maLoai
-    //trangThai
-    //soPhong
     private final static String CREATE_TABLE_PHONG
             = "CREATE TABLE phong(" +
             "maPhong INTEGER PRIMARY KEY AUTOINCREMENT" +
@@ -28,18 +22,10 @@ public class createDataBase extends SQLiteOpenHelper {
             ", trangThai TEXT" +
             ",FOREIGN KEY (maTang) REFERENCES tang(maTang)" +
             ",FOREIGN KEY (maLoai) REFERENCES loaiPhong(maLoai) )";
-    //maLoai
-    //tenLoaiPhong
-    //giaThue
     private final static String CREATE_TABLE_LOAIPHONG
            = "CREATE TABLE loaiPhong (" +
                 "maLoai INTEGER PRIMARY KEY AUTOINCREMENT" +
                 ", tenLoaiPhong TEXT)";
-    //maNhanVien
-    //tenNhanVien
-    //anhNhanVien
-    //soDienThoai
-    //matKhau
     private final static String CREATE_TABLE_NHANVIEN
             = "CREATE TABLE nhanVien (" +
             "maNhanVien TEXT PRIMARY KEY" +
@@ -47,34 +33,17 @@ public class createDataBase extends SQLiteOpenHelper {
             ",anhNhanVien INTEGER" +
             ",soDienThoai TEXT" +
             ",matKhau TEXT)";
-    //soCMT
-    //tenKh
-    //ngaySinh
-    //soDienThoai
     private final static String CREATE_TABLE_KHACHHANG
             = "CREATE TABLE khachHang  (" +
             "soCMT TEXT PRIMARY KEY" +
             ", tenKh TEXT" +
             ", ngaySinh TEXT" +
             ", soDienThoai TEXT)";
-    //maTang
-    //tenTang
-    //soPhong
     private final static String CREATE_TABLE_QUANLYTANG
             = "CREATE TABLE tang(" +
             "maTang TEXT PRIMARY KEY" +
             ", tenTang TEXT UNIQUE" +
             ", soPhong TEXT )";
-    //maDatPhong
-    //maKh
-    //maNhanVien
-    //maPhong
-    //
-    //ghiChu
-    //checkIn
-    //checkOut
-    //gioVao
-    //gioRa
     private final static String CREATE_TABLE_DATPHONG
             = "CREATE TABLE datPhong (" +
             "maDatPhong TEXT PRIMARY KEY " +
@@ -90,27 +59,14 @@ public class createDataBase extends SQLiteOpenHelper {
             ",maChiTietDV TEXT" +
             ",trangThai TEXT"+
             ", tongTien TEXT"+
-            ", YDMIN TEXT"+
-            ", YDMout TEXT"+
             ",FOREIGN KEY (maChiTietDV) REFERENCES chiTietDichVu(maChiTietDV)"+
             ", FOREIGN KEY (maKh) REFERENCES khachHang(maKh)" +
             " ,FOREIGN KEY (maNhanVien) REFERENCES nhanVien(maNhanVien)" +
             " ,FOREIGN KEY (maPhong) REFERENCES phong(maPhong))";
-    //maDichVu
-    //tenDichVu
-    //giaDichVu
-    //
-    //soLuong
     private final static String CREATE_TABLE_DICHVUTHEM
             = "CREATE TABLE dichVuThem (" +
             "maDichVu INTEGER PRIMARY KEY AUTOINCREMENT" +
             ", tenDichVu TEXT UNIQUE)";
-    //maHoaDon
-    //maDatPhong
-    //trangThai
-    //tongTien
-    //ngayThang
-    //maChiTietDV
     private final static String CREATE_TABLE_HOADONTHANHTOAN
             = "CREATE TABLE hoaDonThanhToan(" +
             "maHoaDon INTEGER PRIMARY KEY AUTOINCREMENT" +
@@ -120,11 +76,6 @@ public class createDataBase extends SQLiteOpenHelper {
             ", maChiTietDV TEXT" +
             ", FOREIGN KEY (maDatPhong) REFERENCES datPhong(maDatPhong)" +
             ", FOREIGN KEY (maChiTietDV) REFERENCES chiTietDichVu(maChiTietDV))";
-    //maChiTietDV
-    //maDichVu
-    //maDatPhong
-    //giaTien
-    // soluong
     private final static String CREATE_TABLE_CHITIETDICHVU
             = "CREATE TABLE chiTietDichVu (" +
             " maChiTietDV INTEGER PRIMARY KEY AUTOINCREMENT" +

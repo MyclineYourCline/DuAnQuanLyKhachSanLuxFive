@@ -13,10 +13,9 @@
         android:gravity="center_vertical"
         android:layout_gravity="center_vertical"
         android:layout_height="wrap_content">
-
         <TextView
             android:id="@+id/item_list_view_chi_tiet_phieu_dat_tenDV"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_marginEnd="10dp"
@@ -33,7 +32,7 @@
             android:layout_toEndOf="@+id/item_list_view_chi_tiet_phieu_dat_tenDV"
             android:paddingStart="15dp"
             android:layout_marginEnd="50dp"
-            android:text="so luong "
+            android:text="1"
             android:textSize="20dp" />
 
         <TextView
@@ -41,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="10dp"
             android:text="tong tien "
             android:textSize="20dp" />
     </RelativeLayout>

@@ -28,6 +28,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:hint="Tên phòng"
+            app:errorTextAppearance="@style/ErrorTextAppearance"
             app:startIconDrawable="@drawable/baseline_menu_24"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText

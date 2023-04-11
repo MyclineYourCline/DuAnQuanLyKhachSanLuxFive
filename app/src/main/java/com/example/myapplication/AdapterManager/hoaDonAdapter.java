@@ -80,7 +80,8 @@ public class hoaDonAdapter extends RecyclerView.Adapter<hoaDonAdapter.hoaDonView
         // gán view cho từng phần tử
         holder.item_hoaDon_tvNamePhong.setText(mPhongObj.getTenPhong());
         holder.item_hoaDon_tvNgayThang.setText(items.getNgayThang());
-        holder.item_hoaDon_tvTongTien.setText(items.getTongTien());
+        String tongTien = String.format("%.1f",Float.parseFloat(items.getTongTien()));
+        holder.item_hoaDon_tvTongTien.setText(tongTien);
         //                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         holder.item_hoaDon_btn_chitiet.setOnClickListener(new View.OnClickListener() {
             @Override

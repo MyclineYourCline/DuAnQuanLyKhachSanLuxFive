@@ -105,10 +105,13 @@ public class Home extends AppCompatActivity {
                         mIntent = new Intent(Home.this, quanLyPhong.class);
                         startActivity(mIntent);
                         break;
-                    case "Phiếu đặt":
+                    case "Đặt phòng":
                         mIntent = new Intent(Home.this, manHinhPhieuDat.class);
                         startActivity(mIntent);
                         break;
+                    case "Phiếu đặt":
+                        mIntent = new Intent(Home.this, quanLyPhieuDat.class);
+                        startActivity(mIntent);
                 }
             }
         });
@@ -168,13 +171,16 @@ public class Home extends AppCompatActivity {
         List<manHinhChinhObj> list = new ArrayList<>();
         list.add(new manHinhChinhObj(R.drawable.tang_icon, "Quản lý Tầng"));
         list.add(new manHinhChinhObj(R.drawable.phong_icon, "Quản lý phòng"));
+        list.add(new manHinhChinhObj(R.drawable.reload, "Đặt phòng"));
+        list.add(new manHinhChinhObj(R.drawable.lich, "Phiếu đặt"));
+        list.add(new manHinhChinhObj(R.drawable.hoa_don_icon, "Hóa đơn"));
         list.add(new manHinhChinhObj(R.drawable.phong_don_icon, "Loại phòng"));
         list.add(new manHinhChinhObj(R.drawable.user, "Khách hàng"));
         list.add(new manHinhChinhObj(R.drawable.dich_vu_icon, "Dịch vụ"));
-        list.add(new manHinhChinhObj(R.drawable.hoa_don_icon, "Hóa đơn"));
+
         list.add(new manHinhChinhObj(R.drawable.quan_ly_nhanvien_icon, "Nhân viên"));
         list.add(new manHinhChinhObj(R.drawable.thongke, "Doanh thu"));
-        list.add(new manHinhChinhObj(R.drawable.reload, "Phiếu đặt"));
+
         return list;
     }
     @Override

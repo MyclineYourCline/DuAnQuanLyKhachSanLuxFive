@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.text.DecimalFormat;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -61,6 +63,7 @@ public class quanLyTang_phong extends AppCompatActivity {
     private tangObj items_nhan;
     private hoaDonDao mHoaDonDao;
     private hoaDonObj mHoaDonObj;
+    private String id_admin;
 
     private spinerTenLoaiAdapter spinerLoaiPhongAdapter;
     @SuppressLint("MissingInflatedId")
@@ -86,7 +89,16 @@ public class quanLyTang_phong extends AppCompatActivity {
         btn_add = findViewById(R.id.quan_ly_phong_tang_add);
         mLoaiPhongDao = new loaiPhongDao(quanLyTang_phong.this);
         mPhongDao = new phongDao(quanLyTang_phong.this);
-
+        //
+        SharedPreferences sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
+        id_admin = sharedPreferences.getString("maNv","");
+        if (id_admin.equals("admin1")){
+            btn_add.setVisibility(View.VISIBLE);
+        }
+        else{
+            btn_add.setVisibility(View.INVISIBLE);
+        }
+        //
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -258,21 +270,37 @@ public class quanLyTang_phong extends AppCompatActivity {
     }
 
     private void pTthanhToan(phongObj items) {
-        mDatPhongObj = mDatPhongDao.getByMaPhong(items.getMaPhong());
-        chiTietDichVuDao mChiTietDichVuDao = new chiTietDichVuDao(quanLyTang_phong.this);
-        double tienDv = mChiTietDichVuDao.tongTienDv(mDatPhongObj.getMaDatPhong());
-        mHoaDonObj = new hoaDonObj();
-        mHoaDonObj.setNgayThang(getDate());
-        mHoaDonObj.setMaDatPhong(mDatPhongObj.getMaDatPhong());
-        mHoaDonObj.setTongTien(String.valueOf(tienDv +Double.parseDouble(mDatPhongObj.getTongTien())));
-        mHoaDonObj.setMaChiTietDV(mDatPhongObj.getMaChiTietDV());
-        mHoaDonDao.inserHoaDonThanhToan(mHoaDonObj);
-        //
-        mDatPhongDao.updateDatPhong(mDatPhongObj);
-        items.setTrangThai("Phòng trống");
-        mPhongDao.updatePhong(items);
-        Toast.makeText(this, "Thanh toán thành công", Toast.LENGTH_LONG).show();
-        capNhapDuLieu();
+        AlertDialog.Builder builder = new AlertDialog.Builder(quanLyTang_phong.this);
+        builder.setTitle("Bạn có muốn thanh toán hóa đơn này không ?");
+        builder.setNegativeButton("Thoát", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                capNhapDuLieu();
+            }
+        });
+        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mDatPhongObj = mDatPhongDao.getByMaPhong(items.getMaPhong());
+                chiTietDichVuDao mChiTietDichVuDao = new chiTietDichVuDao(quanLyTang_phong.this);
+                double tienDv = mChiTietDichVuDao.tongTienDv(mDatPhongObj.getMaDatPhong());
+                mHoaDonObj = new hoaDonObj();
+                mHoaDonObj.setNgayThang(getDate());
+                mHoaDonObj.setMaDatPhong(mDatPhongObj.getMaDatPhong());
+                mHoaDonObj.setTongTien(String.valueOf(tienDv +Double.parseDouble(mDatPhongObj.getTongTien())));
+                mHoaDonObj.setMaChiTietDV(mDatPhongObj.getMaChiTietDV());
+                mHoaDonDao.inserHoaDonThanhToan(mHoaDonObj);
+                //
+                mDatPhongDao.updateDatPhong(mDatPhongObj);
+                items.setTrangThai("Phòng trống");
+                mPhongDao.updatePhong(items);
+                Toast.makeText(quanLyTang_phong.this, "Thanh toán thành công", Toast.LENGTH_LONG).show();
+                capNhapDuLieu();
+                dialog.cancel();
+            }
+        });
+        builder.show();
     }
     private void taoPhieuThuePhong(phongObj phongObj){
       Intent intent = new Intent(quanLyTang_phong.this, taoPhieuDatPhong.class);
