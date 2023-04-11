@@ -54,10 +54,8 @@ public class manHinhPhieuDat extends AppCompatActivity implements View.OnClickLi
         mDatPhongDao = new datPhongDao(manHinhPhieuDat.this);
         unNitIu();
         mEditText_d1.setOnClickListener(this);
-        mEditText_d2.setOnClickListener(this);
         mImageView_i1.setOnClickListener(this);
         mImageView_i3.setOnClickListener(this);
-        registerForContextMenu(mImageView_i2);
         btn_search.setOnClickListener(this);
         adapter = new phongAdapter(manHinhPhieuDat.this, new sendPhong() {
             @Override
@@ -70,9 +68,7 @@ public class manHinhPhieuDat extends AppCompatActivity implements View.OnClickLi
     }
     private void  unNitIu(){
         mEditText_d1 = findViewById(R.id.activity_man_hinh_phieu_dat_txtImage1);
-        mEditText_d2 = findViewById(R.id.activity_man_hinh_phieu_dat_txtImage2);
         mImageView_i1 = findViewById(R.id.activity_man_hinh_phieu_dat_image1);
-        mImageView_i2 = findViewById(R.id.activity_man_hinh_phieu_dat_image2);
         mImageView_i3 = findViewById(R.id.activity_man_hinh_phieu_dat_image3);
         mRecyclerView = findViewById(R.id.activity_man_hinh_phieu_dat_Rc);
         btn_search = findViewById(R.id.btnSearch);
@@ -107,42 +103,16 @@ public class manHinhPhieuDat extends AppCompatActivity implements View.OnClickLi
             case R.id.activity_man_hinh_phieu_dat_image1:
                 clickImage(mEditText_d1);
                 break;
-            case R.id.activity_man_hinh_phieu_dat_image2:
-                clickImage(mEditText_d2);
-                break;
             case R.id.btnSearch:
-                if (mEditText_d1.getText().toString().isEmpty() && mEditText_d2.getText().toString().isEmpty()){
+                if (mEditText_d1.getText().toString().isEmpty() && mEditText_d3.getText().toString().isEmpty()){
                     capNhapDuLieu(getPhongObj());
                     return;
                 }
-                if (hinhThucThue.toLowerCase().equals("ngày")){
-                    try {
-                        LocalDateTime localDateTime = tinhNgayRa();
-                        String ngayRa = localDateTime.getYear()+"-"+localDateTime.getMonthValue()+"-"+localDateTime.getDayOfMonth();
-                        String gioRa = localDateTime.getHour()+":"+localDateTime.getMinute()+":00";
+
                         List<phongObj> list = mDatPhongDao.truyVanTaoPhieuCho(mEditText_d1.getText().toString().trim(),
-                                mEditText_d3.getText().toString().trim()
-                                ,ngayRa, gioRa);
+                                mEditText_d3.getText().toString().trim());
                         capNhapDuLieu(list);
-                    }
-                    catch (Exception exception){
-                        Toast.makeText(this, "Sai định dạng ngày tháng", Toast.LENGTH_SHORT).show();
-                    }
 
-                }
-                else if (hinhThucThue.toLowerCase().equals("giờ")){
-                    try {
-                        List<phongObj> list =  mDatPhongDao.truyVanTaoPhieuCho(mEditText_d1.getText().toString().trim(),
-                                mEditText_d3.getText().toString().trim(),checkDayOut()
-                                ,checkTimeOut());
-                        capNhapDuLieu(list);
-                    }
-                    catch (Exception exception){
-                        Toast.makeText(this, "Sai định dạng ngày tháng", Toast.LENGTH_SHORT).show();
-                    }
-
-
-                }
                 break;
 
         }
@@ -174,26 +144,6 @@ public class manHinhPhieuDat extends AppCompatActivity implements View.OnClickLi
     private List<phongObj> getPhongObj(){
         List<phongObj > list = mPhongDao.getAll();
         return list;
-    }
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        menu.setHeaderTitle("Hình thức thuê");
-        getMenuInflater().inflate(R.menu.menu_ngay_gio, menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.menu_gio:
-                hinhThucThue= "giờ";
-                return true;
-            case R.id.menu_ngay:
-                hinhThucThue= "ngày";
-                return true;
-            default:
-                return super.onContextItemSelected(item);
-        }
     }
     private LocalTime chuyenDoiSoVeGio(double hour){
         double hours = hour;

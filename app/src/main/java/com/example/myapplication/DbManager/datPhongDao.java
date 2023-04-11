@@ -128,31 +128,29 @@ public class datPhongDao {
         return mList.get(0);
     }
     @SuppressLint("Range")
-    public List<phongObj> truyVanTaoPhieuCho(String ngayVao, String gioVao, String ngayRa, String gioRa){
+    public List<phongObj> truyVanTaoPhieuCho(String ngayVao, String gioVao){
         List<phongObj> list = new ArrayList<>();
         String sql1 = "SELECT * FROM phong where trangThai = ?";
         List<phongObj> list1 = mPhongDao.get(sql1, new String[]{"Phòng trống"});
-        d("ca" + "chung", "truyVanTaoPhieuCho "+list1.size());
         for (phongObj x: list1){
             list.add(x);
         }
-//        String sql2 = "SELECT phong.maPhong," +
-//                "phong.tenPhong," +
-//                "phong.maTang," +
-//                "phong.maLoai," +
-//                "phong.trangThai from phong  INNER JOIN datPhong on phong.maPhong = datPhong.maPhong \n" +
-//                "WHERE  datPhong.YDMIN NOT BETWEEN ? AND ?\n" +
-//                "AND datPhong.YDMOUT NOT BETWEEN ? AND ?";
-//        Cursor cursor = db.rawQuery(sql2,new String[]{ngayVao,gioVao,ngayRa,gioRa});
-//        while (cursor.moveToNext()){
-//            phongObj item = new phongObj();
-//            item.setMaPhong(cursor.getString(cursor.getColumnIndex("maPhong")));
-//            item.setTenPhong(cursor.getString(cursor.getColumnIndex("tenPhong")));
-//            item.setMaTang(cursor.getString(cursor.getColumnIndex("maTang")));
-//            item.setMaLoai(cursor.getString(cursor.getColumnIndex("maLoai")));
-//            item.setTrangThai(cursor.getString(cursor.getColumnIndex("trangThai")));
-//            list.add(item);
-//        }
+        String sql2 = "SELECT phong.maPhong," +
+                "phong.tenPhong," +
+                "phong.maTang," +
+                "phong.maLoai," +
+                "phong.trangThai from phong  INNER JOIN datPhong on phong.maPhong = datPhong.maPhong \n" +
+                "WHERE checkOut <= ? or ( checkOut <= ? and gioRa <= ?)  ";
+        Cursor cursor = db.rawQuery(sql2,new String[]{ngayVao,gioVao,ngayVao});
+        while (cursor.moveToNext()){
+            phongObj item = new phongObj();
+            item.setMaPhong(cursor.getString(cursor.getColumnIndex("maPhong")));
+            item.setTenPhong(cursor.getString(cursor.getColumnIndex("tenPhong")));
+            item.setMaTang(cursor.getString(cursor.getColumnIndex("maTang")));
+            item.setMaLoai(cursor.getString(cursor.getColumnIndex("maLoai")));
+            item.setTrangThai(cursor.getString(cursor.getColumnIndex("trangThai")));
+            list.add(item);
+        }
         return list;
     }
 }

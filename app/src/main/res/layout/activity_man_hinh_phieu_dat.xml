@@ -33,28 +33,6 @@
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputLayout
-            android:hint="Tổng thời gian thuê"
-            android:layout_width="match_parent"
-            android:layout_toStartOf="@+id/activity_man_hinh_phieu_dat_image2"
-            android:layout_height="wrap_content">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:id="@+id/activity_man_hinh_phieu_dat_txtImage2"
-                android:layout_height="wrap_content"/>
-        </com.google.android.material.textfield.TextInputLayout>
-        <ImageView
-            android:id="@+id/activity_man_hinh_phieu_dat_image2"
-            android:layout_width="40dp"
-            android:layout_alignParentEnd="true"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/baseline_hourglass_empty_24"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content">
-        <com.google.android.material.textfield.TextInputLayout
             android:hint="Thời gian đặt"
             android:layout_width="match_parent"
             android:layout_toStartOf="@+id/activity_man_hinh_phieu_dat_image3"
