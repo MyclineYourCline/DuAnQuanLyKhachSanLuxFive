@@ -82,8 +82,6 @@ public class phongAdapter extends RecyclerView.Adapter<phongAdapter.phongViewHol
             mDatPhongObj = mDatPhongDao.getByMaPhong(items.getMaPhong());
             String timeCheck = mDatPhongObj.getNgayRa()+" "+mDatPhongObj.getGioRa();
             try {
-                d("ca" + "chung", "onBindViewHolder: timcheeck"+timeCheck);
-                d("ca" + "chung", "onBindViewHolder: "+kiemTraTinhTrang(timeCheck));
                 if (kiemTraTinhTrang(timeCheck)){
                     holder.trangThai.setImageResource(R.drawable.phong_dang_dung);
                 }

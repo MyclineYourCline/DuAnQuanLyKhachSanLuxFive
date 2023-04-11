@@ -233,7 +233,7 @@ public class quanLyTang_phong extends AppCompatActivity {
             //
 
             datPhongDao mDatPhongDao = new datPhongDao(quanLyTang_phong.this);
-            datPhongObj mDatPhongObj = mDatPhongDao.getByMaPhong(phongObj.getMaPhong());
+            datPhongObj mDatPhongObj = mDatPhongDao.getByMaPhongChiTiet(phongObj.getMaPhong());
 
             khachHangDao mKhachHangDao = new khachHangDao(quanLyTang_phong.this);
             khachHangObj mKhachHangObj = mKhachHangDao.getByMaKh(mDatPhongObj.getMaKh());
@@ -292,6 +292,7 @@ public class quanLyTang_phong extends AppCompatActivity {
                 mHoaDonObj.setMaChiTietDV(mDatPhongObj.getMaChiTietDV());
                 mHoaDonDao.inserHoaDonThanhToan(mHoaDonObj);
                 //
+                mDatPhongObj.setTrangThai("2");
                 mDatPhongDao.updateDatPhong(mDatPhongObj);
                 items.setTrangThai("Phòng trống");
                 mPhongDao.updatePhong(items);

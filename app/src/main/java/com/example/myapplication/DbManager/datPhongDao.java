@@ -63,22 +63,9 @@ public class datPhongDao {
         values.put("tongTien", items.getTongTien());
         return db.insert("datPhong",null,values);
     }
-    public Long inserDatPhongPhieuCho(datPhongObj items){
-        ContentValues values = new ContentValues();
-        values.put("maDatPhong",items.getMaDatPhong());
-        values.put("maKh",items.getMaKh());
-        values.put("maNhanVien",items.getMaNhanVien());
-        values.put("maPhong",items.getMaPhong());
-        values.put("checkIn",items.getCheckIn());
-        values.put("gioVao",items.getGioVao());
-        values.put("checkOut",items.getNgayRa());
-        values.put("gioRa",items.getGioRa());
-        values.put("giaThue", items.getGiaTien());
-        values.put("soGioThue",items.getSoGioDat());
-        values.put("maChiTietDV",items.getMaChiTietDV());
-        values.put("trangThai", items.getTrangThai());
-        values.put("tongTien", items.getTongTien());
-        return db.insert("datPhong",null,values);
+    public List<datPhongObj> layPhieuDat(String trangThai){
+       String sql = "SELECT * FROM datPhong WHERE trangThai = ?";
+       return get(sql, trangThai);
     }
     public int updateDatPhong(datPhongObj items){
         ContentValues values = new ContentValues();
@@ -117,6 +104,11 @@ public class datPhongDao {
         return mList.get(0);
     }
     public datPhongObj getByMaPhong(String maPhong){
+        String sql = "SELECT * FROM datPhong WHERE maPhong = ? and trangThai = '1'";
+        List<datPhongObj> mList = get(sql,maPhong);
+        return mList.get(0);
+    }
+    public datPhongObj getByMaPhongChiTiet(String maPhong){
         String sql = "SELECT * FROM datPhong WHERE maPhong = ? and trangThai = '1'";
         List<datPhongObj> mList = get(sql,maPhong);
         return mList.get(0);

@@ -91,7 +91,7 @@ public class taoPhieuDatPhong extends AppCompatActivity {
 
         }
         else if (trangThaiPhieu == null){
-            trangThaiPhieu = "2";
+            trangThaiPhieu = "1";
         }
 
         btn_Huy = findViewById(R.id.activity_tao_phieu_dat_phong_btnHuy);
@@ -306,7 +306,7 @@ public class taoPhieuDatPhong extends AppCompatActivity {
             itemInsert.setTongTien(String.valueOf(tinhTongTien(thoiGianDat.getText().toString().trim(), giaThue.getText().toString().trim())));
             mDatPhongDao.inserDatPhong(itemInsert);
             //
-            if (trangThaiPhieu.equals("2")){
+            if (trangThaiPhieu.equals("1")){
                 phongObj itemPhong = mPhongDao.getByMaPhong(items_nhan.getMaPhong());
                 itemPhong.setTrangThai("Đang dùng");
                 mPhongDao.updatePhong(itemPhong);
@@ -345,7 +345,9 @@ public class taoPhieuDatPhong extends AppCompatActivity {
         itemInsert.setTrangThai(trangThaiPhieu);
         itemInsert.setTongTien(String.valueOf(tinhTongTien(thoiGianDat.getText().toString().trim(), giaThue.getText().toString().trim())));
         mDatPhongDao.inserDatPhong(itemInsert);
-        if (trangThaiPhieu.equals("2")){
+        if (trangThaiPhieu.equals("1")){
+
+            //
             phongObj itemPhong = mPhongDao.getByMaPhong(items_nhan.getMaPhong());
             itemPhong.setTrangThai("Đang dùng");
             mPhongDao.updatePhong(itemPhong);
@@ -380,9 +382,20 @@ public class taoPhieuDatPhong extends AppCompatActivity {
     }
     private LocalDateTime tinhNgayRa(String soNgayDat){
        int chuyendoi [] =  chuyenDoiNgay(Double.parseDouble(soNgayDat));
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime result = now.plusDays(chuyendoi[0]).plusHours(chuyendoi[1]);
-        return  result;
+        if (trangThaiPhieu.equals("3")){
+            String ngayDat3 = mBundle.getString("ngayDat");
+            String gioDat3 = mBundle.getString("gioDat");
+            String date = ngayDat3 +" "+gioDat3;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.parse(date,formatter);
+             LocalDateTime result = now.plusDays(chuyendoi[0]).plusHours(chuyendoi[1]);
+            return  result;
+        }
+        else {
+            LocalDateTime now = LocalDateTime.now();
+            LocalDateTime result = now.plusDays(chuyendoi[0]).plusHours(chuyendoi[1]);
+            return  result;
+        }
     }
     private int [] chuyenDoiNgay (double soChuyen){
         double daysToAdd = soChuyen;

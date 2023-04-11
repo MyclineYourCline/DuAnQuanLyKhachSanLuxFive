@@ -65,7 +65,6 @@ public class chiTietHoaDon extends AppCompatActivity {
     }
     private List<chiTietDichVuOBJ> listChiTietDV (){
         mChiTietDichVuDao = new chiTietDichVuDao(chiTietHoaDon.this);
-        d("ca" + "chung", "listChiTietDV: "+maDatPhong);
         return mChiTietDichVuDao.getByMaDP(maDatPhong);
     }
     private void capNhapDuLieu(){

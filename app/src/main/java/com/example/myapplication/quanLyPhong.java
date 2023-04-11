@@ -181,6 +181,7 @@ public class quanLyPhong extends AppCompatActivity {
                 mHoaDonObj.setMaChiTietDV(mDatPhongObj.getMaChiTietDV());
                 mHoaDonDao.inserHoaDonThanhToan(mHoaDonObj);
                 //
+                mDatPhongObj.setTrangThai("2");
                 mDatPhongDao.updateDatPhong(mDatPhongObj);
                 items.setTrangThai("Phòng trống");
                 mPhongDao.updatePhong(items);
@@ -192,7 +193,7 @@ public class quanLyPhong extends AppCompatActivity {
         builder.show();
     }
     private void pTchiTiet(String maPhong) {
-        mDatPhongObj = mDatPhongDao.getByMaPhong(maPhong);
+        mDatPhongObj = mDatPhongDao.getByMaPhongChiTiet(maPhong);
         Intent intent = new Intent(quanLyPhong.this,chiTietHoaDon.class);
         intent.putExtra("maDatPhong",mDatPhongObj.getMaDatPhong());
         startActivity(intent);
