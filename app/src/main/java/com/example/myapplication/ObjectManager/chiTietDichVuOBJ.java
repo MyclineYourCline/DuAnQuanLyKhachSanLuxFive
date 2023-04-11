@@ -21,13 +21,12 @@ public class chiTietDichVuOBJ {
         this.tongTien = tongTien;
 
     }
+    public double tinhTongTien(){
+        return Double.parseDouble(soLuong) * Double.parseDouble(giaTien);
+    }
 
     public String getTongTien() {
         return tongTien;
-    }
-    public double tinhTongTien (){
-       double tongTien = Double.parseDouble(soLuong) * Double.parseDouble(giaTien);
-       return tongTien;
     }
 
     public void setTongTien(String tongTien) {

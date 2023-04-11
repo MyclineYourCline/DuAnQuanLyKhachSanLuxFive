@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.DbManager.chiTietDichVuDao;
 import com.example.myapplication.DbManager.dichVuDao;
+import com.example.myapplication.InterfaceManager.sendChiTietDichVu;
 import com.example.myapplication.ObjectManager.chiTietDichVuOBJ;
 import com.example.myapplication.ObjectManager.dichVuObj;
 import com.example.myapplication.R;
@@ -23,9 +24,11 @@ public class itemRcy_dichVu_chiTietPhieuDat extends RecyclerView.Adapter<itemRcy
     private List<chiTietDichVuOBJ> mList;
     private dichVuDao mDichVuDao;
     private chiTietDichVuDao mChiTietDichVuDao;
+    private sendChiTietDichVu mListener;
 
-    public itemRcy_dichVu_chiTietPhieuDat(Context context) {
+    public itemRcy_dichVu_chiTietPhieuDat(Context context ,sendChiTietDichVu mListener) {
         this.context = context;
+        this.mListener = mListener;
         mDichVuDao = new dichVuDao(context);
         mChiTietDichVuDao = new chiTietDichVuDao(context);
     }
@@ -52,6 +55,12 @@ public class itemRcy_dichVu_chiTietPhieuDat extends RecyclerView.Adapter<itemRcy
         holder.tenDV.setText(mDichVuObj.getTenDichVu());
         holder.soLuong.setText(items.getSoLuong());
         holder.giaDV.setText(items.getGiaTien());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.sendChiTietDichVu(items);
+            }
+        });
     }
 
     @Override

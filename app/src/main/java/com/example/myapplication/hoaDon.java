@@ -24,6 +24,7 @@ import com.example.myapplication.DbManager.hoaDonDao;
 import com.example.myapplication.DbManager.khachHangDao;
 import com.example.myapplication.DbManager.nhanVienDao;
 import com.example.myapplication.DbManager.phongDao;
+import com.example.myapplication.InterfaceManager.sendChiTietDichVu;
 import com.example.myapplication.InterfaceManager.sendHoaDon;
 import com.example.myapplication.ObjectManager.chiTietDichVuOBJ;
 import com.example.myapplication.ObjectManager.datPhongObj;
@@ -86,7 +87,12 @@ public class hoaDon extends AppCompatActivity {
         mKhachHangObj = mKhachHangDao.getByMaKh(mDatPhongObj.getMaKh());
         mPhongObj = mPhongDao.getByMaPhong(mDatPhongObj.getMaPhong());
         //
-        chiTietDV_adapter = new itemRcy_dichVu_chiTietPhieuDat(hoaDon.this);
+        chiTietDV_adapter = new itemRcy_dichVu_chiTietPhieuDat(hoaDon.this, new sendChiTietDichVu() {
+            @Override
+            public void sendChiTietDichVu(chiTietDichVuOBJ items) {
+
+            }
+        });
         chiTietDV_adapter.setmList(getListCTHV(items.getMaDatPhong()));
         //
         Dialog dialog = new Dialog(hoaDon.this);

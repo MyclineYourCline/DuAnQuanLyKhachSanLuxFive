@@ -58,7 +58,6 @@ public class chiTietDichVu extends AppCompatActivity {
         btn_back = findViewById(R.id.activity_chi_tiet_dich_vu_btnBack);
         mIntent = getIntent();
         maDatPhong = mIntent.getStringExtra("id_phieuDatPhong");
-        d("ca" + "chung", "onCreate:id_phieuDatPhong "+maDatPhong);
         //
         capNhapDuLieu();
         btn_back.setOnClickListener(new View.OnClickListener() {

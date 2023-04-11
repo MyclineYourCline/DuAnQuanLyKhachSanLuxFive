@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Số lượng"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
         app:startIconDrawable="@drawable/baseline_numbers_24"
         >
         <com.google.android.material.textfield.TextInputEditText
@@ -41,6 +42,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:errorTextAppearance="@style/ErrorTextAppearance"
         android:hint="Giá tiền"
         app:startIconDrawable="@drawable/baseline_money_24"
         >
