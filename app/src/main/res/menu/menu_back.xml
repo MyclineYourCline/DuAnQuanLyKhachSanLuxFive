@@ -3,6 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
  <item android:id="@+id/menu_back"
      app:showAsAction="always"
-     android:icon="@drawable/baseline_arrow_back_24"
+     android:icon="@drawable/out_dialog"
      android:title="Trở về"/>
 </menu>

@@ -325,35 +325,40 @@ public class taoPhieuDatPhong extends AppCompatActivity {
         return tongTien;
     }
     private void taoPhieuTheoNgay(String soNgay){
-        datPhongObj itemInsert = new datPhongObj();
-        LocalDateTime dateTime = tinhNgayRa(thoiGianDat.getText().toString().trim());
-        itemInsert.setMaDatPhong(id_phieuDatPhong);
-        itemInsert.setMaPhong(maPhong);
-        itemInsert.setCheckIn(ngayDat.getText().toString().trim());
-        itemInsert.setGioVao(gioDat.getText().toString().trim());
-        itemInsert.setMaKh(maKh.getText().toString().trim());
-        itemInsert.setMaNhanVien(maNV);
-        DateTimeFormatter formatYear = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String YDM = dateTime.format(formatYear);
-        String HMS = dateTime.format(formatTime);
-        itemInsert.setSoGioDat(soNgay +" " +hinhThucDat.getText().toString().trim());
-        itemInsert.setGioRa(HMS);
-        itemInsert.setNgayRa(YDM);
-        itemInsert.setGiaTien(giaThue.getText().toString().trim());
-        itemInsert.setMaChiTietDV(id_phieuDatPhong);
-        itemInsert.setTrangThai(trangThaiPhieu);
-        itemInsert.setTongTien(String.valueOf(tinhTongTien(thoiGianDat.getText().toString().trim(), giaThue.getText().toString().trim())));
-        mDatPhongDao.inserDatPhong(itemInsert);
-        if (trangThaiPhieu.equals("1")){
+        try {
+            datPhongObj itemInsert = new datPhongObj();
+            LocalDateTime dateTime = tinhNgayRa(thoiGianDat.getText().toString().trim());
+            itemInsert.setMaDatPhong(id_phieuDatPhong);
+            itemInsert.setMaPhong(maPhong);
+            itemInsert.setCheckIn(ngayDat.getText().toString().trim());
+            itemInsert.setGioVao(gioDat.getText().toString().trim());
+            itemInsert.setMaKh(maKh.getText().toString().trim());
+            itemInsert.setMaNhanVien(maNV);
+            DateTimeFormatter formatYear = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String YDM = dateTime.format(formatYear);
+            String HMS = dateTime.format(formatTime);
+            itemInsert.setSoGioDat(soNgay +" " +hinhThucDat.getText().toString().trim());
+            itemInsert.setGioRa(HMS);
+            itemInsert.setNgayRa(YDM);
+            itemInsert.setGiaTien(giaThue.getText().toString().trim());
+            itemInsert.setMaChiTietDV(id_phieuDatPhong);
+            itemInsert.setTrangThai(trangThaiPhieu);
+            itemInsert.setTongTien(String.valueOf(tinhTongTien(thoiGianDat.getText().toString().trim(), giaThue.getText().toString().trim())));
+            mDatPhongDao.inserDatPhong(itemInsert);
+            if (trangThaiPhieu.equals("1")){
 
-            //
-            phongObj itemPhong = mPhongDao.getByMaPhong(items_nhan.getMaPhong());
-            itemPhong.setTrangThai("Đang dùng");
-            mPhongDao.updatePhong(itemPhong);
+                //
+                phongObj itemPhong = mPhongDao.getByMaPhong(items_nhan.getMaPhong());
+                itemPhong.setTrangThai("Đang dùng");
+                mPhongDao.updatePhong(itemPhong);
+            }
+            finish();
+            Toast.makeText(this, "Tạo phiếu đặt phòng thành công", Toast.LENGTH_SHORT).show();
         }
-        finish();
-        Toast.makeText(this, "Tạo phiếu đặt phòng thành công", Toast.LENGTH_SHORT).show();
+        catch (Exception e){
+            Toast.makeText(this, "Định dạng ngày và giờ bị sai", Toast.LENGTH_SHORT).show();
+        }
     }
     private String getTime (){
         Calendar calendar = Calendar.getInstance();

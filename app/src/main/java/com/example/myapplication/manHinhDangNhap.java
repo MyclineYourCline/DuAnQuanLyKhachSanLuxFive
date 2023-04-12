@@ -22,6 +22,7 @@ public class manHinhDangNhap extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_man_hinh_dang_nhap);
+        getSupportActionBar().setTitle("Màn hình đăng nhập");
         tenDangNhap = findViewById(R.id.dangNhap_txt_tenDangNhap);
         matKhau = findViewById(R.id.dangNhap_txt_matKhau);
         btn_dangNhap = findViewById(R.id.dangNhap_btn_dangNhap);

@@ -90,7 +90,6 @@ public class hoaDon extends AppCompatActivity {
         chiTietDV_adapter = new itemRcy_dichVu_chiTietPhieuDat(hoaDon.this, new sendChiTietDichVu() {
             @Override
             public void sendChiTietDichVu(chiTietDichVuOBJ items) {
-
             }
         });
         chiTietDV_adapter.setmList(getListCTHV(items.getMaDatPhong()));

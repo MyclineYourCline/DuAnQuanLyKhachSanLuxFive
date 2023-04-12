@@ -51,16 +51,20 @@
         android:layout_height="wrap_content">
         <Button
             android:id="@+id/dangNhap_btn_dangNhap"
+            style="@style/Widget.MaterialComponents.MaterialCalendar"
             android:text="Đăng nhập"
-            android:layout_marginRight="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textColor="@color/black"
+            android:layout_marginRight="10dp"
+            android:layout_width="150dp"
+            android:layout_height="60dp"/>
         <Button
             android:id="@+id/dangNhap_btn_dangKy"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="10dp"
             android:text="Đăng ký"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            style="@style/Widget.MaterialComponents.MaterialCalendar"
+            android:textColor="@color/black"
+            android:layout_width="150dp"
+            android:layout_height="60dp"/>
     </LinearLayout>
 
 </RelativeLayout>

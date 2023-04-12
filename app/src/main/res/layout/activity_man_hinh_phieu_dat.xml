@@ -14,7 +14,6 @@
             android:layout_width="match_parent"
             android:hint="Từ ngày"
             app:errorTextAppearance="@style/ErrorTextAppearance"
-            android:layout_toStartOf="@+id/activity_man_hinh_phieu_dat_image1"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -23,9 +22,10 @@
         </com.google.android.material.textfield.TextInputLayout>
         <ImageView
             android:id="@+id/activity_man_hinh_phieu_dat_image1"
-            android:layout_width="40dp"
+            android:layout_width="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_alignParentEnd="true"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:src="@drawable/baseline_date_range_24"/>
     </RelativeLayout>
@@ -37,7 +37,6 @@
             android:hint="Bắt đầu từ"
             android:layout_width="match_parent"
             app:errorTextAppearance="@style/ErrorTextAppearance"
-            android:layout_toStartOf="@+id/activity_man_hinh_phieu_dat_image3"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -46,9 +45,10 @@
         </com.google.android.material.textfield.TextInputLayout>
         <ImageView
             android:id="@+id/activity_man_hinh_phieu_dat_image3"
-            android:layout_width="40dp"
+            android:layout_width="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_alignParentEnd="true"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:src="@drawable/baseline_info_24"/>
     </RelativeLayout>

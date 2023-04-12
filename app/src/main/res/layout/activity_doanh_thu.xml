@@ -1,128 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_margin="5dp"
+    android:layout_height="match_parent"
+    tools:context=".manHinhPhieuDat">
     <LinearLayout
-        android:id="@+id/lin1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:weightSum="3">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginStart="10dp"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/img_datePickerDialog_tuNgay"
-                android:src="@drawable/baseline_date_range_24"
-
-                android:layout_width="50dp"
-                android:layout_height="50dp"/>
-            <TextView
-                android:id="@+id/tv_tuNgay"
-                android:textSize="20dp"
-                android:layout_marginStart="10dp"
-                android:text="03/03/2003"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:hint="Từ ngày"
+            app:errorTextAppearance="@style/ErrorTextAppearance"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:id="@+id/activity_doanh_thu_ed1"
                 android:layout_height="wrap_content"/>
-
-
-
-        </LinearLayout>
-
+        </com.google.android.material.textfield.TextInputLayout>
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/baseline_add_24"/>
-
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/activity_doanh_thu_image1"
+            android:layout_width="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_height="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/baseline_date_range_24"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputLayout
+            android:hint="Đến ngày"
+            android:layout_width="match_parent"
+            app:errorTextAppearance="@style/ErrorTextAppearance"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:editable="false"
+                android:id="@+id/activity_doanh_thu_ed2"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <ImageView
+            android:id="@+id/activity_doanh_thu_img2"
+            android:layout_width="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_height="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/baseline_date_range_24"/>
+    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_marginStart="10dp"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/img_datePickerDialog_denNgay"
-                android:src="@drawable/baseline_date_range_24"
-                android:layout_width="50dp"
-                android:layout_height="50dp"/>
-            <TextView
-                android:id="@+id/tv_denNgay"
-                android:layout_marginStart="10dp"
-                android:textSize="20dp"
-                android:text="03/03/2003"
-                android:layout_weight="1"
-                android:layout_gravity="center"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_marginStart="5dp"
+                android:id="@+id/activity_doanh_thu_timKiem"
+                android:text="Tìm kiếm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-
-
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_thong_ke"
-        android:layout_below="@+id/lin1"
-        android:text="Thong ke"
-        />
-
-
+            <Button
+                android:layout_alignParentEnd="true"
+                android:id="@+id/activity_doanh_thu_xoa"
+                android:layout_marginEnd="10dp"
+                android:text="Xóa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_thongKe"
+        android:id="@+id/activity_doanh_thu_rcv"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </LinearLayout>
+    <TextView
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/btn_thong_ke"
-
-        android:layout_marginTop="10dp"
-        android:padding="15dp"
-        />
-
-
-    <TextView
-        android:id="@+id/tv1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/rcv_thongKe"
-        android:layout_marginTop="-40dp"
-        android:text="Tổng Tiền :"
-        android:textColor="@color/black"
-        android:textSize="30dp" />
-
-    <TextView
-        android:id="@+id/tv_tongTien"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rcv_thongKe"
-        android:layout_marginTop="-40dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="16dp"
-        android:layout_toEndOf="@+id/tv1"
-        android:gravity="center"
-        android:text="2000000"
-        android:textColor="@color/black"
-        android:textSize="30dp" />
-
-
+        android:layout_width="match_parent"
+        android:id="@+id/activity_doanh_thu_tongTien"
+        android:paddingStart="10dp"
+        android:background="@color/teal_700"
+        android:layout_height="40dp"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:textSize="20dp"/>
 </RelativeLayout>

@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.myapplication.ObjectManager.hoaDonObj;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class hoaDonDao {
@@ -82,5 +83,71 @@ public class hoaDonDao {
         List<hoaDonObj> list = get(sql,maDatPhong);
         return list.get(0);
     }
-
+    public List<hoaDonObj> truyVanTheoKhoangNgay(String tuNgay, String denNgay){
+        String sql = "SELECT * FROM hoaDonThanhToan WHERE ngayThang  BETWEEN ? AND ? ";
+        return get(sql,new String[]{tuNgay,denNgay});
+    }
+    public List<hoaDonObj> truyVanTheoTuNgay(String tuNgay){
+        String sql = "SELECT * FROM hoaDonThanhToan WHERE ngayThang  BETWEEN ? AND ? ";
+        return get(sql,new String[]{tuNgay,layNgayHienTai()});
+    }
+    public List<hoaDonObj> truyVanTheoDenNgay(String denNgay){
+        String sql = "SELECT * FROM hoaDonThanhToan WHERE ngayThang  BETWEEN ? AND ? ";
+        return get(sql,new String[]{layNgayHienTai(),denNgay});
+    }
+    @SuppressLint("Range")
+    public String truyVanTongTienTheoKhoanNgay (String tuNgay, String denNgay){
+        String result = "0";
+        String sql = "SELECT SUM(tongTien) as tongTruyVan FROM hoaDonThanhToan WHERE ngayThang  BETWEEN ? AND ? ";
+        Cursor cursor = db.rawQuery(sql, new String[]{tuNgay, denNgay});
+        while (cursor.moveToNext()){
+            result = cursor.getString(cursor.getColumnIndex("tongTruyVan"));
+        }
+       return result;
+    }
+    @SuppressLint("Range")
+    public String truyVanTongTien (){
+        String result = "0";
+        String sql = "SELECT SUM(tongTien) as tongTruyVan FROM hoaDonThanhToan ";
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()){
+            result = cursor.getString(cursor.getColumnIndex("tongTruyVan"));
+        }
+        return result;
+    }
+    @SuppressLint("Range")
+    public String truyVanTongTienTuNgay(String tuNgay){
+        String result = "0";
+        String sql = "SELECT SUM(tongTien) as tongTruyVan FROM hoaDonThanhToan WHERE ngayThang  BETWEEN ? AND ? ";
+        Cursor cursor = db.rawQuery(sql, new String[]{layNgayHienTai(),tuNgay});
+        while (cursor.moveToNext()){
+            result = cursor.getString(cursor.getColumnIndex("tongTruyVan"));
+        }
+        return result;
+    }
+    @SuppressLint("Range")
+    public String truyVanTongTienDenNgay(String tuNgay){
+        String result = "0";
+        String sql = "SELECT SUM(tongTien) as tongTruyVan FROM hoaDonThanhToan WHERE ngayThang  BETWEEN ? AND ? ";
+        Cursor cursor = db.rawQuery(sql, new String[]{tuNgay,layNgayHienTai()});
+        while (cursor.moveToNext()){
+            result = cursor.getString(cursor.getColumnIndex("tongTruyVan"));
+        }
+        return result;
+    }
+    private String layNgayHienTai(){
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        String monthString = month+"";
+        String dayString = day+"";
+        if (month < 10){
+            monthString = "0"+month;
+        }
+        if (day<10){
+            dayString = "0"+day;
+        }
+        return year+"-"+monthString+"-"+dayString;
+    }
 }
