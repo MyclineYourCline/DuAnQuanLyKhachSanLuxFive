@@ -43,7 +43,7 @@ public class dichVu extends AppCompatActivity {
         adapter = new dichVuAdapter(dichVu.this, new sendDichVu() {
             @Override
             public void sendDichVu(dichVuObj items) {
-
+                    updateDichVu(items);
             }
         });
         capNhapRecyclerView();
@@ -56,6 +56,48 @@ public class dichVu extends AppCompatActivity {
 
 
     }
+
+    private void updateDichVu(dichVuObj items) {
+        Dialog dialog = new Dialog(dichVu.this,
+                androidx.appcompat.R.style.Base_Theme_AppCompat_Dialog_Alert);
+        dialog.setContentView(R.layout.dialog_update_dich_vu);
+        EditText mEditText_tenDichVu = dialog.findViewById(R.id.dialog_update_dichVu_tenDV);
+        Button button_them =  dialog.findViewById(R.id.dialog_update_dichVu_them);
+        Button button_huy =  dialog.findViewById(R.id.dialog_update_dichVu_huy);
+        mEditText_tenDichVu.setText(items.getTenDichVu());
+        button_huy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+            }
+        });
+        button_them.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    if (mEditText_tenDichVu.getText().toString().isEmpty()){
+                        mEditText_tenDichVu.setError("Không được để trông");
+
+                    }
+                    else{
+                        dichVuObj dichVuObjUpdate = new dichVuObj();
+                        dichVuObjUpdate.setMaDichVu(items.getMaDichVu());
+                        dichVuObjUpdate.setTenDichVu(mEditText_tenDichVu.getText().toString().trim());
+                        mDichVuDao.updateDichVuThem(dichVuObjUpdate);
+                        capNhapRecyclerView();
+                        dialog.cancel();
+                        Toast.makeText(dichVu.this, "Cập nhập thành công", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (Exception e){
+                    mEditText_tenDichVu.setError("Dịch vụ đã tồn tại");
+                }
+
+            }
+        });
+        dialog.show();
+    }
+
     private void capNhapRecyclerView(){
         adapter.setmList(layTatCaDichVu());
         mRecyclerView.setAdapter(adapter);
@@ -80,17 +122,22 @@ public class dichVu extends AppCompatActivity {
         button_them.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
                     if (mEditText_tenDichVu.getText().toString().isEmpty()){
                         mEditText_tenDichVu.setError("Không được để trông");
 
                     }
-                     else{
+                    else{
                         dichVuObj dichVuObjInsert = new dichVuObj();
                         dichVuObjInsert.setTenDichVu(mEditText_tenDichVu.getText().toString().trim());
                         mDichVuDao.inserDichVuThem(dichVuObjInsert);
                         capNhapRecyclerView();
                         dialog.cancel();
                         Toast.makeText(dichVu.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (Exception e){
+                    mEditText_tenDichVu.setError("Dịch vụ đã tồn tại");
                 }
             }
         });

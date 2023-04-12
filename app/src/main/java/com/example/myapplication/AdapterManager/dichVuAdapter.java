@@ -49,6 +49,12 @@ public class dichVuAdapter extends RecyclerView.Adapter<dichVuAdapter.dichVuView
             return;
         }
         holder.tenDichVu.setText(items.getTenDichVu());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             mListener.sendDichVu(items);
+            }
+        });
 
     }
 

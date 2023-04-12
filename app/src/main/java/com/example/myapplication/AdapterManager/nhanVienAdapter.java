@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -117,6 +119,12 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
                 notifyItemRemoved(pos);
             }
         });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateNhanVien(items);
+            }
+        });
 
 
     }
@@ -140,8 +148,6 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
             item_nhan_vien_avata = itemView.findViewById(R.id.item_nhan_vien_avata);
             item_nhan_vien_tv_ten = itemView.findViewById(R.id.item_nhan_vien_tv_ten);
             item_nhan_vien_tv_sdt = itemView.findViewById(R.id.item_nhan_vien_tv_sdt);
-
-
         }
     }
 
@@ -177,7 +183,37 @@ public class nhanVienAdapter extends RecyclerView.Adapter<nhanVienAdapter.nhanVi
         };
     }
 
-
+    private  void  updateNhanVien(nhanVienObj items){
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences("my_prefs", Context.MODE_PRIVATE);
+        String id_admin = sharedPreferences.getString("maNv","");
+        if (id_admin.equals("admin1")){
+            Dialog dialog = new Dialog(mContext);
+            dialog.setContentView(R.layout.dialog_chi_tiet_nhan_vien);
+            dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+           CircleImageView avatar = dialog.findViewById(R.id.dialog_chitiet_nhan_vien_avata);
+            EditText maNV = dialog.findViewById(R.id.dialog_chitiet_nhan_vien_Edt_manv);
+            EditText tenNV= dialog.findViewById(R.id.dialog_chitiet_nhan_vien_Edt_tenNv);
+            EditText sdt = dialog.findViewById(R.id.dialog_chitiet_nhan_vien_Edt_sdt);
+            EditText matKhau= dialog.findViewById(R.id.dialog_chitiet_nhan_vien_Edt_matkhau);
+            Button btnHuy = dialog.findViewById(R.id.dialog_chitiet_nhan_vien_btnHuy);
+            //
+            avatar.setImageURI(Uri.parse(items.getAnhNhanVien()));
+            maNV.setText(items.getMaNhanVien());
+            tenNV.setText(items.getTenNhanVien());
+            sdt.setText(items.getSoDienThoai());
+            matKhau.setText(items.getMatKhau());
+            btnHuy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.cancel();
+                }
+            });
+            dialog.show();
+        }
+        else{
+            return;
+        }
+    }
 
 
 }

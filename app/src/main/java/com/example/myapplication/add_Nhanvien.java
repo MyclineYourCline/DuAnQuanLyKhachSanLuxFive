@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -56,9 +58,7 @@ public class add_Nhanvien extends AppCompatActivity {
         getSupportActionBar().setTitle("Thêm nhân Viên");
 
         intui();
-        dialog_add_nhan_vien_img_back.setVisibility(View.GONE);
         dao = new nhanVienDao(add_Nhanvien.this);
-
 
         dialog_add_nhan_vien_avata.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,5 +180,18 @@ public class add_Nhanvien extends AppCompatActivity {
         }
 
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_back, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_back:
+                finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

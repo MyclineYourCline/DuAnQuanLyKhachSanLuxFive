@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:hint="Tên dịch vụ"
         app:errorTextAppearance="@style/ErrorTextAppearance"
-        app:startIconDrawable="@drawable/baseline_numbers_24"
+        app:startIconDrawable="@drawable/baseline_edit_note_24"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_update_chi_tiet_dich_vu_tenDV"
@@ -31,8 +31,9 @@
         android:layout_height="wrap_content"
         android:hint="Số lượng"
         app:errorTextAppearance="@style/ErrorTextAppearance"
+
         android:layout_marginTop="20dp"
-        app:startIconDrawable="@drawable/baseline_numbers_24"
+        app:startIconDrawable="@drawable/baseline_add_24"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_update_chi_tiet_dich_vu_soLuong"
@@ -51,7 +52,7 @@
         android:layout_height="wrap_content"
         android:hint="Giá tiền"
         app:errorTextAppearance="@style/ErrorTextAppearance"
-        app:startIconDrawable="@drawable/baseline_money_24"
+        app:startIconDrawable="@drawable/baseline_attach_money_24"
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_update_chi_tiet_dich_vu_giaTien"

@@ -88,6 +88,17 @@ public class datPhongDao {
     public int deleteDatPhong(String maDatPhong){
         return db.delete("datPhong","maDatPhong = ?", new String[]{maDatPhong});
     }
+    public boolean checkTaoPhieu(String ngayVe, String gioRa,String maPhong){
+        String sql = "SELECT * FROM datPhong WHERE  checkIn <= ? AND " +
+                "  gioVao <= ? AND maPhong = ? AND trangThai = '3' ";
+        List<datPhongObj> list = get(sql, new String[]{ngayVe,gioRa, maPhong});
+        if (list.size() == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     public datPhongObj getBymaDatPhong(String maDatPhong){
         String sql = "SELECT * FROM datPhong WHERE maDatPhong = ?";
         List<datPhongObj> mList = get(sql,maDatPhong);

@@ -18,9 +18,6 @@ public class loaiPhongDao {
         createDataBase mCreateDataBase = new createDataBase(context);
         db = mCreateDataBase.getWritableDatabase();
     }
-    //maLoai
-    //tenLoaiPhong
-    //giaThue
     @SuppressLint("Range")
     public List<loaiPhongObj> get(String sql, String...agrs){
         List<loaiPhongObj> mList = new ArrayList<>();

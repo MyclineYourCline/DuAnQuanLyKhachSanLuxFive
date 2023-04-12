@@ -5,26 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".updateNhanVien">
-
-
-
-
     <ImageView
         android:id="@+id/dialog_update_nhan_vien_img"
         android:src="@drawable/img_back_dialog_update_nhanvien"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <ImageView
-        android:id="@+id/dialog_update_nhan_vien_img_back"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/baseline_arrow_back" />
-
+        android:scaleType="centerCrop"
+        android:layout_height="150dp"/>
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/dialog_update_nhan_vien_avata"
         android:src="@drawable/user"
@@ -33,8 +19,6 @@
         android:layout_marginTop="-80dp"
         android:layout_width="120dp"
         android:layout_height="130dp"/>
-
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dialog_update_nhan_vien_textInput_manv"
         android:layout_below="@id/dialog_update_nhan_vien_avata"
@@ -42,12 +26,14 @@
         app:startIconDrawable="@drawable/baseline_person"
         app:endIconMode="clear_text"
         android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_height="wrap_content">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_update_nhan_vien_Edt_manv"
-            android:hint="Mã Nhân viên"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:hint="Mã Nhân viên" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -57,6 +43,7 @@
         app:startIconDrawable="@drawable/baseline_local_phone"
         app:endIconMode="clear_text"
         android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_update_nhan_vien_Edt_sdt"
@@ -74,6 +61,7 @@
         app:startIconDrawable="@drawable/baseline_password"
         app:endIconMode="password_toggle"
         android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_update_nhan_vien_Edt_matkhau"
@@ -90,6 +78,7 @@
         app:startIconDrawable="@drawable/baseline_password"
         app:endIconMode="password_toggle"
         android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_update_nhan_vien_Edt_matkhauMoi"

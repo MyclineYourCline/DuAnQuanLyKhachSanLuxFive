@@ -28,6 +28,7 @@ import com.example.myapplication.ObjectManager.datPhongObj;
 import com.example.myapplication.ObjectManager.khachHangObj;
 import com.example.myapplication.ObjectManager.phongObj;
 import com.example.myapplication.ObjectManager.tangObj;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -88,7 +89,6 @@ public class taoPhieuDatPhong extends AppCompatActivity {
             ngayDat.setText(ngayDat3);
             gioDat.setText(gioDat3);
             taoPhieuDat();
-
         }
         else if (trangThaiPhieu == null){
             trangThaiPhieu = "1";
@@ -304,16 +304,22 @@ public class taoPhieuDatPhong extends AppCompatActivity {
             itemInsert.setMaChiTietDV(id_phieuDatPhong);
             itemInsert.setTrangThai(trangThaiPhieu);
             itemInsert.setTongTien(String.valueOf(tinhTongTien(thoiGianDat.getText().toString().trim(), giaThue.getText().toString().trim())));
-            mDatPhongDao.inserDatPhong(itemInsert);
-            //
-            if (trangThaiPhieu.equals("1")){
-                phongObj itemPhong = mPhongDao.getByMaPhong(items_nhan.getMaPhong());
-                itemPhong.setTrangThai("Đang dùng");
-                mPhongDao.updatePhong(itemPhong);
-            }
-            //
-            finish();
-            Toast.makeText(this, "Tạo phiếu đặt phòng thành công", Toast.LENGTH_SHORT).show();
+               if (mDatPhongDao.checkTaoPhieu(itemInsert.checkDayOut(), itemInsert.checkTimeOut(),maPhong)){
+                   mDatPhongDao.inserDatPhong(itemInsert);
+                   //
+                   if (trangThaiPhieu.equals("1")){
+                       phongObj itemPhong = mPhongDao.getByMaPhong(items_nhan.getMaPhong());
+                       itemPhong.setTrangThai("Đang dùng");
+                       mPhongDao.updatePhong(itemPhong);
+                   }
+                   //
+                   finish();
+                   Toast.makeText(this, "Tạo phiếu đặt phòng thành công", Toast.LENGTH_SHORT).show();
+               }
+               else{
+                   thoiGianDat.setError("Từ "+itemInsert.checkDayOut()+"/"+itemInsert.checkTimeOut()+" Phòng "+tenPhong.getText().toString()+"Đã được đặt trước ");
+                   return;
+               }
         }
         catch (Exception e){
             Toast.makeText(this, "Định dạng giờ hoặc ngày tháng bị sai", Toast.LENGTH_LONG).show();
@@ -345,17 +351,24 @@ public class taoPhieuDatPhong extends AppCompatActivity {
             itemInsert.setMaChiTietDV(id_phieuDatPhong);
             itemInsert.setTrangThai(trangThaiPhieu);
             itemInsert.setTongTien(String.valueOf(tinhTongTien(thoiGianDat.getText().toString().trim(), giaThue.getText().toString().trim())));
-            mDatPhongDao.inserDatPhong(itemInsert);
-            if (trangThaiPhieu.equals("1")){
-
-                //
-                phongObj itemPhong = mPhongDao.getByMaPhong(items_nhan.getMaPhong());
-                itemPhong.setTrangThai("Đang dùng");
-                mPhongDao.updatePhong(itemPhong);
+            if (mDatPhongDao.checkTaoPhieu(YDM, HMS,maPhong)){
+                mDatPhongDao.inserDatPhong(itemInsert);
+                if (trangThaiPhieu.equals("1")){
+                    //
+                    phongObj itemPhong = mPhongDao.getByMaPhong(items_nhan.getMaPhong());
+                    itemPhong.setTrangThai("Đang dùng");
+                    mPhongDao.updatePhong(itemPhong);
+                }
+                finish();
             }
-            finish();
-            Toast.makeText(this, "Tạo phiếu đặt phòng thành công", Toast.LENGTH_SHORT).show();
-        }
+            else {
+                thoiGianDat.setError("Từ "+HMS+"/"+YDM+" Phòng "+tenPhong.getText().toString()+"Đã được đặt trước ");
+                return;
+            }
+
+           }
+
+
         catch (Exception e){
             Toast.makeText(this, "Định dạng ngày và giờ bị sai", Toast.LENGTH_SHORT).show();
         }

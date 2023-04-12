@@ -13,6 +13,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,7 +34,7 @@ public class updateNhanVien extends AppCompatActivity {
     nhanVienDao nvDao;
     Button sua_nhanvien;
     String pattern = "(\\+84|03)\\d{8,9}";
-    ImageView img_back , img_avata;
+    ImageView  img_avata;
     TextInputLayout update_nhan_vien_textInput_manv , update_nhan_vien_textInput_sdt , update_nhan_vien_textInput_matkhau, update_nhan_vien_textInput_rematKhau;
     TextInputEditText dialog_update_nhan_vien_Edt_manv, dialog_update_nhan_vien_Edt_sdt,dialog_update_nhan_vien_Edt_matkhau,dialog_update_nhan_vien_Edt_matkhauMoi;
     @Override
@@ -47,8 +49,11 @@ public class updateNhanVien extends AppCompatActivity {
       nvDao = new nhanVienDao(updateNhanVien.this);
       nhanVienObj obj = nvDao.getByMaNhanVien(ma);
 
-        Uri uri = Uri.parse(obj.getAnhNhanVien());
-        Picasso.get().load(obj.getAnhNhanVien()).into(img_avata);
+            Uri uri = Uri.parse(obj.getAnhNhanVien());
+            if (uri == null){
+                img_avata.setImageResource(R.drawable.user);
+            }
+            Picasso.get().load(obj.getAnhNhanVien()).into(img_avata);
             dialog_update_nhan_vien_Edt_manv.setText(obj.getMaNhanVien());
             dialog_update_nhan_vien_Edt_sdt.setText(obj.getSoDienThoai());
             dialog_update_nhan_vien_Edt_matkhau.setText(obj.getMatKhau());
@@ -74,12 +79,6 @@ public class updateNhanVien extends AppCompatActivity {
                                     finish();
                                 }
 
-//                            }else {
-//                                update_nhan_vien_textInput_manv.setError("đã có mã nhân viên này !");
-//                                update_nhan_vien_textInput_rematKhau.setError("đã có mã nhân viên này !");
-//                                return;
-//
-//                            }
                    }else {
                        update_nhan_vien_textInput_sdt.setError("không phải số điện thoại");
                    }
@@ -95,28 +94,11 @@ public class updateNhanVien extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-
-
-        img_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
     }
 
 
     void initUi(){
-         img_back = findViewById(R.id.dialog_update_nhan_vien_img_back);
          img_avata = findViewById(R.id.dialog_update_nhan_vien_avata);
-
 
         // text input
          update_nhan_vien_textInput_manv = findViewById(R.id.dialog_update_nhan_vien_textInput_manv);
@@ -135,7 +117,6 @@ public class updateNhanVien extends AppCompatActivity {
 
 
 
-
     public boolean checkStoragePermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             // Quyền chưa được cấp, yêu cầu người dùng cấp quyền
@@ -146,7 +127,6 @@ public class updateNhanVien extends AppCompatActivity {
             return true;
         }
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -157,5 +137,19 @@ public class updateNhanVien extends AppCompatActivity {
         }else {
             Toast.makeText(updateNhanVien.this, "chưa cấp quyền thư viện", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_back, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_back:
+                finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

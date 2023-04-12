@@ -71,7 +71,8 @@ public class quanLyPhieuDat extends AppCompatActivity {
 
     private void clickLenDon(datPhongObj items) {
         mPhongObj = mPhongDao.getByMaPhong(items.getMaPhong());
-        if (mPhongObj.getTrangThai().toLowerCase().equals("đang dùng")){
+        if (mPhongObj.getTrangThai().toLowerCase().equals("đang dùng") ||
+                mPhongObj.getTrangThai().toLowerCase().equals("quá hạn")){
             AlertDialog.Builder builder = new AlertDialog.Builder(quanLyPhieuDat.this);
             builder.setTitle("Phòng hiện tại đang được sử dụng");
             builder.setNegativeButton("Thoát", new DialogInterface.OnClickListener() {

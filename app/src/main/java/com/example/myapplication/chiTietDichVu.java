@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import static android.util.Log.d;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +12,8 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,7 +34,6 @@ import java.util.List;
 public class chiTietDichVu extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private FloatingActionButton btn_add;
-    private  FloatingActionButton btn_back;
     private String maDatPhong;
     private Intent mIntent;
     private chiTietDichVuAdapter adapter;
@@ -55,17 +57,10 @@ public class chiTietDichVu extends AppCompatActivity {
         getSupportActionBar().setTitle("Các dịch vụ đã dùng");
         mRecyclerView = findViewById(R.id.activity_chi_tiet_dich_vu_rcv);
         btn_add = findViewById(R.id.activity_chi_tiet_dich_vu_btnAdd);
-        btn_back = findViewById(R.id.activity_chi_tiet_dich_vu_btnBack);
         mIntent = getIntent();
         maDatPhong = mIntent.getStringExtra("id_phieuDatPhong");
         //
         capNhapDuLieu();
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,6 +145,19 @@ public class chiTietDichVu extends AppCompatActivity {
     }
     private List<dichVuObj> getDichVu (){
         return mDichVuDao.getAll();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_back, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_back:
+                finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

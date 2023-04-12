@@ -20,6 +20,7 @@
         android:id="@+id/dialog_add_khach_hang_textInput_cmt"
        android:layout_below="@+id/dialog_khach_hang_vien_img_back"
         android:layout_margin="20sp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:startIconDrawable="@drawable/baseline_person_outline_24"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -37,6 +38,7 @@
         android:layout_margin="20sp"
         app:startIconDrawable="@drawable/baseline_person_outline_24"
         android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_add_khach_hang_textEdit_nameKhach"
@@ -52,6 +54,7 @@
         android:layout_margin="20sp"
         app:startIconDrawable="@drawable/baseline_date_range_24"
         android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_add_khach_hang_textEdit_ngaySinh"
@@ -66,6 +69,7 @@
         android:layout_margin="20sp"
         app:startIconDrawable="@drawable/baseline_local_phone"
         android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_add_khach_hang_textEdit_soDt"

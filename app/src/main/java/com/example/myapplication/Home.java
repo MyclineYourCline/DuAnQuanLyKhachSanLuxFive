@@ -59,11 +59,12 @@ public class Home extends AppCompatActivity {
         item_nhanVien = nvDao.getByMaNhanVien(maNV);
         View headerView = mNavigationView.getHeaderView(0);
         CircleImageView avatar = headerView.findViewById(R.id.title_navigation_img);
+        if (item_nhanVien.getMaNhanVien() == null){
+            avatar.setImageResource(R.drawable.user);
+        }
         avatar.setImageURI(Uri.parse(item_nhanVien.getAnhNhanVien()));
         TextView name = headerView.findViewById(R.id.title_navigation_text);
         name.setText(item_nhanVien.getTenNhanVien());
-
-
         //
         adapter = new manHinhChinhAdapter(Home.this, new manHinhChinhAdapter.senData() {
             @Override

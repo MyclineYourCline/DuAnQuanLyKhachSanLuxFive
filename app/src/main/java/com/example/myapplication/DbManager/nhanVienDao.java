@@ -18,11 +18,6 @@ public class nhanVienDao {
         createDataBase mCreateDataBase = new createDataBase(context);
         db = mCreateDataBase.getWritableDatabase();
     }
-    //maNhanVien
-    //tenNhanVien
-    //anhNhanVien
-    //soDienThoai
-    //matKhau
     @SuppressLint("Range")
     public List<nhanVienObj> get(String sql, String...agrs){
         List<nhanVienObj> mList = new ArrayList<>();
@@ -43,6 +38,7 @@ public class nhanVienDao {
         String sql = "SELECT * FROM nhanVien";
         return get(sql);
     }
+
     public Long insertNhanVien(nhanVienObj nhanVienObj){
         ContentValues values = new ContentValues();
         values.put("maNhanVien",nhanVienObj.getMaNhanVien());
@@ -55,6 +51,10 @@ public class nhanVienDao {
 
     public Long deleteNhanVien(String manv){
         long res = db.delete("nhanVien" , "maNhanVien = ?" , new String[]{manv});
+        return res;
+    }
+    public Long xoTen(String manv){
+        long res = db.delete("nhanVien" , "tenNhanVien = ?" , new String[]{manv});
         return res;
     }
     public int updateNhanVien(nhanVienObj nhanVienObj){

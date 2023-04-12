@@ -5,31 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".add_Nhanvien">
-
-
-
     <ImageView
         android:id="@+id/dialog_add_nhan_vien_img"
         android:src="@drawable/img_back_add_nhanvien"
         android:layout_width="match_parent"
-        android:layout_height="180dp"/>
-    <ImageView
-        android:id="@+id/dialog_add_nhan_vien_img_back"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/out_dialog" />
+        android:scaleType="centerCrop"
+        android:layout_height="130dp"/>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutAvata"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="80dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -61,6 +48,7 @@
         android:layout_margin="10dp"
         app:startIconDrawable="@drawable/baseline_person_outline_24"
         app:errorTextAppearance="@style/ErrorTextAppearance"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
@@ -77,6 +65,7 @@
         app:startIconDrawable="@drawable/baseline_person_outline_24"
         app:errorTextAppearance="@style/ErrorTextAppearance"
         android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_add_nhan_vien_Edt_tenNv"
@@ -93,6 +82,7 @@
         app:startIconDrawable="@drawable/baseline_local_phone"
         app:errorTextAppearance="@style/ErrorTextAppearance"
         android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_add_nhan_vien_Edt_sdt"
@@ -110,6 +100,7 @@
         app:errorTextAppearance="@style/ErrorTextAppearance"
         android:layout_width="match_parent"
         app:endIconMode="password_toggle"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_add_nhan_vien_Edt_matkhau"
@@ -126,6 +117,7 @@
         app:startIconDrawable="@drawable/baseline_password"
         app:errorTextAppearance="@style/ErrorTextAppearance"
         android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:endIconMode="password_toggle"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText

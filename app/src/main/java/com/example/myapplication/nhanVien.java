@@ -40,7 +40,6 @@ import java.util.List;
 
 public class nhanVien extends AppCompatActivity {
 
-
     private static final int STORAGE_PERMISSION_REQUEST = 123;
     RecyclerView recycleView_nhanvien_activity;
     FloatingActionButton floating_btn_nhanvien_activity;
@@ -122,6 +121,12 @@ public class nhanVien extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        loadData();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
         loadData();
     }
 }

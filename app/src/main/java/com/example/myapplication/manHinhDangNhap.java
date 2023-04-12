@@ -64,18 +64,16 @@ public class manHinhDangNhap extends AppCompatActivity {
     }
 
     public  void dataAdmin(){
-        nhanVienObj obj = new nhanVienObj();
-
-
-        obj.setMaNhanVien("admin1");
-        obj.setAnhNhanVien("android.resource://com.example.myapplication/2131165466");
-        obj.setMatKhau("1");
-        obj.setSoDienThoai("033434343");
-        obj.setTenNhanVien("nhóm lux five");
+        nhanVienObj obj1 = new nhanVienObj();
+        obj1.setMaNhanVien("admin1");
+        obj1.setAnhNhanVien("android.resource://com.example.myapplication/"+R.drawable.user);
+        obj1.setMatKhau("1");
+        obj1.setSoDienThoai("033434343");
+        obj1.setTenNhanVien("LuxFive");
 
        nvDao = new nhanVienDao(getApplicationContext());
        nvDao.deleteNhanVien("admin1");
-       nvDao.insertNhanVien(obj);
+       nvDao.insertNhanVien(obj1);
     }
 
 }

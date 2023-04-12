@@ -61,7 +61,6 @@ public class phongAdapter extends RecyclerView.Adapter<phongAdapter.phongViewHol
         notifyDataSetChanged();
     }
 
-
     @NonNull
     @Override
     public phongViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -151,7 +150,7 @@ public class phongAdapter extends RecyclerView.Adapter<phongAdapter.phongViewHol
                     }
                     else {
                         List<phongObj> list = new ArrayList<>();
-                        for (phongObj x: mList){
+                        for (phongObj x: mListOld){
                             loaiPhongObj loaiPhong = loaiPhongDao.getByMaLoaiPhong(x.getMaLoai());
                             if (x.getTenPhong().toLowerCase().contains(stringSearch.toLowerCase()) ||
                                     loaiPhong.getTenLoaiPhong().toLowerCase().contains(stringSearch.toLowerCase())){

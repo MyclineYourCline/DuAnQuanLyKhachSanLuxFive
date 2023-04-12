@@ -23,7 +23,8 @@
             android:parentActivityName=".Home" />
         <activity
             android:name=".updateNhanVien"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".Home"/>
         <activity
             android:name=".chiTietHoaDon"
             android:exported="false" />
@@ -35,7 +36,8 @@
             android:exported="false" />
         <activity
             android:name=".add_Nhanvien"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".nhanVien"/>
         <activity
             android:name=".manHinhDangNhap"
             android:exported="false" />
