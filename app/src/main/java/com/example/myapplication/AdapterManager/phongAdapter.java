@@ -153,7 +153,8 @@ public class phongAdapter extends RecyclerView.Adapter<phongAdapter.phongViewHol
                         for (phongObj x: mListOld){
                             loaiPhongObj loaiPhong = loaiPhongDao.getByMaLoaiPhong(x.getMaLoai());
                             if (x.getTenPhong().toLowerCase().contains(stringSearch.toLowerCase()) ||
-                                    loaiPhong.getTenLoaiPhong().toLowerCase().contains(stringSearch.toLowerCase())){
+                                    loaiPhong.getTenLoaiPhong().toLowerCase().contains(stringSearch.toLowerCase())
+                            || x.getTrangThai().toLowerCase().contains(stringSearch.toLowerCase())){
                                 list.add(x);
                             }
                         }

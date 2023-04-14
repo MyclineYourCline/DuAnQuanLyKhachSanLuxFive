@@ -217,7 +217,7 @@ public class quanLyPhong extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_search, menu);
         MenuItem menuItem =menu.findItem(R.id.menu_search);
         androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) menuItem.getActionView();
-        searchView.setQueryHint("Nhập tên phòng...");
+        searchView.setQueryHint("Tên, loại, trạng thái...");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

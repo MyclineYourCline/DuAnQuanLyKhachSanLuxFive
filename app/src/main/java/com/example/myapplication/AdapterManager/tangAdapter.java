@@ -16,6 +16,7 @@ import com.example.myapplication.InterfaceManager.sendTang;
 import com.example.myapplication.ObjectManager.tangObj;
 import com.example.myapplication.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class tangAdapter extends RecyclerView.Adapter<tangAdapter.tangViewHolder>
@@ -67,7 +68,6 @@ public class tangAdapter extends RecyclerView.Adapter<tangAdapter.tangViewHolder
         return 0;
     }
     public final class tangViewHolder extends RecyclerView.ViewHolder {
-        //todo............
         ImageView mImageView;
         TextView mTextView;
         public tangViewHolder(@NonNull View itemView) {
@@ -82,11 +82,29 @@ public class tangAdapter extends RecyclerView.Adapter<tangAdapter.tangViewHolder
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                return null;
+                String query = constraint.toString();
+                if (query.isEmpty()){
+                    mList = mListOld;
+                }
+                else{
+                    List<tangObj> list = new ArrayList<>();
+                    for (tangObj x: mListOld){
+                        if (x.getMaTang().toLowerCase().contains(query.toLowerCase())||
+                        x.getTenTang().toLowerCase().contains(query.toLowerCase())){
+                            list.add(x);
+                        }
+                    }
+                    mList = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mList;
+                return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
+                mList = (List<tangObj>) results.values;
+                notifyDataSetChanged();
 
             }
         };
