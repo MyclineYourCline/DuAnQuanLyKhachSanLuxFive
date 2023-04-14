@@ -164,9 +164,14 @@ public class doanhThu extends AppCompatActivity {
     private String tongTienTatCaHoaDon(){
         String tongTienQuery ;
         tongTienQuery = mHoaDonDao.truyVanTongTien();
-        Float tongTienDouble = Float.parseFloat(tongTienQuery);
-        String tienToTal = String.format("%.1f",tongTienDouble);
-        return  "Tổng tiền: "+tienToTal+" VND";
+        if (tongTienQuery == null){
+            return "Tổng tiền: 0 VND";
+        }
+        else{
+            Float tongTienDouble = Float.parseFloat(tongTienQuery);
+            String tienToTal = String.format("%.1f",tongTienDouble);
+            return  "Tổng tiền: "+tienToTal+" VND";
+        }
     }
     private void capNhapDuLieu(List<hoaDonObj> list){
         mHoaDonAdapter.setmList(list);
