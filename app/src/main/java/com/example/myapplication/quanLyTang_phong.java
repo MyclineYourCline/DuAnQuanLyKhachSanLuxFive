@@ -154,29 +154,33 @@ public class quanLyTang_phong extends AppCompatActivity {
             button_them.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (editText_tenPhong.getText().toString().isEmpty()) {
-                        editText_tenPhong.setError("Bạn không được để trống tiên phòng");
-                        return;
+                    try {
+                        if (editText_tenPhong.getText().toString().isEmpty()) {
+                            editText_tenPhong.setError("Bạn không được để trống tiên phòng");
+                            return;
+                        }
+                        if (editText_tenPhong.getText().toString().toLowerCase().equals(maTang.toLowerCase())) {
+                            editText_tenPhong.setError("Bạn chưa đặt tên phòng");
+                            return;
+                        }
+                        if (editText_tenPhong.getText().toString().toLowerCase()
+                                .substring(0, maTang.length()).equals(maTang.toLowerCase())) {
+                            loaiPhongObj itemSlect = (loaiPhongObj) spinner_loaiPhong.getSelectedItem();
+                            phongObj phongObjInsert = new phongObj();
+                            phongObjInsert.setTenPhong(editText_tenPhong.getText().toString().trim());
+                            phongObjInsert.setMaLoai(itemSlect.getMaLoai());
+                            phongObjInsert.setMaTang(maTang);
+                            phongObjInsert.setTrangThai("Phòng trống");
+                            mPhongDao.insertPhong(phongObjInsert);
+                            capNhapDuLieu();
+                            dialogThemPhong.cancel();
+                        } else {
+                            editText_tenPhong.setError("Tên tầng phải bắt đầu bằng mã tầng");
+                        }
                     }
-                    if (editText_tenPhong.getText().toString().toLowerCase().equals(maTang.toLowerCase())) {
-                        editText_tenPhong.setError("Bạn chưa đặt tên phòng");
-                        return;
-                    }
-                    if (editText_tenPhong.getText().toString().toLowerCase()
-                            .substring(0, maTang.length()).equals(maTang.toLowerCase())) {
-                        loaiPhongObj itemSlect = (loaiPhongObj) spinner_loaiPhong.getSelectedItem();
-                        phongObj phongObjInsert = new phongObj();
-                        phongObjInsert.setTenPhong(editText_tenPhong.getText().toString().trim());
-                        phongObjInsert.setMaLoai(itemSlect.getMaLoai());
-                        phongObjInsert.setMaTang(maTang);
-                        phongObjInsert.setTrangThai("Phòng trống");
-                        mPhongDao.insertPhong(phongObjInsert);
-                        capNhapDuLieu();
-                        dialogThemPhong.cancel();
-                    } else {
+                    catch (Exception e){
                         editText_tenPhong.setError("Tên tầng phải bắt đầu bằng mã tầng");
                     }
-
                 }
             });
             editText_tenPhong.setText(maTang);
